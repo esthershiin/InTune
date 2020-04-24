@@ -19,10 +19,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="InTune" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="InTune" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -84,10 +84,10 @@
             </objects>
             <point key="canvasLocation" x="941" y="118"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="g6I-SM-yS8">
             <objects>
-                <viewController id="h3R-3G-D2j" sceneMemberID="viewController">
+                <viewController id="h3R-3G-D2j" customClass="ProfileViewController" customModule="InTune" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BrD-pr-jXN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -191,10 +191,10 @@
             </objects>
             <point key="canvasLocation" x="941" y="830"/>
         </scene>
-        <!--View Controller-->
+        <!--Dashboard View Controller-->
         <scene sceneID="Ya5-cj-QSl">
             <objects>
-                <viewController id="9dh-KT-2nM" sceneMemberID="viewController">
+                <viewController id="9dh-KT-2nM" customClass="DashboardViewController" customModule="InTune" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CB1-9q-agm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -345,10 +345,10 @@
             </objects>
             <point key="canvasLocation" x="2512" y="118"/>
         </scene>
-        <!--View Controller-->
+        <!--Incoming Request View Controller-->
         <scene sceneID="1Hh-w6-yge">
             <objects>
-                <viewController id="Lq4-ga-Lsn" sceneMemberID="viewController">
+                <viewController id="Lq4-ga-Lsn" customClass="IncomingRequestViewController" customModule="InTune" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hgq-cC-kky">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -439,10 +439,10 @@
             </objects>
             <point key="canvasLocation" x="2907" y="860"/>
         </scene>
-        <!--View Controller-->
+        <!--Outgoing Request View Controller-->
         <scene sceneID="9xO-9o-JQX">
             <objects>
-                <viewController id="byh-Si-U2Z" sceneMemberID="viewController">
+                <viewController id="byh-Si-U2Z" customClass="OutgoingRequestViewController" customModule="InTune" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yND-uE-ALt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -514,10 +514,10 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
             </objects>
             <point key="canvasLocation" x="3757.971014492754" y="859.82142857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Search Hit View Controller-->
         <scene sceneID="EW1-WB-trb">
             <objects>
-                <viewController id="a9w-SA-07K" sceneMemberID="viewController">
+                <viewController id="a9w-SA-07K" customClass="SearchHitViewController" customModule="InTune" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SVE-01-ttz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -608,10 +608,10 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
             </objects>
             <point key="canvasLocation" x="2905.7971014492755" y="-629.46428571428567"/>
         </scene>
-        <!--View Controller-->
+        <!--Search Miss View Controller-->
         <scene sceneID="P7X-qe-J3V">
             <objects>
-                <viewController id="D8G-Jn-N5E" sceneMemberID="viewController">
+                <viewController id="D8G-Jn-N5E" customClass="SearchMissViewController" customModule="InTune" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aiG-FW-4Wk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -647,10 +647,10 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
             </objects>
             <point key="canvasLocation" x="3721.739130434783" y="-629.46428571428567"/>
         </scene>
-        <!--View Controller-->
+        <!--Match View Controller-->
         <scene sceneID="ek7-8K-umz">
             <objects>
-                <viewController id="L1y-n0-dhd" sceneMemberID="viewController">
+                <viewController id="L1y-n0-dhd" customClass="MatchViewController" customModule="InTune" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ilJ-ZC-rdB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -677,6 +677,13 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Top Mutual Artists" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHh-3c-nEb">
+                                <rect key="frame" x="34" y="679" width="221" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="24"/>
+                                <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Top Mutual Songs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="izv-as-VXH">
                                 <rect key="frame" x="34" y="553" width="216" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -699,16 +706,9 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ool-yK-3PP">
-                                <rect key="frame" x="162" y="209" width="90" height="97"/>
+                                <rect key="frame" x="162" y="226" width="90" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="72"/>
-                                <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Top Mutual Artists" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHh-3c-nEb">
-                                <rect key="frame" x="34" y="679" width="221" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="24"/>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>

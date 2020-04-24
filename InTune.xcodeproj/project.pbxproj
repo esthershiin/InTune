@@ -13,6 +13,16 @@
 		3F0364A52452431F00B5B217 /* blob3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0364A42452431F00B5B217 /* blob3.png */; };
 		3F0364A924525ACF00B5B217 /* Group 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0364A824525ACF00B5B217 /* Group 6.png */; };
 		3F0364AB24525AF800B5B217 /* Group 7.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0364AA24525AF800B5B217 /* Group 7.png */; };
+		3F0364AD24525CF700B5B217 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364AC24525CF700B5B217 /* LoginViewController.swift */; };
+		3F0364AF24525D2C00B5B217 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364AE24525D2C00B5B217 /* DashboardViewController.swift */; };
+		3F0364B124525D4000B5B217 /* SearchHitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364B024525D4000B5B217 /* SearchHitViewController.swift */; };
+		3F0364B324525D4B00B5B217 /* SearchMissViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364B224525D4B00B5B217 /* SearchMissViewController.swift */; };
+		3F0364B524525D6100B5B217 /* IncomingRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364B424525D6100B5B217 /* IncomingRequestViewController.swift */; };
+		3F0364B724525D6F00B5B217 /* OutgoingRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364B624525D6F00B5B217 /* OutgoingRequestViewController.swift */; };
+		3F0364B924525D7B00B5B217 /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364B824525D7B00B5B217 /* MatchViewController.swift */; };
+		3F0364BB24525DA500B5B217 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364BA24525DA500B5B217 /* ProfileViewController.swift */; };
+		3F0364C024525F4F00B5B217 /* Tuner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364BF24525F4F00B5B217 /* Tuner.swift */; };
+		3F0364C22452603F00B5B217 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364C12452603F00B5B217 /* UserData.swift */; };
 		FEF2F194244FE594000BC236 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF2F193244FE594000BC236 /* AppDelegate.swift */; };
 		FEF2F196244FE594000BC236 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF2F195244FE594000BC236 /* SceneDelegate.swift */; };
 		FEF2F198244FE594000BC236 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF2F197244FE594000BC236 /* ViewController.swift */; };
@@ -47,6 +57,16 @@
 		3F0364A42452431F00B5B217 /* blob3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blob3.png; sourceTree = "<group>"; };
 		3F0364A824525ACF00B5B217 /* Group 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 6.png"; sourceTree = "<group>"; };
 		3F0364AA24525AF800B5B217 /* Group 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 7.png"; sourceTree = "<group>"; };
+		3F0364AC24525CF700B5B217 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3F0364AE24525D2C00B5B217 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		3F0364B024525D4000B5B217 /* SearchHitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHitViewController.swift; sourceTree = "<group>"; };
+		3F0364B224525D4B00B5B217 /* SearchMissViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMissViewController.swift; sourceTree = "<group>"; };
+		3F0364B424525D6100B5B217 /* IncomingRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingRequestViewController.swift; sourceTree = "<group>"; };
+		3F0364B624525D6F00B5B217 /* OutgoingRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingRequestViewController.swift; sourceTree = "<group>"; };
+		3F0364B824525D7B00B5B217 /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		3F0364BA24525DA500B5B217 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3F0364BF24525F4F00B5B217 /* Tuner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuner.swift; sourceTree = "<group>"; };
+		3F0364C12452603F00B5B217 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		FEF2F190244FE594000BC236 /* InTune.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InTune.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEF2F193244FE594000BC236 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEF2F195244FE594000BC236 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +120,41 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		3F0364BC24525E4C00B5B217 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3F0364AC24525CF700B5B217 /* LoginViewController.swift */,
+				3F0364AE24525D2C00B5B217 /* DashboardViewController.swift */,
+				3F0364BA24525DA500B5B217 /* ProfileViewController.swift */,
+				3F0364B024525D4000B5B217 /* SearchHitViewController.swift */,
+				3F0364B224525D4B00B5B217 /* SearchMissViewController.swift */,
+				3F0364B424525D6100B5B217 /* IncomingRequestViewController.swift */,
+				3F0364B624525D6F00B5B217 /* OutgoingRequestViewController.swift */,
+				3F0364B824525D7B00B5B217 /* MatchViewController.swift */,
+				FEF2F195244FE594000BC236 /* SceneDelegate.swift */,
+				FEF2F197244FE594000BC236 /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		3F0364BD24525ECA00B5B217 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3F0364BF24525F4F00B5B217 /* Tuner.swift */,
+				3F0364C12452603F00B5B217 /* UserData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3F0364BE24525F1600B5B217 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3F03649D245237D000B5B217 /* amiko */,
+				3F03649F2452413C00B5B217 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		FEF2F187244FE594000BC236 = {
 			isa = PBXGroup;
 			children = (
@@ -123,14 +178,13 @@
 		FEF2F192244FE594000BC236 /* InTune */ = {
 			isa = PBXGroup;
 			children = (
-				3F03649F2452413C00B5B217 /* Images */,
-				3F03649D245237D000B5B217 /* amiko */,
-				FEF2F193244FE594000BC236 /* AppDelegate.swift */,
-				FEF2F195244FE594000BC236 /* SceneDelegate.swift */,
-				FEF2F197244FE594000BC236 /* ViewController.swift */,
+				3F0364BE24525F1600B5B217 /* Resources */,
+				3F0364BC24525E4C00B5B217 /* View Controllers */,
+				3F0364BD24525ECA00B5B217 /* Model */,
 				FEF2F199244FE594000BC236 /* Main.storyboard */,
-				FEF2F19C244FE595000BC236 /* Assets.xcassets */,
 				FEF2F19E244FE595000BC236 /* LaunchScreen.storyboard */,
+				FEF2F193244FE594000BC236 /* AppDelegate.swift */,
+				FEF2F19C244FE595000BC236 /* Assets.xcassets */,
 				FEF2F1A1244FE595000BC236 /* Info.plist */,
 			);
 			path = InTune;
@@ -290,7 +344,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0364C22452603F00B5B217 /* UserData.swift in Sources */,
+				3F0364B124525D4000B5B217 /* SearchHitViewController.swift in Sources */,
+				3F0364B324525D4B00B5B217 /* SearchMissViewController.swift in Sources */,
+				3F0364B524525D6100B5B217 /* IncomingRequestViewController.swift in Sources */,
+				3F0364AD24525CF700B5B217 /* LoginViewController.swift in Sources */,
+				3F0364C024525F4F00B5B217 /* Tuner.swift in Sources */,
+				3F0364B924525D7B00B5B217 /* MatchViewController.swift in Sources */,
 				FEF2F198244FE594000BC236 /* ViewController.swift in Sources */,
+				3F0364BB24525DA500B5B217 /* ProfileViewController.swift in Sources */,
+				3F0364AF24525D2C00B5B217 /* DashboardViewController.swift in Sources */,
+				3F0364B724525D6F00B5B217 /* OutgoingRequestViewController.swift in Sources */,
 				FEF2F194244FE594000BC236 /* AppDelegate.swift in Sources */,
 				FEF2F196244FE594000BC236 /* SceneDelegate.swift in Sources */,
 			);
