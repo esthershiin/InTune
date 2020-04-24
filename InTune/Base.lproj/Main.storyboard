@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,29 +27,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OhB-9E-VwD">
-                                <rect key="frame" x="143" y="162" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OhB-9E-VwD">
+                                <rect key="frame" x="143" y="164" width="128" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="7SP-Bd-9nl"/>
+                                    <constraint firstAttribute="width" constant="128" id="I2f-kQ-3aK"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to InTune" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-2L-pi7">
-                                <rect key="frame" x="50" y="324" width="319" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to InTune" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-2L-pi7">
+                                <rect key="frame" x="47" y="327" width="320" height="45"/>
                                 <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="33"/>
                                 <color key="textColor" red="0.3197522047546012" green="0.10357203640328851" blue="0.11438104482085411" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOx-Bj-JSv">
-                                <rect key="frame" x="56" y="481" width="302" height="250"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">In Tune uses your Spotify data to tune you with your friends. We look at your library, listening patterns, and playlists. In Tune will also make playlists on your account when you’ve tuned in with a friend–you can delete these at any time.</string>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8k-9s-Wbj">
-                                <rect key="frame" x="77" y="424" width="260" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8k-9s-Wbj">
+                                <rect key="frame" x="89" y="407" width="237" height="49"/>
                                 <color key="backgroundColor" red="0.9808698296546936" green="0.78948522715449365" blue="0.7933695885583113" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="0KK-YC-kFP"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="20"/>
                                 <state key="normal" title="LOG IN WITH SPOTIFY">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,8 +56,33 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOx-Bj-JSv">
+                                <rect key="frame" x="60" y="491" width="294" height="182"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="182" id="Mvl-Hb-rF7"/>
+                                </constraints>
+                                <string key="text">In Tune uses your Spotify data to tune you with your friends. We look at your library, listening patterns, and playlists. In Tune will also make playlists on your account when you’ve tuned in with a friend–you can delete these at any time.</string>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1u1-2L-pi7" secondAttribute="trailing" constant="47" id="4QH-nx-kgx"/>
+                            <constraint firstItem="HOx-Bj-JSv" firstAttribute="top" secondItem="p8k-9s-Wbj" secondAttribute="bottom" constant="35" id="6ly-2N-XmI"/>
+                            <constraint firstItem="1u1-2L-pi7" firstAttribute="top" secondItem="OhB-9E-VwD" secondAttribute="bottom" constant="35" id="9di-6m-grs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p8k-9s-Wbj" secondAttribute="trailing" constant="88" id="C2r-bV-c4t"/>
+                            <constraint firstItem="p8k-9s-Wbj" firstAttribute="top" secondItem="1u1-2L-pi7" secondAttribute="bottom" constant="35" id="Est-DZ-yjg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HOx-Bj-JSv" secondAttribute="trailing" constant="60" id="HaF-fc-hRJ"/>
+                            <constraint firstItem="p8k-9s-Wbj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="89" id="LcP-5j-h0D"/>
+                            <constraint firstItem="HOx-Bj-JSv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="YGN-CS-26e"/>
+                            <constraint firstItem="OhB-9E-VwD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="120" id="dCw-qi-5iW"/>
+                            <constraint firstItem="1u1-2L-pi7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="fm3-8C-Jj5"/>
+                            <constraint firstItem="HOx-Bj-JSv" firstAttribute="top" secondItem="p8k-9s-Wbj" secondAttribute="bottom" constant="35" id="iRW-r6-ijC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OhB-9E-VwD" secondAttribute="trailing" constant="143" id="l2m-wN-f2W"/>
+                            <constraint firstItem="OhB-9E-VwD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="143" id="yjX-cR-XfH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -92,14 +113,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blob1.png" translatesAutoresizingMaskIntoConstraints="NO" id="wcy-K8-CIe">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blob1.png" translatesAutoresizingMaskIntoConstraints="NO" id="wcy-K8-CIe">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jj0-9R-X9p">
-                                <rect key="frame" x="33" y="105" width="349" height="183"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jj0-9R-X9p">
+                                <rect key="frame" x="30" y="104" width="354" height="183"/>
                                 <color key="backgroundColor" red="0.9808698296546936" green="0.87273269891738892" blue="0.87492746114730835" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="183" id="Cbt-Ts-ECA"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -109,68 +131,113 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e5u-qo-1Bo">
-                                <rect key="frame" x="57" y="135" width="129" height="129"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e5u-qo-1Bo">
+                                <rect key="frame" x="50" y="124" width="136" height="145"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="145" id="vCr-34-15h"/>
+                                    <constraint firstAttribute="width" constant="136" id="zuk-35-CRd"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UdQ-2T-gLQ">
-                                <rect key="frame" x="211" y="135" width="95" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UdQ-2T-gLQ">
+                                <rect key="frame" x="211" y="129" width="95" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="7U9-53-3gF"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="30"/>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOI-UG-nkl">
-                                <rect key="frame" x="211" y="171" width="116" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOI-UG-nkl">
+                                <rect key="frame" x="211" y="169" width="116" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="3fh-nT-Bfg"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Amiko-Regular" family="Amiko" pointSize="20"/>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Joined MM/DD/YYYY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Llk-Bx-tIm">
-                                <rect key="frame" x="211" y="245" width="146" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joined MM/DD/YYYY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Llk-Bx-tIm">
+                                <rect key="frame" x="211" y="246" width="146" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="6Po-CC-dXD"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Amiko-Regular" family="Amiko" pointSize="14"/>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Top Match:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dje-lj-gdf">
-                                <rect key="frame" x="33" y="368" width="195" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Top Match:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dje-lj-gdf">
+                                <rect key="frame" x="30" y="347" width="195" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="JTJ-87-COn"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Amiko-SemiBold" family="Amiko" pointSize="24"/>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptR-QK-YGK">
-                                <rect key="frame" x="327" y="67" width="55" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptR-QK-YGK">
+                                <rect key="frame" x="329" y="54" width="55" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="Ob9-W7-lmW"/>
+                                    <constraint firstAttribute="height" constant="30" id="Un6-Cs-hZC"/>
+                                </constraints>
                                 <state key="normal" title="Log Out">
                                     <color key="titleColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Average match score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6g-yC-Bja">
-                                <rect key="frame" x="33" y="505" width="257" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of friends you're in tune with:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rg-lv-Vvm">
+                                <rect key="frame" x="30" y="533" width="354" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="66" id="48Z-VF-H26"/>
+                                    <constraint firstAttribute="height" constant="66" id="DJI-xl-7qh"/>
+                                    <constraint firstAttribute="width" constant="354" id="t3x-16-IZ2"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Amiko-SemiBold" family="Amiko" pointSize="24"/>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of friends you're in tune with:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rg-lv-Vvm">
-                                <rect key="frame" x="33" y="546" width="304" height="246"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average match score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6g-yC-Bja">
+                                <rect key="frame" x="30" y="440" width="256.5" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="cHW-nu-Svu"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Amiko-SemiBold" family="Amiko" pointSize="24"/>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Zb6-22-lnD" firstAttribute="trailing" secondItem="jj0-9R-X9p" secondAttribute="trailing" constant="30" id="1LB-2O-ohV"/>
+                            <constraint firstItem="dje-lj-gdf" firstAttribute="top" secondItem="jj0-9R-X9p" secondAttribute="bottom" constant="60" id="3Zs-lb-8XQ"/>
+                            <constraint firstItem="wcy-K8-CIe" firstAttribute="trailing" secondItem="Zb6-22-lnD" secondAttribute="trailing" id="7hG-gp-bQw"/>
+                            <constraint firstItem="jj0-9R-X9p" firstAttribute="leading" secondItem="Zb6-22-lnD" secondAttribute="leading" constant="30" id="Cr1-S7-dEG"/>
+                            <constraint firstItem="6Rg-lv-Vvm" firstAttribute="top" secondItem="H6g-yC-Bja" secondAttribute="bottom" constant="60" id="Iim-yY-8BP"/>
+                            <constraint firstItem="Zb6-22-lnD" firstAttribute="trailing" secondItem="ptR-QK-YGK" secondAttribute="trailing" constant="30" id="KqE-gM-8zJ"/>
+                            <constraint firstItem="e5u-qo-1Bo" firstAttribute="leading" secondItem="Zb6-22-lnD" secondAttribute="leading" constant="50" id="O4V-63-eWn"/>
+                            <constraint firstItem="H6g-yC-Bja" firstAttribute="top" secondItem="dje-lj-gdf" secondAttribute="bottom" constant="60" id="On0-qo-d9n"/>
+                            <constraint firstItem="H6g-yC-Bja" firstAttribute="leading" secondItem="Zb6-22-lnD" secondAttribute="leading" constant="30" id="Ong-AP-ydu"/>
+                            <constraint firstItem="Llk-Bx-tIm" firstAttribute="leading" secondItem="e5u-qo-1Bo" secondAttribute="trailing" constant="25" id="QsX-kp-8at"/>
+                            <constraint firstItem="e5u-qo-1Bo" firstAttribute="top" secondItem="Zb6-22-lnD" secondAttribute="top" constant="80" id="Sbg-J1-OyE"/>
+                            <constraint firstItem="6Rg-lv-Vvm" firstAttribute="leading" secondItem="Zb6-22-lnD" secondAttribute="leading" constant="30" id="Tlk-fM-QSM"/>
+                            <constraint firstItem="wcy-K8-CIe" firstAttribute="top" secondItem="BrD-pr-jXN" secondAttribute="top" id="UZh-Tb-3Qd"/>
+                            <constraint firstItem="Llk-Bx-tIm" firstAttribute="top" secondItem="lOI-UG-nkl" secondAttribute="bottom" constant="50" id="YQd-FM-xWi"/>
+                            <constraint firstItem="lOI-UG-nkl" firstAttribute="top" secondItem="Zb6-22-lnD" secondAttribute="top" constant="125" id="awb-HF-Fai"/>
+                            <constraint firstItem="UdQ-2T-gLQ" firstAttribute="leading" secondItem="e5u-qo-1Bo" secondAttribute="trailing" constant="25" id="beD-kS-q3n"/>
+                            <constraint firstItem="ptR-QK-YGK" firstAttribute="top" secondItem="Zb6-22-lnD" secondAttribute="top" constant="10" id="ecD-vc-wPm"/>
+                            <constraint firstItem="wcy-K8-CIe" firstAttribute="leading" secondItem="Zb6-22-lnD" secondAttribute="leading" id="f5F-Cz-nTW"/>
+                            <constraint firstItem="UdQ-2T-gLQ" firstAttribute="top" secondItem="Zb6-22-lnD" secondAttribute="top" constant="85" id="gB1-G5-ABY"/>
+                            <constraint firstAttribute="bottom" secondItem="wcy-K8-CIe" secondAttribute="bottom" id="gha-lX-sAj"/>
+                            <constraint firstItem="dje-lj-gdf" firstAttribute="leading" secondItem="Zb6-22-lnD" secondAttribute="leading" constant="30" id="mkc-Cd-Zz9"/>
+                            <constraint firstItem="jj0-9R-X9p" firstAttribute="top" secondItem="ptR-QK-YGK" secondAttribute="bottom" constant="20" id="y8E-Ay-FSS"/>
+                            <constraint firstItem="lOI-UG-nkl" firstAttribute="leading" secondItem="e5u-qo-1Bo" secondAttribute="trailing" constant="25" id="yf5-Sk-Htg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Zb6-22-lnD"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="person.crop.circle" catalog="system" id="LJx-Fh-fyr"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gY4-Sf-o7n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1751" y="118"/>
+            <point key="canvasLocation" x="1750.7246376811595" y="117.85714285714285"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="wET-kJ-CPK">
@@ -305,12 +372,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blob2.png" translatesAutoresizingMaskIntoConstraints="NO" id="vwW-f6-rRw">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blob2.png" translatesAutoresizingMaskIntoConstraints="NO" id="vwW-f6-rRw">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TII-Mo-d5t">
-                                <rect key="frame" x="23" y="92" width="231" height="67"/>
+                                <rect key="frame" x="25" y="92" width="369" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="50"/>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
@@ -347,13 +413,19 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vwW-f6-rRw" firstAttribute="leading" secondItem="Amq-wq-hjb" secondAttribute="leading" id="GkW-WW-BAG"/>
+                            <constraint firstItem="vwW-f6-rRw" firstAttribute="top" secondItem="AKz-pQ-tQZ" secondAttribute="top" id="OXL-2F-j5R"/>
+                            <constraint firstItem="vwW-f6-rRw" firstAttribute="trailing" secondItem="Amq-wq-hjb" secondAttribute="trailing" id="fvU-C6-oD4"/>
+                            <constraint firstAttribute="bottom" secondItem="vwW-f6-rRw" secondAttribute="bottom" id="isX-Yj-gqb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Amq-wq-hjb"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="music.note" catalog="system" id="p2G-ke-5Fx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dBD-43-mqW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2512" y="118"/>
+            <point key="canvasLocation" x="2511.594202898551" y="117.85714285714285"/>
         </scene>
         <!--Incoming Request View Controller-->
         <scene sceneID="1Hh-w6-yge">
