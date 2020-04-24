@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>157264404084-cqk5c7p0s491g9bvvk4tsqk86c329p61.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.157264404084-cqk5c7p0s491g9bvvk4tsqk86c329p61</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA3y5GlT2J2H8NhFONfjK-9Xl4dwfwXxJg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>157264404084</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.APES.Snapagram</string>
+	<key>PROJECT_ID</key>
+	<string>snapagram-949e4</string>
+	<key>STORAGE_BUCKET</key>
+	<string>snapagram-949e4.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:157264404084:ios:32069c4e237f4b960afb21</string>
+	<key>DATABASE_URL</key>
+	<string>https://snapagram-949e4.firebaseio.com</string>
+</dict>
+</plist>
