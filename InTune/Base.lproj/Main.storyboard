@@ -35,13 +35,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to InTune" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-2L-pi7">
-                                <rect key="frame" x="47" y="327" width="320" height="45"/>
+                                <rect key="frame" x="47" y="327" width="320" height="38.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="33"/>
                                 <color key="textColor" red="0.39471387860000001" green="0.14917823669999999" blue="0.15293234589999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8k-9s-Wbj">
-                                <rect key="frame" x="89" y="407" width="237" height="49"/>
+                                <rect key="frame" x="89" y="400.66666666666669" width="237" height="49"/>
                                 <color key="backgroundColor" red="0.95174139738082886" green="0.79616183042526245" blue="0.79607534408569336" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="0KK-YC-kFP"/>
@@ -60,7 +60,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOx-Bj-JSv">
-                                <rect key="frame" x="60" y="491" width="294" height="150"/>
+                                <rect key="frame" x="60" y="484.66666666666674" width="294" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Mvl-Hb-rF7"/>
                                 </constraints>
