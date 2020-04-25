@@ -9,12 +9,24 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var joinedDateLabel: UILabel!
+    @IBOutlet weak var topMatchLabel: UILabel!
+    @IBOutlet weak var averageScoreLabel: UILabel!
+    @IBOutlet weak var numberOfMatchesLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func settingsButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+    }
 
     /*
     // MARK: - Navigation

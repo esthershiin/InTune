@@ -15,7 +15,9 @@ class DashboardViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func inviteButtonPressed(_ sender: Any) {
+    }
+    
     /*
     // MARK: - Navigation
 
