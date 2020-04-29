@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F03649E245237D000B5B217 /* amiko in Resources */ = {isa = PBXBuildFile; fileRef = 3F03649D245237D000B5B217 /* amiko */; };
 		3F0364A12452414D00B5B217 /* blob1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0364A02452414D00B5B217 /* blob1.png */; };
 		3F0364A32452431800B5B217 /* blob2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0364A22452431800B5B217 /* blob2.png */; };
 		3F0364A52452431F00B5B217 /* blob3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0364A42452431F00B5B217 /* blob3.png */; };
@@ -24,6 +23,11 @@
 		3F0364C024525F4F00B5B217 /* Tuner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364BF24525F4F00B5B217 /* Tuner.swift */; };
 		3F0364C22452603F00B5B217 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364C12452603F00B5B217 /* UserData.swift */; };
 		3F1137CB2453952C00C869D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F1137CA2453952C00C869D8 /* GoogleService-Info.plist */; };
+		3F86B57C24590C42001ABE19 /* ios-sdk-1.2.2 in Resources */ = {isa = PBXBuildFile; fileRef = 3F86B57B24590C42001ABE19 /* ios-sdk-1.2.2 */; };
+		3FB0E67624578E13005E2A59 /* Amiko-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */; };
+		3FB0E67724578E13005E2A59 /* Amiko-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67324578E13005E2A59 /* Amiko-Bold.ttf */; };
+		3FB0E67824578E13005E2A59 /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67424578E13005E2A59 /* SIL Open Font License.txt */; };
+		3FB0E67924578E13005E2A59 /* Amiko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67524578E13005E2A59 /* Amiko-Regular.ttf */; };
 		4BCB01C155B0EF3DFCBF23FA /* Pods_InTuneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72F2F77795E25C19DA26C9FC /* Pods_InTuneTests.framework */; };
 		8D0D9A26EE595F2B890D7F2B /* Pods_InTune_InTuneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698361698130C2F53964F7F6 /* Pods_InTune_InTuneUITests.framework */; };
 		F409F3A59F13F78497A4B8E9 /* Pods_InTune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37691AE6708D85021A2248E0 /* Pods_InTune.framework */; };
@@ -57,7 +61,6 @@
 /* Begin PBXFileReference section */
 		1E3B7FEB2A786886B2DD8897 /* Pods-InTune.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InTune.release.xcconfig"; path = "Target Support Files/Pods-InTune/Pods-InTune.release.xcconfig"; sourceTree = "<group>"; };
 		37691AE6708D85021A2248E0 /* Pods_InTune.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InTune.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F03649D245237D000B5B217 /* amiko */ = {isa = PBXFileReference; lastKnownFileType = folder; path = amiko; sourceTree = "<group>"; };
 		3F0364A02452414D00B5B217 /* blob1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blob1.png; sourceTree = "<group>"; };
 		3F0364A22452431800B5B217 /* blob2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blob2.png; sourceTree = "<group>"; };
 		3F0364A42452431F00B5B217 /* blob3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blob3.png; sourceTree = "<group>"; };
@@ -74,6 +77,12 @@
 		3F0364BF24525F4F00B5B217 /* Tuner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuner.swift; sourceTree = "<group>"; };
 		3F0364C12452603F00B5B217 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		3F1137CA2453952C00C869D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3F86B57B24590C42001ABE19 /* ios-sdk-1.2.2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "ios-sdk-1.2.2"; sourceTree = "<group>"; };
+		3F86B57D245964F6001ABE19 /* inTune-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inTune-Bridging-Header.h"; sourceTree = "<group>"; };
+		3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-SemiBold.ttf"; sourceTree = "<group>"; };
+		3FB0E67324578E13005E2A59 /* Amiko-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-Bold.ttf"; sourceTree = "<group>"; };
+		3FB0E67424578E13005E2A59 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
+		3FB0E67524578E13005E2A59 /* Amiko-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-Regular.ttf"; sourceTree = "<group>"; };
 		50C4B189D4E449F4681BF4ED /* Pods-InTuneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InTuneTests.release.xcconfig"; path = "Target Support Files/Pods-InTuneTests/Pods-InTuneTests.release.xcconfig"; sourceTree = "<group>"; };
 		51B79A2E2474A8894EC13589 /* Pods-InTune.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InTune.debug.xcconfig"; path = "Target Support Files/Pods-InTune/Pods-InTune.debug.xcconfig"; sourceTree = "<group>"; };
 		698361698130C2F53964F7F6 /* Pods_InTune_InTuneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InTune_InTuneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,10 +174,21 @@
 		3F0364BE24525F1600B5B217 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3F03649D245237D000B5B217 /* amiko */,
+				3FB0E67124578DEE005E2A59 /* fonts */,
 				3F03649F2452413C00B5B217 /* Images */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3FB0E67124578DEE005E2A59 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3FB0E67324578E13005E2A59 /* Amiko-Bold.ttf */,
+				3FB0E67524578E13005E2A59 /* Amiko-Regular.ttf */,
+				3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */,
+				3FB0E67424578E13005E2A59 /* SIL Open Font License.txt */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		4EE6CD6CA2439369E4F3DFB6 /* Frameworks */ = {
@@ -177,6 +197,7 @@
 				37691AE6708D85021A2248E0 /* Pods_InTune.framework */,
 				698361698130C2F53964F7F6 /* Pods_InTune_InTuneUITests.framework */,
 				72F2F77795E25C19DA26C9FC /* Pods_InTuneTests.framework */,
+				3F86B57B24590C42001ABE19 /* ios-sdk-1.2.2 */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -229,6 +250,7 @@
 				FEF2F193244FE594000BC236 /* AppDelegate.swift */,
 				FEF2F19C244FE595000BC236 /* Assets.xcassets */,
 				FEF2F1A1244FE595000BC236 /* Info.plist */,
+				3F86B57D245964F6001ABE19 /* inTune-Bridging-Header.h */,
 			);
 			path = InTune;
 			sourceTree = "<group>";
@@ -359,14 +381,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FB0E67624578E13005E2A59 /* Amiko-SemiBold.ttf in Resources */,
+				3FB0E67724578E13005E2A59 /* Amiko-Bold.ttf in Resources */,
 				3F0364A924525ACF00B5B217 /* Group 6.png in Resources */,
 				3F0364A52452431F00B5B217 /* blob3.png in Resources */,
 				3F0364A12452414D00B5B217 /* blob1.png in Resources */,
 				3F0364AB24525AF800B5B217 /* Group 7.png in Resources */,
+				3FB0E67824578E13005E2A59 /* SIL Open Font License.txt in Resources */,
+				3FB0E67924578E13005E2A59 /* Amiko-Regular.ttf in Resources */,
 				FEF2F1A0244FE595000BC236 /* LaunchScreen.storyboard in Resources */,
 				FEF2F19D244FE595000BC236 /* Assets.xcassets in Resources */,
-				3F03649E245237D000B5B217 /* amiko in Resources */,
 				3F1137CB2453952C00C869D8 /* GoogleService-Info.plist in Resources */,
+				3F86B57C24590C42001ABE19 /* ios-sdk-1.2.2 in Resources */,
 				FEF2F19B244FE594000BC236 /* Main.storyboard in Resources */,
 				3F0364A32452431800B5B217 /* blob2.png in Resources */,
 			);
@@ -691,8 +717,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ally-esth-jun.InTune";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "inTune-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -710,8 +737,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ally-esth-jun.InTune";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "inTune-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
