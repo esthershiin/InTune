@@ -22,7 +22,6 @@
 		3F0364BB24525DA500B5B217 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364BA24525DA500B5B217 /* ProfileViewController.swift */; };
 		3F0364C024525F4F00B5B217 /* Tuner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364BF24525F4F00B5B217 /* Tuner.swift */; };
 		3F0364C22452603F00B5B217 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364C12452603F00B5B217 /* UserData.swift */; };
-		3F1137CB2453952C00C869D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F1137CA2453952C00C869D8 /* GoogleService-Info.plist */; };
 		3F86B57C24590C42001ABE19 /* ios-sdk-1.2.2 in Resources */ = {isa = PBXBuildFile; fileRef = 3F86B57B24590C42001ABE19 /* ios-sdk-1.2.2 */; };
 		3FB0E67624578E13005E2A59 /* Amiko-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */; };
 		3FB0E67724578E13005E2A59 /* Amiko-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67324578E13005E2A59 /* Amiko-Bold.ttf */; };
@@ -31,6 +30,7 @@
 		4BCB01C155B0EF3DFCBF23FA /* Pods_InTuneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72F2F77795E25C19DA26C9FC /* Pods_InTuneTests.framework */; };
 		8D0D9A26EE595F2B890D7F2B /* Pods_InTune_InTuneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698361698130C2F53964F7F6 /* Pods_InTune_InTuneUITests.framework */; };
 		F409F3A59F13F78497A4B8E9 /* Pods_InTune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37691AE6708D85021A2248E0 /* Pods_InTune.framework */; };
+		FEBF45F124599EF000DF5543 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEBF45F024599EF000DF5543 /* GoogleService-Info.plist */; };
 		FEF2F194244FE594000BC236 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF2F193244FE594000BC236 /* AppDelegate.swift */; };
 		FEF2F196244FE594000BC236 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF2F195244FE594000BC236 /* SceneDelegate.swift */; };
 		FEF2F198244FE594000BC236 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF2F197244FE594000BC236 /* ViewController.swift */; };
@@ -76,7 +76,6 @@
 		3F0364BA24525DA500B5B217 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3F0364BF24525F4F00B5B217 /* Tuner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuner.swift; sourceTree = "<group>"; };
 		3F0364C12452603F00B5B217 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		3F1137CA2453952C00C869D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F86B57B24590C42001ABE19 /* ios-sdk-1.2.2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "ios-sdk-1.2.2"; sourceTree = "<group>"; };
 		3F86B57D245964F6001ABE19 /* inTune-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inTune-Bridging-Header.h"; sourceTree = "<group>"; };
 		3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -90,6 +89,7 @@
 		74474FA8052B173668FBD112 /* Pods-InTune-InTuneUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InTune-InTuneUITests.debug.xcconfig"; path = "Target Support Files/Pods-InTune-InTuneUITests/Pods-InTune-InTuneUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A4A96DF4FE91CAAB47CE9DF0 /* Pods-InTuneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InTuneTests.debug.xcconfig"; path = "Target Support Files/Pods-InTuneTests/Pods-InTuneTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F2CAA0F3D21375D6A57475AB /* Pods-InTune-InTuneUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InTune-InTuneUITests.release.xcconfig"; path = "Target Support Files/Pods-InTune-InTuneUITests/Pods-InTune-InTuneUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FEBF45F024599EF000DF5543 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEF2F190244FE594000BC236 /* InTune.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InTune.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEF2F193244FE594000BC236 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEF2F195244FE594000BC236 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,8 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				3F0364AC24525CF700B5B217 /* LoginViewController.swift */,
-				3F0364AE24525D2C00B5B217 /* DashboardViewController.swift */,
 				3F0364BA24525DA500B5B217 /* ProfileViewController.swift */,
+				3F0364AE24525D2C00B5B217 /* DashboardViewController.swift */,
 				3F0364B024525D4000B5B217 /* SearchHitViewController.swift */,
 				3F0364B224525D4B00B5B217 /* SearchMissViewController.swift */,
 				3F0364B424525D6100B5B217 /* IncomingRequestViewController.swift */,
@@ -240,7 +240,7 @@
 		FEF2F192244FE594000BC236 /* InTune */ = {
 			isa = PBXGroup;
 			children = (
-				3F1137CA2453952C00C869D8 /* GoogleService-Info.plist */,
+				FEBF45F024599EF000DF5543 /* GoogleService-Info.plist */,
 				3F0364BE24525F1600B5B217 /* Resources */,
 				3F0364BC24525E4C00B5B217 /* View Controllers */,
 				3F0364BD24525ECA00B5B217 /* Model */,
@@ -391,10 +391,10 @@
 				3FB0E67924578E13005E2A59 /* Amiko-Regular.ttf in Resources */,
 				FEF2F1A0244FE595000BC236 /* LaunchScreen.storyboard in Resources */,
 				FEF2F19D244FE595000BC236 /* Assets.xcassets in Resources */,
-				3F1137CB2453952C00C869D8 /* GoogleService-Info.plist in Resources */,
 				3F86B57C24590C42001ABE19 /* ios-sdk-1.2.2 in Resources */,
 				FEF2F19B244FE594000BC236 /* Main.storyboard in Resources */,
 				3F0364A32452431800B5B217 /* blob2.png in Resources */,
+				FEBF45F124599EF000DF5543 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,6 +709,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ios-sdk-1.2.2",
+				);
 				INFOPLIST_FILE = InTune/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -729,6 +733,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ios-sdk-1.2.2",
+				);
 				INFOPLIST_FILE = InTune/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (

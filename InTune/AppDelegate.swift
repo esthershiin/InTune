@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    //THE THREE FUNCTIONS BELOW ARE COPIED FROM THE SPOTIFY SDK INSTRUCTIONS FOR ADVANCED AUTHORIZATION 
+    // implement session delegate
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
       print("success", session)
     }
@@ -43,7 +43,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
       print("renewed", session)
     }
+    
+    // instatiate SPTConfiguration
+    let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
+    let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
 
+    lazy var configuration = SPTConfiguration(
+      clientID: SpotifyClientID,
+      redirectURL: SpotifyRedirectURL
+    )
 
+    // setup token swap
+    lazy var sessionManager: SPTSessionManager = {
+      if let tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token"),
+         let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token") {
+        self.configuration.tokenSwapURL = tokenSwapURL
+        self.configuration.tokenRefreshURL = tokenRefreshURL
+        self.configuration.playURI = ""
+      }
+      let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
+      return manager
+    }()
+    
+    // invoke auth modal
+    let requestedScopes: SPTScope = [.appRemoteControl]
+    self.sessionManager.initiateSession(with: requestedScopes, options: .default)
+    
+    // configure auth callback
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+      self.sessionManager.application(app, open: url, options: options)
+      return true
+    }
+
+    
+    
 }
 
