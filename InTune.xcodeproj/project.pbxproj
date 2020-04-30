@@ -150,8 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				3F0364AC24525CF700B5B217 /* LoginViewController.swift */,
-				3F0364AE24525D2C00B5B217 /* DashboardViewController.swift */,
 				3F0364BA24525DA500B5B217 /* ProfileViewController.swift */,
+				3F0364AE24525D2C00B5B217 /* DashboardViewController.swift */,
 				3F0364B024525D4000B5B217 /* SearchHitViewController.swift */,
 				3F0364B224525D4B00B5B217 /* SearchMissViewController.swift */,
 				3F0364B424525D6100B5B217 /* IncomingRequestViewController.swift */,
@@ -709,6 +709,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ios-sdk-1.2.2",
+				);
 				INFOPLIST_FILE = InTune/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -729,6 +733,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ios-sdk-1.2.2",
+				);
 				INFOPLIST_FILE = InTune/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
