@@ -22,6 +22,7 @@
 		3F0364BB24525DA500B5B217 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364BA24525DA500B5B217 /* ProfileViewController.swift */; };
 		3F0364C024525F4F00B5B217 /* Tuner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364BF24525F4F00B5B217 /* Tuner.swift */; };
 		3F0364C22452603F00B5B217 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364C12452603F00B5B217 /* UserData.swift */; };
+		3F391B35245B7F3900081A79 /* inTune-Bridging-Header.h in Resources */ = {isa = PBXBuildFile; fileRef = 3F391B33245B7EAD00081A79 /* inTune-Bridging-Header.h */; };
 		3F86B57C24590C42001ABE19 /* ios-sdk-1.2.2 in Resources */ = {isa = PBXBuildFile; fileRef = 3F86B57B24590C42001ABE19 /* ios-sdk-1.2.2 */; };
 		3FB0E67624578E13005E2A59 /* Amiko-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */; };
 		3FB0E67724578E13005E2A59 /* Amiko-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67324578E13005E2A59 /* Amiko-Bold.ttf */; };
@@ -76,8 +77,8 @@
 		3F0364BA24525DA500B5B217 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3F0364BF24525F4F00B5B217 /* Tuner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuner.swift; sourceTree = "<group>"; };
 		3F0364C12452603F00B5B217 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		3F391B33245B7EAD00081A79 /* inTune-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inTune-Bridging-Header.h"; sourceTree = "<group>"; };
 		3F86B57B24590C42001ABE19 /* ios-sdk-1.2.2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "ios-sdk-1.2.2"; sourceTree = "<group>"; };
-		3F86B57D245964F6001ABE19 /* inTune-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inTune-Bridging-Header.h"; sourceTree = "<group>"; };
 		3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-SemiBold.ttf"; sourceTree = "<group>"; };
 		3FB0E67324578E13005E2A59 /* Amiko-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-Bold.ttf"; sourceTree = "<group>"; };
 		3FB0E67424578E13005E2A59 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
@@ -219,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				FEF2F192244FE594000BC236 /* InTune */,
+				3F391B33245B7EAD00081A79 /* inTune-Bridging-Header.h */,
 				FEF2F1A9244FE595000BC236 /* InTuneTests */,
 				FEF2F1B4244FE595000BC236 /* InTuneUITests */,
 				FEF2F191244FE594000BC236 /* Products */,
@@ -250,7 +252,6 @@
 				FEF2F193244FE594000BC236 /* AppDelegate.swift */,
 				FEF2F19C244FE595000BC236 /* Assets.xcassets */,
 				FEF2F1A1244FE595000BC236 /* Info.plist */,
-				3F86B57D245964F6001ABE19 /* inTune-Bridging-Header.h */,
 			);
 			path = InTune;
 			sourceTree = "<group>";
@@ -381,6 +382,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F391B35245B7F3900081A79 /* inTune-Bridging-Header.h in Resources */,
 				3FB0E67624578E13005E2A59 /* Amiko-SemiBold.ttf in Resources */,
 				3FB0E67724578E13005E2A59 /* Amiko-Bold.ttf in Resources */,
 				3F0364A924525ACF00B5B217 /* Group 6.png in Resources */,

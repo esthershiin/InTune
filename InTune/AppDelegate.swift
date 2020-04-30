@@ -16,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        // invoke auth modal
+        let requestedScopes: SPTScope = [.appRemoteControl]
+        self.sessionManager.initiateSession(with: requestedScopes, options: .default)
         return true
     }
 
@@ -65,12 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
       return manager
     }()
     
-    // invoke auth modal
-    let requestedScopes: SPTScope = [.appRemoteControl]
-    self.sessionManager.initiateSession(with: requestedScopes, options: .default)
-    
     // configure auth callback
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
       self.sessionManager.application(app, open: url, options: options)
       return true
     }
