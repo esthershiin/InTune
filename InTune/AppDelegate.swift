@@ -75,7 +75,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
       return true
     }
 
-    
-    
 }
-
