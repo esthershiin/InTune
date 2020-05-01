@@ -11,7 +11,6 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate {
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         //Use Firebase library to configure APIs
@@ -20,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         // invoke auth modal
         let requestedScopes: SPTScope = [.appRemoteControl, .userTopRead, .playlistModifyPublic]
         self.sessionManager.initiateSession(with: requestedScopes, options: .default)
-        
+        setIsLoggedIn()
         return true
     }
 
@@ -50,16 +49,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
       print("renewed", session)
     }
-        
-    //    // instatiate SPTConfiguration
-    //    let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
-    //    let SpotifyRedirectURL = URL(string: "localhost:8888/callback")!
-    //
-    //    lazy var configuration = SPTConfiguration(
-    //      clientID: SpotifyClientID,
-    //      redirectURL: SpotifyRedirectURL
-    //    )
 
+    let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
+
+    let SpotifyRedirectURL = URL(string: "intune-login://callback")!
+
+    lazy var configuration = SPTConfiguration(
+      clientID: SpotifyClientID,
+      redirectURL: SpotifyRedirectURL
+    )
+    
     // setup token swap
     lazy var sessionManager: SPTSessionManager = {
       if let tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token"),
@@ -68,6 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         self.configuration.tokenRefreshURL = tokenRefreshURL
         self.configuration.playURI = ""
         storeTokens()
+        setIsLoggedIn()
       }
       let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
       return manager
@@ -80,19 +80,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     }
     
     func storeTokens() {
-        let _ = URLSession.shared.dataTask(with: self.configuration.tokenSwapURL!) { (data, response, err) in
-            guard let tokenData = data else { return }
-            let jsonTokenData = try? JSONSerialization.jsonObject(with: tokenData, options: [])
-            guard let dictionary = jsonTokenData as? [String: Any] else { return }
-            guard let access_token = dictionary["access_token"] else { return }
-            guard let expires_in = dictionary["expires_in"] else { return }
-            guard let refresh_token = dictionary["refresh_token"] else { return }
-            guard let scope = dictionary["scope"] else { return }
-            
-            authToken = access_token as! String
-            refreshToken = refresh_token as! String
-        }.resume()
-        
+        authToken = sessionManager.session?.accessToken
+        refreshToken = sessionManager.session?.refreshToken
+    }
+    
+    func setIsLoggedIn() {
+        isLoggedIn = (!sessionManager.session!.isExpired)
     }
 
 }
