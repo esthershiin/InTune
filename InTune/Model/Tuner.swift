@@ -13,11 +13,8 @@
 import Foundation
 
 
-func generateScoresFor(matchobj: match, _ userA: user, _ userB: user) -> (tracks: [String], artists: [String], score: Int) {
-    var tracksA = getTracks(userA)
-    var tracksB = getTracks(userB)
-    var artistsA = getArtists(userA)
-    var artistsB = getArtists(userB)
+func generateScoresFor(_ userA: user, _ userB: user) -> (tracks: [String], artists: [String], score: Int) {
+    
     
     var tracksIntersection = [String]()
     var artistsIntersection = [String]()
@@ -26,46 +23,71 @@ func generateScoresFor(matchobj: match, _ userA: user, _ userB: user) -> (tracks
     return ([""], [""], 3)
 }
 
-func getTracks(_ user: user) -> [[[String: Any]]]? {
-    let urlStringTracks = "https://api.spotify.com/v1/me/top/tracks?limit=50"
-    guard let urlTracks = URL(string: urlStringTracks) else {return nil}
-    var requestTracks = URLRequest(url: urlTracks)
-    requestTracks.httpMethod = "GET"
-    requestTracks.setValue(authToken, forHTTPHeaderField: "Authorization")
-    var topTracks: [[[String: Any]]]
-    URLSession.shared.dataTask(with: requestTracks) {(data, response, error) in
-        if error != nil {
-            print(error!)
-        } else {
-            guard let tracks = data else { return}
-            let json = try? JSONSerialization.jsonObject(with: tracks, options: [])
-            guard let dict = json as? [String: Any] else {return}
-            guard let mytracks = dict["items"] else {return}
-            topTracks = mytracks as! [[[String: Any]]]
-        }
-    }.resume()
-}
+struct TuneData {
+    
+    var userA: user
+    var userB: user
+    var tracksA: [String]
+    var tracksB: [String]
+    var artistsA: [String]
+    var artistsB: [String]
+    
+    init(userA: user, userB: user) {
+        self.userA = userA
+        self.userB = userB
+        tracksA = [""]
+        tracksB = [""]
+        artistsA = [""]
+        artistsB = [""]
+    }
+    
+    func setTracksA() {
+        
+    }
+    
+    func setTracksB() {
+        
+    }
 
-func getArtists(_ user: user) -> [[[String: Any]]]? {
-    let urlStringArtists = "https://api.spotify.com/v1/me/top/artists?limit=50"
-    guard let urlArtists = URL(string: urlStringArtists) else {return nil}
-    var requestArtists = URLRequest(url: urlArtists)
-    requestArtists.httpMethod = "GET"
-    requestArtists.setValue(authToken, forHTTPHeaderField: "Authorization")
-    URLSession.shared.dataTask(with: requestArtists) {(data, response, err) in
-        if let error = err {
-            print(error)
-            let code = error.localizedDescription
-            if (code == "") {
-                useRefreshToken()
+
+    func getTracks(_ user: user) {
+        let urlStringTracks = "https://api.spotify.com/v1/me/top/tracks?limit=50"
+        guard let urlTracks = URL(string: urlStringTracks) else {return}
+        var requestTracks = URLRequest(url: urlTracks)
+        requestTracks.httpMethod = "GET"
+        requestTracks.setValue(authToken, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: requestTracks) {(data, response, error) in
+            if error != nil {
+                print(error!)
+            } else {
+                guard let tracks = data else { return}
+                let json = try? JSONSerialization.jsonObject(with: tracks, options: [])
+                guard let dict = json as? [String: Any] else {return}
+                guard let mytracks = dict["items"] else {return}
             }
-        } else {
-            guard let artists = data else { return}
-            let json = try? JSONSerialization.jsonObject(with: artists, options: [])
-            guard let dict = json as? [String: Any] else { return}
-            guard let topArtists = dict["items"] else { return}
-        }
-    }.resume()
+        }.resume()
+    }
+
+    func getArtists(_ user: user) {
+        let urlStringArtists = "https://api.spotify.com/v1/me/top/artists?limit=50"
+        guard let urlArtists = URL(string: urlStringArtists) else {return}
+        var requestArtists = URLRequest(url: urlArtists)
+        requestArtists.httpMethod = "GET"
+        requestArtists.setValue(authToken, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: requestArtists) {(data, response, err) in
+            if let error = err {
+                print(error)
+                let code = error.localizedDescription
+                if (code == "") {
+                    useRefreshToken()
+                }
+            } else {
+                guard let artists = data else { return}
+                let json = try? JSONSerialization.jsonObject(with: artists, options: [])
+                guard let dict = json as? [String: Any] else { return}
+                guard let topArtists = dict["items"] else { return}
+            }
+        }.resume()
+    }
+
 }
-
-

@@ -14,7 +14,7 @@ func isLoggedIn() -> Bool {
 }
 
 func useRefreshToken() {
-    var urlstr = "https://spotify-token-swap.glitch.me/api/refresh_token?refresh_token=" + refreshToken
+    var urlstr = "https://spotify-token-swap.glitch.me/api/refresh_token?refresh_token=" + refreshToken!
     guard let refreshURL = URL(string: urlstr) else {return}
     var req = URLRequest(url: refreshURL)
     req.httpMethod = "POST"

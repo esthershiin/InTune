@@ -18,9 +18,11 @@ class LoginViewController: UIViewController, SPTSessionManagerDelegate {
     @IBAction func loginButtonPressed(_ sender: Any) {
         // invoke auth modal
         let requestedScopes: SPTScope = [.appRemoteControl, .userTopRead, .playlistModifyPublic]
-        self.sessionManager.initiateSession(with: requestedScopes, options: .default)
+            self.sessionManager.initiateSession(with: requestedScopes, options: .default)
         if (self.sessionManager.session != nil) {
-            
+            var vc = UITabBarController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
         }
     }
 

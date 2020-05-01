@@ -128,6 +128,6 @@ class match {
         self.userA = userA
         self.userB = userB
         self.date = Date()
-        generateScoresFor(self, userA, userB)
+        generateScoresFor(userA, userB)
     }
 }
