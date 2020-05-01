@@ -14,8 +14,21 @@ class MatchViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    @IBOutlet weak var usersLabel: UILabel!
+    @IBOutlet weak var matchScore: UILabel!
+    @IBOutlet weak var matchMessage: UILabel!
     
-
+    @IBOutlet weak var topSongImage1: UIImageView!
+    @IBOutlet weak var topSongTitle1: UILabel!
+    @IBOutlet weak var topSongImage2: UIImageView!
+    @IBOutlet weak var topSongImage3: UIImageView!
+    @IBOutlet weak var topSongTitle3: UILabel!
+    @IBOutlet weak var topSongTitle2: UILabel!
+    @IBOutlet weak var topArtist1: UILabel!
+    @IBOutlet weak var topArtist2: UILabel!
+    @IBOutlet weak var topArtist3: UILabel!
+    @IBAction func goToPlaylist(_ sender: Any) {
+    }
     /*
     // MARK: - Navigation
 

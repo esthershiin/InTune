@@ -15,7 +15,24 @@ class SearchHitViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var joinDateLabel: UILabel!
+    
+    @IBAction func tuneInAccepted(_ sender: Any) {
+        performSegue(withIdentifier: "searchHitToMatch", sender: usernameLabel.text)
+    }
+    @IBAction func tuneInRejected(_ sender: Any) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if let dest = segue.destination as? MatchViewController, let username = usernameLabel.text {
+                //fix title and change other items
+                dest.usersLabel.text = "Match with " + username
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 

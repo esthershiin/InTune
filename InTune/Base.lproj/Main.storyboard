@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tbx-N6-K0c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tbx-N6-K0c">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -257,7 +257,7 @@
                                 </state>
                                 <connections>
                                     <action selector="settingsButtonPressed:" destination="h3R-3G-D2j" eventType="touchUpInside" id="VYz-pX-707"/>
-                                    <segue destination="DBa-KY-qFk" kind="show" id="RjT-ZO-LFX"/>
+                                    <segue destination="DBa-KY-qFk" kind="show" identifier="settings" id="RjT-ZO-LFX"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6o-1N-1Qc">
@@ -498,6 +498,12 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Matches" image="heart.circle" catalog="system" id="6GB-zx-i6d"/>
                     <navigationItem key="navigationItem" id="5Wd-HU-PDD"/>
+                    <connections>
+                        <outlet property="incomingRequests" destination="Pv2-BK-7d3" id="IK6-FO-0Ip"/>
+                        <outlet property="matches" destination="5HU-fE-EYZ" id="j41-CP-EE7"/>
+                        <outlet property="pendingRequests" destination="QAi-kS-Lzh" id="t0T-4M-m1H"/>
+                        <outlet property="searchBar" destination="Axt-j2-aV0" id="MNz-7Y-Rvo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jg4-ob-Xl2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -506,7 +512,7 @@
         <!--About-->
         <scene sceneID="FRn-w6-pG3">
             <objects>
-                <viewController id="Gli-pd-uFM" sceneMemberID="viewController">
+                <viewController id="Gli-pd-uFM" customClass="DashboardViewController" customModule="InTune" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AKz-pQ-tQZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -582,6 +588,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="inviteButtonPressed:" destination="T3K-y9-2I0" eventType="touchUpInside" id="Z81-eW-41j"/>
+                                    <action selector="inviteButtonPressed:" destination="Gli-pd-uFM" eventType="touchUpInside" id="sdi-Uz-JdL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -638,6 +645,9 @@
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="requestAccepted:" destination="Lq4-ga-Lsn" eventType="touchUpInside" id="f4V-PR-FhR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5At-EY-c5c">
                                 <rect key="frame" x="97" y="620" width="220" height="60"/>
@@ -652,6 +662,9 @@
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="requestRejected:" destination="Lq4-ga-Lsn" eventType="touchUpInside" id="VtY-sa-MCx"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You've got a tune in request!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQc-6s-61d">
                                 <rect key="frame" x="32" y="207" width="350" height="33"/>
@@ -709,6 +722,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jkU-BL-eN4"/>
                     </view>
+                    <connections>
+                        <outlet property="joinDateLabel" destination="HfZ-s5-pzT" id="Nzu-J9-54R"/>
+                        <outlet property="profileImageView" destination="fxU-Bd-c0e" id="kiA-4X-GU1"/>
+                        <outlet property="usernameLabel" destination="eDq-Bz-0xN" id="lZM-oN-aRH"/>
+                        <segue destination="L1y-n0-dhd" kind="presentation" identifier="requestToMatch" modalPresentationStyle="fullScreen" id="aLi-gD-kIm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RrL-hr-AX2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -726,24 +745,27 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lqG-tP-VWP">
+                                <rect key="frame" x="87" y="687" width="240" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99843233819999999" green="0.78033357859999997" blue="0.78823167090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="24"/>
+                                <state key="normal" title="Return to Matches">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="returnToMatches:" destination="byh-Si-U2Z" eventType="touchUpInside" id="Bw1-aL-4gL"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Waiting on the other user to approve your request!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ba-sK-8dP">
-                                <rect key="frame" x="39" y="223" width="337" height="97"/>
+                                <rect key="frame" x="39" y="179" width="337" height="97"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="24"/>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8o-dA-Cf3">
-                                <rect key="frame" x="40" y="513" width="334" height="223"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">They might not have notifications on.
-If that’s the case, remind them you’re waiting to get in tune!</string>
-                                <fontDescription key="fontDescription" name="Amiko-Regular" family="Amiko" pointSize="18"/>
-                                <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1Z-yW-vNA">
-                                <rect key="frame" x="30" y="357" width="354" height="183"/>
+                                <rect key="frame" x="30" y="311" width="354" height="183"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.97955185170000003" green="0.87455928329999999" blue="0.87450808290000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.97955185170000003" green="0.87455928329999999" blue="0.87450808290000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -757,7 +779,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fzz-Hc-E6R">
-                                <rect key="frame" x="44" y="376" width="128" height="144"/>
+                                <rect key="frame" x="44" y="330" width="128" height="144"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -766,23 +788,37 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Joined MM/DD/YYYY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fav-am-gju">
-                                <rect key="frame" x="189" y="438" width="156" height="21"/>
+                                <rect key="frame" x="189" y="392" width="156" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Amiko-Regular" family="Amiko" pointSize="15"/>
                                 <color key="textColor" red="0.39471387860000001" green="0.14917823669999999" blue="0.15293234589999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZf-Sa-jUP">
-                                <rect key="frame" x="189" y="394" width="144.66666666666663" height="27"/>
+                                <rect key="frame" x="189" y="348" width="144.66666666666663" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="25"/>
                                 <color key="textColor" red="0.39471387860000001" green="0.14917823669999999" blue="0.15293234589999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8o-dA-Cf3">
+                                <rect key="frame" x="39" y="472" width="334" height="223"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">They might not have notifications on.
+If that’s the case, remind them you’re waiting to get in tune!</string>
+                                <fontDescription key="fontDescription" name="Amiko-Regular" family="Amiko" pointSize="18"/>
+                                <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="wHE-0W-mRo"/>
                     </view>
+                    <connections>
+                        <outlet property="joinDateLabel" destination="fav-am-gju" id="Kff-R4-sUt"/>
+                        <outlet property="profileImageView" destination="Fzz-Hc-E6R" id="DSW-BC-uXZ"/>
+                        <outlet property="usernameLabel" destination="MZf-Sa-jUP" id="V1n-e4-nOd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9CC-Dq-XfV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -813,6 +849,9 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tuneInAccepted:" destination="a9w-SA-07K" eventType="touchUpInside" id="IJG-2f-OMv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fJ-YL-rBp">
                                 <rect key="frame" x="97" y="620" width="220" height="60"/>
@@ -827,6 +866,9 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tuneInRejected:" destination="a9w-SA-07K" eventType="touchUpInside" id="VcQ-PF-YE7"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Do you want to tune in with the user below?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVJ-aZ-svV">
                                 <rect key="frame" x="35" y="155" width="345" height="78"/>
@@ -876,6 +918,12 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="1Qp-Hc-Stc"/>
                     </view>
+                    <connections>
+                        <outlet property="joinDateLabel" destination="zYw-3Z-uak" id="5Ys-Eh-tC4"/>
+                        <outlet property="profileImageView" destination="DQ4-Bo-B1h" id="vQX-Ce-XMH"/>
+                        <outlet property="usernameLabel" destination="eqZ-ff-Zrl" id="i0i-e5-IKr"/>
+                        <segue destination="L1y-n0-dhd" kind="presentation" identifier="searchHitToMatch" modalPresentationStyle="fullScreen" id="N2H-Eb-ROC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pdc-Dt-bbb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -894,23 +942,32 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Are you sure you’re spelling it correctly? Your friends username will be the same as their Spotify account username.  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPt-bh-oOE">
-                                <rect key="frame" x="43" y="458" width="328" height="272"/>
+                                <rect key="frame" x="43" y="419" width="328" height="272"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Amiko-Regular" family="Amiko" pointSize="18"/>
                                 <color key="textColor" red="0.39471387860000001" green="0.14917823669999999" blue="0.15293234589999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Group 7.png" translatesAutoresizingMaskIntoConstraints="NO" id="G9Y-fg-P6j">
-                                <rect key="frame" x="110" y="328" width="194" height="172"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hm, no user with that username could be found." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbJ-jx-rnS">
-                                <rect key="frame" x="26" y="212" width="362" height="78"/>
+                                <rect key="frame" x="26" y="150" width="362" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="24"/>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sG-Ym-S0h">
+                                <rect key="frame" x="87" y="699" width="240" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99843233823776245" green="0.78033357858657837" blue="0.78823167085647583" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="24"/>
+                                <state key="normal" title="Return to Matches">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Group 7.png" translatesAutoresizingMaskIntoConstraints="NO" id="G9Y-fg-P6j">
+                                <rect key="frame" x="110" y="259" width="194" height="172"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="r9X-tZ-LTB"/>
@@ -948,7 +1005,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Mutual Artists" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHh-3c-nEb">
-                                <rect key="frame" x="34" y="653" width="354" height="33"/>
+                                <rect key="frame" x="34" y="662" width="354" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="oWZ-qk-6A9"/>
                                     <constraint firstAttribute="width" constant="354" id="wnN-yp-V97"/>
@@ -958,7 +1015,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Mutual Songs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="izv-as-VXH">
-                                <rect key="frame" x="34" y="490" width="354" height="33"/>
+                                <rect key="frame" x="34" y="475" width="354" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="354" id="cTO-6S-GsT"/>
                                     <constraint firstAttribute="height" constant="33" id="iNi-Lt-XPQ"/>
@@ -979,7 +1036,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </state>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEV-PL-JNb">
-                                <rect key="frame" x="41" y="538" width="90" height="90"/>
+                                <rect key="frame" x="41" y="523" width="90" height="90"/>
                                 <color key="backgroundColor" red="0.98086982970000003" green="0.87273269890000005" blue="0.87492746109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="7al-Me-Mtp"/>
@@ -995,7 +1052,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQQ-kZ-7cb">
-                                <rect key="frame" x="167" y="538" width="90" height="90"/>
+                                <rect key="frame" x="167" y="523" width="90" height="90"/>
                                 <color key="backgroundColor" red="0.98086982970000003" green="0.87273269890000005" blue="0.87492746109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="KN3-Nw-ccO"/>
@@ -1011,7 +1068,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6x-s6-4he">
-                                <rect key="frame" x="298" y="538" width="90" height="90"/>
+                                <rect key="frame" x="298" y="523" width="90" height="90"/>
                                 <color key="backgroundColor" red="0.98086982970000003" green="0.87273269890000005" blue="0.87492746109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="Ioz-Xr-bqJ"/>
@@ -1027,28 +1084,28 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hNb-hc-SgC">
-                                <rect key="frame" x="34" y="533" width="90" height="90"/>
+                                <rect key="frame" x="34" y="518" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="QAr-vN-gr4"/>
                                     <constraint firstAttribute="height" constant="90" id="efj-Ax-9sG"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I1r-jv-FOG">
-                                <rect key="frame" x="291" y="533" width="90" height="90"/>
+                                <rect key="frame" x="291" y="518" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="62J-Fg-Kl9"/>
                                     <constraint firstAttribute="width" constant="90" id="d2E-1c-3hv"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8SZ-pO-Kkr">
-                                <rect key="frame" x="160" y="533" width="90" height="90"/>
+                                <rect key="frame" x="160" y="518" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="FMA-PB-X18"/>
                                     <constraint firstAttribute="width" constant="90" id="qTH-ZR-vVd"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1) Artist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xf3-wY-tGd">
-                                <rect key="frame" x="53" y="695" width="304" height="27"/>
+                                <rect key="frame" x="53" y="704" width="304" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="304" id="Wee-7W-u46"/>
                                     <constraint firstAttribute="height" constant="27" id="qoR-Zd-mpa"/>
@@ -1058,7 +1115,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2) Artist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xeh-c7-a6s">
-                                <rect key="frame" x="53" y="730" width="304" height="27"/>
+                                <rect key="frame" x="53" y="739" width="304" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="RV4-l7-cIj"/>
                                     <constraint firstAttribute="width" constant="304" id="qUK-gt-baV"/>
@@ -1068,7 +1125,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3) Artist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pm8-n3-R1h">
-                                <rect key="frame" x="53" y="765" width="304" height="27"/>
+                                <rect key="frame" x="53" y="774" width="304" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="304" id="R52-pX-kfI"/>
                                     <constraint firstAttribute="height" constant="27" id="RuJ-U3-taX"/>
@@ -1093,6 +1150,9 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToPlaylist:" destination="L1y-n0-dhd" eventType="touchUpInside" id="jwd-Up-w2F"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match message goes here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ca-O2-HMe">
                                 <rect key="frame" x="73" y="338" width="268" height="59"/>
@@ -1105,7 +1165,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match Date: MM/DD/YYYY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFc-bQ-CMl">
-                                <rect key="frame" x="74" y="817" width="266" height="36"/>
+                                <rect key="frame" x="74" y="816" width="266" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="266" id="VJl-V2-5qo"/>
                                     <constraint firstAttribute="height" constant="36" id="l3u-bD-QpR"/>
@@ -1124,14 +1184,36 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <color key="textColor" red="0.3197522048" green="0.1035720364" blue="0.1143810448" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1) Song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAk-zs-xgf">
+                                <rect key="frame" x="34" y="621" width="90" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Amiko-SemiBold" family="Amiko" pointSize="16"/>
+                                <color key="textColor" red="0.39804631470000001" green="0.15238249300000001" blue="0.1628524959" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2) Song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TT-NV-zjH">
+                                <rect key="frame" x="160" y="621" width="90" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Amiko-SemiBold" family="Amiko" pointSize="16"/>
+                                <color key="textColor" red="0.39804631470000001" green="0.15238249300000001" blue="0.1628524959" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3) Song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zA1-zJ-ZbF">
+                                <rect key="frame" x="291" y="621" width="90" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Amiko-SemiBold" family="Amiko" pointSize="16"/>
+                                <color key="textColor" red="0.39804631470000001" green="0.15238249300000001" blue="0.1628524959" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="OBd-f9-4gq" firstAttribute="top" secondItem="5Ca-O2-HMe" secondAttribute="bottom" constant="5" id="0M6-aD-ljs"/>
+                            <constraint firstItem="gFc-bQ-CMl" firstAttribute="top" secondItem="Pm8-n3-R1h" secondAttribute="bottom" constant="15" id="0i3-bd-Hq5"/>
                             <constraint firstItem="MEV-PL-JNb" firstAttribute="leading" secondItem="sSu-UC-xd0" secondAttribute="leading" constant="41" id="1vl-yY-l6r"/>
                             <constraint firstItem="Q6x-s6-4he" firstAttribute="leading" secondItem="pQQ-kZ-7cb" secondAttribute="trailing" constant="41" id="2fA-R1-6kM"/>
-                            <constraint firstItem="BHh-3c-nEb" firstAttribute="top" secondItem="MEV-PL-JNb" secondAttribute="bottom" constant="25" id="3Ni-zj-YhM"/>
                             <constraint firstItem="xOv-l5-Axr" firstAttribute="leading" secondItem="sSu-UC-xd0" secondAttribute="leading" id="5gr-gN-mDT"/>
+                            <constraint firstItem="sSu-UC-xd0" firstAttribute="bottom" secondItem="gFc-bQ-CMl" secondAttribute="bottom" constant="10" id="79E-D5-Anh"/>
                             <constraint firstItem="8SZ-pO-Kkr" firstAttribute="leading" secondItem="MEV-PL-JNb" secondAttribute="trailing" constant="29" id="7LR-Ke-jOw"/>
                             <constraint firstItem="Xf3-wY-tGd" firstAttribute="leading" secondItem="sSu-UC-xd0" secondAttribute="leading" constant="53" id="8cJ-Wm-MWs"/>
                             <constraint firstItem="pQQ-kZ-7cb" firstAttribute="leading" secondItem="MEV-PL-JNb" secondAttribute="trailing" constant="36" id="AD9-Mr-q8F"/>
@@ -1146,7 +1228,6 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                             <constraint firstItem="IBO-tN-Rb5" firstAttribute="top" secondItem="LYZ-qp-5vi" secondAttribute="bottom" constant="10" id="Fin-QN-9Gy"/>
                             <constraint firstAttribute="bottom" secondItem="xOv-l5-Axr" secondAttribute="bottom" id="GRU-jL-TGN"/>
                             <constraint firstItem="izv-as-VXH" firstAttribute="leading" secondItem="sSu-UC-xd0" secondAttribute="leading" constant="34" id="IgV-M8-pT0"/>
-                            <constraint firstItem="gFc-bQ-CMl" firstAttribute="top" secondItem="Pm8-n3-R1h" secondAttribute="bottom" constant="25" id="ImP-ff-dnV"/>
                             <constraint firstItem="I1r-jv-FOG" firstAttribute="leading" secondItem="pQQ-kZ-7cb" secondAttribute="trailing" constant="34" id="JHa-nX-Rrq"/>
                             <constraint firstItem="xOv-l5-Axr" firstAttribute="trailing" secondItem="sSu-UC-xd0" secondAttribute="trailing" id="Jl1-Ss-j8v"/>
                             <constraint firstItem="Pm8-n3-R1h" firstAttribute="leading" secondItem="sSu-UC-xd0" secondAttribute="leading" constant="53" id="LvA-Bi-PWE"/>
@@ -1173,7 +1254,6 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                             <constraint firstItem="IBO-tN-Rb5" firstAttribute="leading" secondItem="sSu-UC-xd0" secondAttribute="leading" constant="116" id="r3h-qN-bhF"/>
                             <constraint firstItem="pQQ-kZ-7cb" firstAttribute="top" secondItem="izv-as-VXH" secondAttribute="bottom" constant="15" id="rTQ-zn-Wdg"/>
                             <constraint firstItem="Xeh-c7-a6s" firstAttribute="leading" secondItem="sSu-UC-xd0" secondAttribute="leading" constant="53" id="sm2-AL-B7c"/>
-                            <constraint firstItem="izv-as-VXH" firstAttribute="top" secondItem="OBd-f9-4gq" secondAttribute="bottom" constant="30" id="tzx-uy-bBU"/>
                             <constraint firstItem="sSu-UC-xd0" firstAttribute="trailing" secondItem="I1r-jv-FOG" secondAttribute="trailing" constant="33" id="uMh-xD-2pc"/>
                             <constraint firstItem="xOv-l5-Axr" firstAttribute="top" secondItem="ilJ-ZC-rdB" secondAttribute="top" id="wFD-sb-s4O"/>
                             <constraint firstItem="Xf3-wY-tGd" firstAttribute="top" secondItem="BHh-3c-nEb" secondAttribute="bottom" constant="9" id="wZl-fb-eoI"/>
@@ -1182,10 +1262,26 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                             <constraint firstItem="hNb-hc-SgC" firstAttribute="top" secondItem="izv-as-VXH" secondAttribute="bottom" constant="10" id="xFX-4i-wAq"/>
                             <constraint firstItem="sSu-UC-xd0" firstAttribute="trailing" secondItem="LYZ-qp-5vi" secondAttribute="trailing" constant="58" id="yra-HH-9yY"/>
                             <constraint firstItem="OBd-f9-4gq" firstAttribute="leading" secondItem="sSu-UC-xd0" secondAttribute="leading" constant="57" id="zSH-cn-cgN"/>
+                            <constraint firstItem="izv-as-VXH" firstAttribute="top" secondItem="OBd-f9-4gq" secondAttribute="bottom" constant="15" id="zVi-wO-Tih"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sSu-UC-xd0"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="music.note" catalog="system" id="O95-S2-zwh"/>
+                    <navigationItem key="navigationItem" id="LAb-dQ-XMX"/>
+                    <connections>
+                        <outlet property="matchMessage" destination="5Ca-O2-HMe" id="fHe-uA-qgg"/>
+                        <outlet property="matchScore" destination="ool-yK-3PP" id="aAL-p9-e81"/>
+                        <outlet property="topArtist1" destination="Xf3-wY-tGd" id="bBx-3P-Psu"/>
+                        <outlet property="topArtist2" destination="Xeh-c7-a6s" id="Lch-FG-PNW"/>
+                        <outlet property="topArtist3" destination="Pm8-n3-R1h" id="gLz-9r-UCq"/>
+                        <outlet property="topSongImage1" destination="hNb-hc-SgC" id="OG5-XU-rzW"/>
+                        <outlet property="topSongImage2" destination="8SZ-pO-Kkr" id="NIV-qV-6pw"/>
+                        <outlet property="topSongImage3" destination="I1r-jv-FOG" id="Qkh-qK-Jr3"/>
+                        <outlet property="topSongTitle1" destination="qAk-zs-xgf" id="qP1-t4-AQZ"/>
+                        <outlet property="topSongTitle2" destination="0TT-NV-zjH" id="d9n-Zq-D0K"/>
+                        <outlet property="topSongTitle3" destination="zA1-zJ-ZbF" id="6hm-NY-YYD"/>
+                        <outlet property="usersLabel" destination="LYZ-qp-5vi" id="cIK-hh-jud"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PM0-zb-daE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1437,4 +1533,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
         <image name="music.note" catalog="system" width="48" height="64"/>
         <image name="person.crop.circle" catalog="system" width="64" height="60"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="aLi-gD-kIm"/>
+    </inferredMetricsTieBreakers>
 </document>
