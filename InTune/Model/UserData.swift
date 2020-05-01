@@ -17,6 +17,7 @@ let db = Firestore.firestore()
 var isLoggedIn: Bool = false
 var authToken: String = ""
 var refreshToken: String = ""
+var tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token")
 
 class user {
     var name: String

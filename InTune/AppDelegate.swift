@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
          let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token") {
         self.configuration.tokenSwapURL = tokenSwapURL
         self.configuration.tokenRefreshURL = tokenRefreshURL
+        refreshURL = tokenRefreshURL
         self.configuration.playURI = ""
         storeTokens()
       }
@@ -92,6 +93,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
             refreshToken = refresh_token as! String
         }.resume()
         
+    }
+    
+    func useRefreshToken() {
+        var urlstr = "https://spotify-token-swap.glitch.me/api/refresh_token?refresh_token=" + refreshToken
+        guard let refreshURL = URL(string: urlstr) else {return}
+        var req = URLRequest(url: refreshURL)
+        req.httpMethod = "POST"
+        req.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        URLSession.shared.dataTask(with: req) {(data, response, err) in
+            guard let tokenData = data else {return}
+            let json = try? JSONSerialization.jsonObject(with: tokenData, options: [])
+            guard let dict = json as? [String: Any] else {return}
+            guard let newToken = dict["access_token"] as? String else {return}
+            authToken = newToken
+        }
     }
     
 
