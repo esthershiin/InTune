@@ -38,6 +38,54 @@ class user {
         startDate = Date()
     }
     
+    //shallow test of equality
+    func equalsUser(other: user) -> Bool {
+        if (name != other.name || numMatches != other.numMatches) {
+            return false
+        } else if (avgScore != other.avgScore || startDate != other.startDate) {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    //request a user
+    func requestUser(otherUser: user) {
+        outgoings.append(otherUser)
+        otherUser.incomings.append(self)
+    }
+    
+    //remove a request (decline request?)
+    func removeRequest(otherUser: user) {
+        removeUser(arr: incomings, other: otherUser)
+        removeUser(arr: otherUser.outgoings, other: self)
+    }
+    
+    //accept an incoming request and update the other user's status
+    func acceptRequest(otherUser: user) {
+        addMatch(other: otherUser)
+        otherUser.addMatch(other: self)
+        removeRequest(otherUser: otherUser)
+    }
+    
+    //add a match
+    func addMatch(other: user) {
+        let newMatch = match(userA: self, userB: other)
+        avgScore = (avgScore * numMatches + newMatch.score) / (numMatches + 1)
+        numMatches += 1
+        matches.append(newMatch)
+    }
+    
+    //remove user from a given array (meant for incomings and outgoings)
+    func removeUser(arr: [user], other: user) {
+        for (i, user) in arr.enumerated() {
+            if (user.equalsUser(other: other)) {
+                incomings.remove(at: i)
+                break
+            }
+        }
+    }
+    
     //adding user data to Firestore
     func addUser() {
         
