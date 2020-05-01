@@ -27,8 +27,17 @@ class Tuner: NSURLConnection {
         requestArtists.httpMethod = "GET"
         requestArtists.setValue(authToken, forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: requestArtists) {(data, response, error) in
-            
-        }
+            if error != nil {
+                print(error!)
+            } else {
+                guard let tracks = data else {
+                    return
+                }
+                let json = try? JSONSerialization.jsonObject(with: tracks, options: [])
+                guard let dict = json as? [String: String] else { return }
+                guard let topTracks = dict["name"] else { return }
+            }
+        }.resume()
     }
 
     func getTracksJSON(_ user: user) {
@@ -38,14 +47,18 @@ class Tuner: NSURLConnection {
         requestTracks.httpMethod = "GET"
         requestTracks.setValue(authToken, forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: requestTracks) {(data, response, error) in
-            guard let tracks = data else {
-                guard let err = error else {
-                    
+            if error != nil {
+                print(error!)
+            } else {
+                guard let tracks = data else {
                     return
                 }
-                
+                let json = try? JSONSerialization.jsonObject(with: tracks, options: [])
+                guard let dict = json as? [String: String] else { return }
+                guard let topTracks = dict["name"] else { return }
             }
-        }
+
+        }.resume()
     }
 
 }
