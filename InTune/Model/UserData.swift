@@ -17,7 +17,6 @@ let db = Firestore.firestore()
 var isLoggedIn: Bool = false
 var authToken: String = ""
 var refreshToken: String = ""
-var tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token")
 
 class user {
     var name: String
@@ -82,7 +81,7 @@ class match {
         self.userA = userA
         self.userB = userB
         self.date = Date()
-        let evaluation = generateScoresFor(userA, userB)
+        let evaluation = Tuner.generateScoresFor(userA, userB)
         self.score = evaluation.score
         self.topTracks = evaluation.tracks
         self.topArtists = evaluation.artists

@@ -50,14 +50,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
       print("renewed", session)
     }
     
-    // instatiate SPTConfiguration
-    let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
-    let SpotifyRedirectURL = URL(string: "localhost:8888/callback")!
-
-    lazy var configuration = SPTConfiguration(
-      clientID: SpotifyClientID,
-      redirectURL: SpotifyRedirectURL
-    )
+//    // instatiate SPTConfiguration
+//    let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
+//    let SpotifyRedirectURL = URL(string: "localhost:8888/callback")!
+//
+//    lazy var configuration = SPTConfiguration(
+//      clientID: SpotifyClientID,
+//      redirectURL: SpotifyRedirectURL
+//    )
 
     // setup token swap
     lazy var sessionManager: SPTSessionManager = {
@@ -65,7 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
          let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token") {
         self.configuration.tokenSwapURL = tokenSwapURL
         self.configuration.tokenRefreshURL = tokenRefreshURL
-        refreshURL = tokenRefreshURL
         self.configuration.playURI = ""
         storeTokens()
       }
@@ -95,20 +94,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         
     }
     
-    func useRefreshToken() {
-        var urlstr = "https://spotify-token-swap.glitch.me/api/refresh_token?refresh_token=" + refreshToken
-        guard let refreshURL = URL(string: urlstr) else {return}
-        var req = URLRequest(url: refreshURL)
-        req.httpMethod = "POST"
-        req.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        URLSession.shared.dataTask(with: req) {(data, response, err) in
-            guard let tokenData = data else {return}
-            let json = try? JSONSerialization.jsonObject(with: tokenData, options: [])
-            guard let dict = json as? [String: Any] else {return}
-            guard let newToken = dict["access_token"] as? String else {return}
-            authToken = newToken
-        }
-    }
     
 
 }
