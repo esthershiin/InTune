@@ -92,21 +92,17 @@ NS_ASSUME_NONNULL_END
 #pragma mark - Public
 
 - (FBLPromise<FIRInstallationsItem *> *)registerInstallation:(FIRInstallationsItem *)installation {
-  return [self registerRequestWithInstallation:installation]
-      .then(^id _Nullable(NSURLRequest *_Nullable request) {
-        return [self sendURLRequest:request];
-      })
-      .then(^id _Nullable(FIRInstallationsURLSessionResponse *response) {
+  NSURLRequest *request = [self registerRequestWithInstallation:installation];
+  return [self sendURLRequest:request].then(
+      ^id _Nullable(FIRInstallationsURLSessionResponse *response) {
         return [self registeredInstallationWithInstallation:installation serverResponse:response];
       });
 }
 
 - (FBLPromise<FIRInstallationsItem *> *)refreshAuthTokenForInstallation:
     (FIRInstallationsItem *)installation {
-  return [self authTokenRequestWithInstallation:installation]
-      .then(^id _Nullable(NSURLRequest *_Nullable request) {
-        return [self sendURLRequest:request];
-      })
+  NSURLRequest *request = [self authTokenRequestWithInstallation:installation];
+  return [self sendURLRequest:request]
       .then(^FBLPromise<FIRInstallationsStoredAuthToken *> *(
           FIRInstallationsURLSessionResponse *response) {
         return [self authTokenWithServerResponse:response];
@@ -119,20 +115,17 @@ NS_ASSUME_NONNULL_END
 }
 
 - (FBLPromise<FIRInstallationsItem *> *)deleteInstallation:(FIRInstallationsItem *)installation {
-  return [self deleteInstallationRequestWithInstallation:installation]
-      .then(^id _Nullable(NSURLRequest *_Nullable request) {
-        return [self sendURLRequest:request];
-      })
-      .then(^id _Nullable(FIRInstallationsURLSessionResponse *_Nullable value) {
+  NSURLRequest *request = [self deleteInstallationRequestWithInstallation:installation];
+  return [[self sendURLRequest:request]
+      then:^id _Nullable(FIRInstallationsURLSessionResponse *_Nullable value) {
         // Return the original installation on success.
         return installation;
-      });
+      }];
 }
 
 #pragma mark - Register Installation
 
-- (FBLPromise<NSURLRequest *> *)registerRequestWithInstallation:
-    (FIRInstallationsItem *)installation {
+- (NSURLRequest *)registerRequestWithInstallation:(FIRInstallationsItem *)installation {
   NSString *URLString = [NSString stringWithFormat:@"%@/v1/projects/%@/installations/",
                                                    kFIRInstallationsAPIBaseURL, self.projectID];
   NSURL *URL = [NSURL URLWithString:URLString];
@@ -183,8 +176,7 @@ NS_ASSUME_NONNULL_END
 
 #pragma mark - Auth token
 
-- (FBLPromise<NSURLRequest *> *)authTokenRequestWithInstallation:
-    (FIRInstallationsItem *)installation {
+- (NSURLRequest *)authTokenRequestWithInstallation:(FIRInstallationsItem *)installation {
   NSString *URLString =
       [NSString stringWithFormat:@"%@/v1/projects/%@/installations/%@/authTokens:generate",
                                  kFIRInstallationsAPIBaseURL, self.projectID,
@@ -224,8 +216,7 @@ NS_ASSUME_NONNULL_END
 
 #pragma mark - Delete Installation
 
-- (FBLPromise<NSURLRequest *> *)deleteInstallationRequestWithInstallation:
-    (FIRInstallationsItem *)installation {
+- (NSURLRequest *)deleteInstallationRequestWithInstallation:(FIRInstallationsItem *)installation {
   NSString *URLString = [NSString stringWithFormat:@"%@/v1/projects/%@/installations/%@/",
                                                    kFIRInstallationsAPIBaseURL, self.projectID,
                                                    installation.firebaseInstallationID];
@@ -238,10 +229,10 @@ NS_ASSUME_NONNULL_END
 }
 
 #pragma mark - URL Request
-- (FBLPromise<NSURLRequest *> *)requestWithURL:(NSURL *)requestURL
-                                    HTTPMethod:(NSString *)HTTPMethod
-                                      bodyDict:(NSDictionary *)bodyDict
-                                  refreshToken:(nullable NSString *)refreshToken {
+- (NSURLRequest *)requestWithURL:(NSURL *)requestURL
+                      HTTPMethod:(NSString *)HTTPMethod
+                        bodyDict:(NSDictionary *)bodyDict
+                    refreshToken:(nullable NSString *)refreshToken {
   return [self requestWithURL:requestURL
                    HTTPMethod:HTTPMethod
                      bodyDict:bodyDict
@@ -249,41 +240,34 @@ NS_ASSUME_NONNULL_END
             additionalHeaders:nil];
 }
 
-- (FBLPromise<NSURLRequest *> *)requestWithURL:(NSURL *)requestURL
-                                    HTTPMethod:(NSString *)HTTPMethod
-                                      bodyDict:(NSDictionary *)bodyDict
-                                  refreshToken:(nullable NSString *)refreshToken
-                             additionalHeaders:(nullable NSDictionary<NSString *, NSString *> *)
-                                                   additionalHeaders {
-  return [FBLPromise
-      onQueue:dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)
-           do:^id _Nullable {
-             __block NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
-             request.HTTPMethod = HTTPMethod;
-             NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-             [request addValue:self.APIKey forHTTPHeaderField:kFIRInstallationsAPIKey];
-             [request addValue:bundleIdentifier forHTTPHeaderField:kFIRInstallationsBundleId];
-             [self setJSONHTTPBody:bodyDict forRequest:request];
-             if (refreshToken) {
-               NSString *authHeader = [NSString stringWithFormat:@"FIS_v2 %@", refreshToken];
-               [request setValue:authHeader forHTTPHeaderField:@"Authorization"];
-             }
-             // User agent Header.
-             [request setValue:[FIRApp firebaseUserAgent]
-                 forHTTPHeaderField:kFIRInstallationsUserAgentKey];
-             // Heartbeat Header.
-             [request setValue:@([FIRHeartbeatInfo
-                                     heartbeatCodeForTag:kFIRInstallationsHeartbeatTag])
-                                   .stringValue
-                 forHTTPHeaderField:kFIRInstallationsHeartbeatKey];
-             [additionalHeaders
-                 enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key, NSString *_Nonnull obj,
-                                                     BOOL *_Nonnull stop) {
-                   [request setValue:obj forHTTPHeaderField:key];
-                 }];
+- (NSURLRequest *)requestWithURL:(NSURL *)requestURL
+                      HTTPMethod:(NSString *)HTTPMethod
+                        bodyDict:(NSDictionary *)bodyDict
+                    refreshToken:(nullable NSString *)refreshToken
+               additionalHeaders:
+                   (nullable NSDictionary<NSString *, NSString *> *)additionalHeaders {
+  __block NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+  request.HTTPMethod = HTTPMethod;
+  NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+  [request addValue:self.APIKey forHTTPHeaderField:kFIRInstallationsAPIKey];
+  [request addValue:bundleIdentifier forHTTPHeaderField:kFIRInstallationsBundleId];
+  [self setJSONHTTPBody:bodyDict forRequest:request];
+  if (refreshToken) {
+    NSString *authHeader = [NSString stringWithFormat:@"FIS_v2 %@", refreshToken];
+    [request setValue:authHeader forHTTPHeaderField:@"Authorization"];
+  }
+  // User agent Header.
+  [request setValue:[FIRApp firebaseUserAgent] forHTTPHeaderField:kFIRInstallationsUserAgentKey];
+  // Heartbeat Header.
+  [request setValue:@([FIRHeartbeatInfo heartbeatCodeForTag:kFIRInstallationsHeartbeatTag])
+                        .stringValue
+      forHTTPHeaderField:kFIRInstallationsHeartbeatKey];
+  [additionalHeaders enumerateKeysAndObjectsUsingBlock:^(
+                         NSString *_Nonnull key, NSString *_Nonnull obj, BOOL *_Nonnull stop) {
+    [request setValue:obj forHTTPHeaderField:key];
+  }];
 
-             return [request copy];
-           }];
+  return [request copy];
 }
 
 - (FBLPromise<FIRInstallationsURLSessionResponse *> *)URLRequestPromise:(NSURLRequest *)request {

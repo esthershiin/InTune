@@ -31,7 +31,9 @@
 #import <nanopb/pb_decode.h>
 #import <nanopb/pb_encode.h>
 
-#import "GDTCCTLibrary/Private/GDTCOREvent+NetworkConnectionInfo.h"
+NSString *const GDTCCTNeedsNetworkConnectionInfo = @"needs_network_connection_info";
+
+NSString *const GDTCCTNetworkConnectionInfo = @"network_connection_info";
 
 #pragma mark - General purpose encoders
 
@@ -41,12 +43,12 @@ pb_bytes_array_t *GDTCCTEncodeString(NSString *string) {
 }
 
 pb_bytes_array_t *GDTCCTEncodeData(NSData *data) {
-  pb_bytes_array_t *pbBytesArray = calloc(1, PB_BYTES_ARRAY_T_ALLOCSIZE(data.length));
-  if (pbBytesArray != NULL) {
-    [data getBytes:pbBytesArray->bytes length:data.length];
-    pbBytesArray->size = (pb_size_t)data.length;
+  pb_bytes_array_t *pbBytes = malloc(PB_BYTES_ARRAY_T_ALLOCSIZE(data.length));
+  if (pbBytes != NULL) {
+    memcpy(pbBytes->bytes, [data bytes], data.length);
+    pbBytes->size = (pb_size_t)data.length;
   }
-  return pbBytesArray;
+  return pbBytes;
 }
 
 #pragma mark - CCT object constructors
@@ -76,7 +78,7 @@ gdt_cct_BatchedLogRequest GDTCCTConstructBatchedLogRequest(
     NSDictionary<NSString *, NSSet<GDTCOREvent *> *> *logMappingIDToLogSet) {
   gdt_cct_BatchedLogRequest batchedLogRequest = gdt_cct_BatchedLogRequest_init_default;
   NSUInteger numberOfLogRequests = logMappingIDToLogSet.count;
-  gdt_cct_LogRequest *logRequests = calloc(numberOfLogRequests, sizeof(gdt_cct_LogRequest));
+  gdt_cct_LogRequest *logRequests = malloc(sizeof(gdt_cct_LogRequest) * numberOfLogRequests);
   if (logRequests == NULL) {
     return batchedLogRequest;
   }
@@ -109,7 +111,7 @@ gdt_cct_LogRequest GDTCCTConstructLogRequest(int32_t logSource,
   logRequest.has_log_source = 1;
   logRequest.client_info = GDTCCTConstructClientInfo();
   logRequest.has_client_info = 1;
-  logRequest.log_event = calloc(logSet.count, sizeof(gdt_cct_LogEvent));
+  logRequest.log_event = malloc(sizeof(gdt_cct_LogEvent) * logSet.count);
   if (logRequest.log_event == NULL) {
     return logRequest;
   }
@@ -138,25 +140,18 @@ gdt_cct_LogEvent GDTCCTConstructLogEvent(GDTCOREvent *event) {
   logEvent.has_event_uptime_ms = 1;
   logEvent.timezone_offset_seconds = event.clockSnapshot.timezoneOffsetSeconds;
   logEvent.has_timezone_offset_seconds = 1;
-  if (event.customBytes) {
-    NSData *networkConnectionInfoData = event.networkConnectionInfoData;
-    if (networkConnectionInfoData) {
-      [networkConnectionInfoData getBytes:&logEvent.network_connection_info
-                                   length:networkConnectionInfoData.length];
-      logEvent.has_network_connection_info = 1;
-    }
+  if (event.customPrioritizationParams[GDTCCTNetworkConnectionInfo]) {
+    NSData *networkConnectionInfoData =
+        event.customPrioritizationParams[GDTCCTNetworkConnectionInfo];
+    [networkConnectionInfoData getBytes:&logEvent.network_connection_info
+                                 length:networkConnectionInfoData.length];
+    logEvent.has_network_connection_info = 1;
   }
   NSError *error;
-  NSData *extensionBytes;
-  if (event.fileURL) {
-    extensionBytes = [NSData dataWithContentsOfFile:event.fileURL.path options:0 error:&error];
-  } else {
-    GDTCORLogError(GDTCORMCEFileReadError, @"%@", @"An event's fileURL property was nil.");
-    return logEvent;
-  }
+  NSData *extensionBytes = [NSData dataWithContentsOfURL:event.fileURL options:0 error:&error];
   if (error) {
-    GDTCORLogWarning(GDTCORMCWFileReadError,
-                     @"There was an error reading extension bytes from disk: %@", error);
+    GDTCORLogError(GDTCORMCEGeneralError,
+                   @"There was an error reading extension bytes from disk: %@", error);
     return logEvent;
   }
   logEvent.source_extension = GDTCCTEncodeData(extensionBytes);  // read bytes from the file.

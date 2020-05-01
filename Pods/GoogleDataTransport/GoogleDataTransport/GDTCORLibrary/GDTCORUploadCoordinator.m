@@ -22,6 +22,7 @@
 #import <GoogleDataTransport/GDTCORReachability.h>
 
 #import "GDTCORLibrary/Private/GDTCORRegistrar_Private.h"
+#import "GDTCORLibrary/Private/GDTCORStorage.h"
 
 @implementation GDTCORUploadCoordinator
 
@@ -50,11 +51,22 @@
 
 - (void)forceUploadForTarget:(GDTCORTarget)target {
   dispatch_async(_coordinationQueue, ^{
-    GDTCORLogDebug(@"Forcing an upload of target %ld", (long)target);
+    GDTCORLogDebug("Forcing an upload of target %ld", (long)target);
     GDTCORUploadConditions conditions = [self uploadConditions];
     conditions |= GDTCORUploadConditionHighPriority;
     [self uploadTargets:@[ @(target) ] conditions:conditions];
   });
+}
+
+#pragma mark - Property overrides
+
+// GDTCORStorage and GDTCORUploadCoordinator +sharedInstance methods call each other, so this breaks
+// the loop.
+- (GDTCORStorage *)storage {
+  if (!_storage) {
+    _storage = [GDTCORStorage sharedInstance];
+  }
+  return _storage;
 }
 
 #pragma mark - Private helper methods
@@ -71,11 +83,11 @@
     dispatch_source_set_event_handler(self->_timer, ^{
       if (![[GDTCORApplication sharedApplication] isRunningInBackground]) {
         GDTCORUploadConditions conditions = [self uploadConditions];
-        GDTCORLogDebug(@"%@", @"Upload timer fired");
+        GDTCORLogDebug("%@", @"Upload timer fired");
         [self uploadTargets:[self.registrar.targetToUploader allKeys] conditions:conditions];
       }
     });
-    GDTCORLogDebug(@"%@", @"Upload timer started");
+    GDTCORLogDebug("%@", @"Upload timer started");
     dispatch_resume(self->_timer);
   });
 }
@@ -100,7 +112,7 @@
     for (NSNumber *target in targets) {
       // Don't trigger uploads for targets that have an in-flight package already.
       if (self->_targetToInFlightPackages[target]) {
-        GDTCORLogDebug(@"Target %@ will not upload, there's an upload in flight", target);
+        GDTCORLogDebug("Target %@ will not upload, there's an upload in flight", target);
         continue;
       }
       // Ask the uploader if they can upload and do so, if it can.
@@ -111,27 +123,16 @@
                                                                  conditions:conditions];
         if (package.events.count) {
           self->_targetToInFlightPackages[target] = package;
-          GDTCORLogDebug(@"Package of %ld events is being handed over to an uploader",
+          GDTCORLogDebug("Package of %ld events is being handed over to an uploader",
                          (long)package.events.count);
           [uploader uploadPackage:package];
         } else {
           [package completeDelivery];
         }
       }
-      GDTCORLogDebug(@"Target %@ is not ready to upload", target);
+      GDTCORLogDebug("Target %@ is not ready to upload", target);
     }
   });
-}
-
-/** Returns the registered storage for the given NSNumber wrapped GDTCORTarget.
- *
- * @param target The NSNumber wrapping of a GDTCORTarget to find the storage instance of.
- * @return The storage instance for the given target.
- */
-- (nullable id<GDTCORStorageProtocol>)storageForTarget:(NSNumber *)target {
-  id<GDTCORStorageProtocol> storage = [GDTCORRegistrar sharedInstance].targetToStorage[target];
-  GDTCORAssert(storage, @"A storage must be registered for target %@", target);
-  return storage;
 }
 
 /** Returns the current upload conditions after making determinations about the network connection.
@@ -176,10 +177,9 @@ static NSString *const ktargetToInFlightPackagesKey =
   GDTCORUploadCoordinator *sharedCoordinator = [GDTCORUploadCoordinator sharedInstance];
   dispatch_sync(sharedCoordinator->_coordinationQueue, ^{
     @try {
-      NSSet *classes =
-          [NSSet setWithObjects:[NSMutableDictionary class], [GDTCORUploadPackage class], nil];
       sharedCoordinator->_targetToInFlightPackages =
-          [aDecoder decodeObjectOfClasses:classes forKey:ktargetToInFlightPackagesKey];
+          [aDecoder decodeObjectOfClass:[NSMutableDictionary class]
+                                 forKey:ktargetToInFlightPackagesKey];
 
     } @catch (NSException *exception) {
       sharedCoordinator->_targetToInFlightPackages = [NSMutableDictionary dictionary];
@@ -201,14 +201,13 @@ static NSString *const ktargetToInFlightPackagesKey =
 #pragma mark - GDTCORLifecycleProtocol
 
 - (void)appWillForeground:(GDTCORApplication *)app {
-  // -startTimer is thread-safe.
+  // Not entirely thread-safe, but it should be fine.
   [self startTimer];
 }
 
 - (void)appWillBackground:(GDTCORApplication *)app {
-  dispatch_sync(_coordinationQueue, ^{
-    [self stopTimer];
-  });
+  // Should be thread-safe. If it ends up not being, put this in a dispatch_sync.
+  [self stopTimer];
 }
 
 - (void)appWillTerminate:(GDTCORApplication *)application {
@@ -231,7 +230,6 @@ static NSString *const ktargetToInFlightPackagesKey =
     if (targetToInFlightPackages) {
       [targetToInFlightPackages removeObjectForKey:targetNumber];
     }
-    NSSet<GDTCOREvent *> *packageEvents = [package.events copy];
     if (registrar) {
       id<GDTCORPrioritizer> prioritizer = registrar.targetToPrioritizer[targetNumber];
       if (!prioritizer) {
@@ -239,20 +237,11 @@ static NSString *const ktargetToInFlightPackagesKey =
                        @"A prioritizer should be registered for this target: %@", targetNumber);
       }
       if ([prioritizer respondsToSelector:@selector(packageDelivered:successful:)]) {
-        [prioritizer packageDelivered:[package copy] successful:successful];
+        [prioritizer packageDelivered:package successful:successful];
       }
     }
-    if (successful && packageEvents.count) {
-      NSMutableSet *eventIDs = [[NSMutableSet alloc] init];
-      for (GDTCOREvent *event in packageEvents) {
-        NSNumber *eventID = event.eventID;
-        if (eventID != nil) {
-          [eventIDs addObject:eventID];
-        } else {
-          GDTCORLogDebug(@"An event was missing its ID: %@", event);
-        }
-      }
-      [[self storageForTarget:@(package.target)] removeEvents:eventIDs];
+    if (package.events != nil) {
+      [self.storage removeEvents:package.events];
     }
   });
 }

@@ -6,17 +6,10 @@ target 'InTune' do
   use_frameworks!
 
   # Pods for InTune
-
-  # add the Firebase pod for Google Analytics
+  
   pod 'Firebase/Analytics'
-
-  target 'InTuneTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'InTuneUITests' do
-    # Pods for testing
-  end
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Database'
 
 end

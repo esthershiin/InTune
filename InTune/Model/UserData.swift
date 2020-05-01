@@ -2,12 +2,16 @@
 //  UserData.swift
 //  InTune
 //
-//  Created by Allyson on 4/23/20.
+//  Created by Allyson, Esther, Junna on 4/23/20.
 //
 
 /* Notes for development: Will probably need an abstraction for a user (class or struct?). The class will need a username, name, date joined, top match, average match score, and maybe a data structure that holds all the matches. */
 
 import Foundation
+import Firebase
+
+//Firebase reference
+let db = Firestore.firestore()
 
 //authtoken and refresh token must be persistent
 var isLoggedIn: Bool = false
@@ -33,6 +37,36 @@ class user {
         startDate = Date()
     }
     
+    //adding user data to Firestore
+    func addUser() {
+        
+        var outgoingUsernames = [String]()
+        for outUser in outgoings {
+            outgoingUsernames.append(outUser.name)
+        }
+        
+        var incomingUsernames = [String]()
+        for inUser in incomings {
+            incomingUsernames.append(inUser.name)
+        }
+        
+        var ref: DocumentReference? = nil
+        ref = db.collection("users").addDocument(data: [
+            "name": name,
+            "avgScore": avgScore,
+            "numMatches": numMatches,
+            "matches": matches, //fixme
+            "outgoings": outgoingUsernames,
+            "incomings": incomingUsernames,
+        ]) {err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
+ 
 }
 
 class match {
@@ -53,5 +87,3 @@ class match {
         self.topArtists = evaluation.artists
     }
 }
-
-

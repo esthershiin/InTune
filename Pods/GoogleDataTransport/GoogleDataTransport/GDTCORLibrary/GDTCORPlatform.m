@@ -40,28 +40,6 @@ NSString *const kGDTCORApplicationWillEnterForegroundNotification =
 
 NSString *const kGDTCORApplicationWillTerminateNotification =
     @"GDTCORApplicationWillTerminateNotification";
-
-NSURL *GDTCORRootDirectory(void) {
-  static NSURL *GDTPath;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    NSString *cachePath =
-        NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
-    GDTPath =
-        [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/google-sdks-events", cachePath]];
-    GDTCORLogDebug(@"GDT's state will be saved to: %@", GDTPath);
-    if (![[NSFileManager defaultManager] fileExistsAtPath:GDTPath.path]) {
-      NSError *error;
-      [[NSFileManager defaultManager] createDirectoryAtPath:GDTPath.path
-                                withIntermediateDirectories:YES
-                                                 attributes:nil
-                                                      error:&error];
-      GDTCORAssert(error == nil, @"There was an error creating GDT's path");
-    }
-  });
-  return GDTPath;
-}
-
 #if !TARGET_OS_WATCH
 BOOL GDTCORReachabilityFlagsContainWWAN(SCNetworkReachabilityFlags flags) {
 #if TARGET_OS_IOS
@@ -115,8 +93,7 @@ GDTCORNetworkMobileSubtype GDTCORNetworkMobileSubTypeMessage() {
   if (networkCurrentRadioAccessTechnologyDict.count) {
     networkCurrentRadioAccessTechnology = networkCurrentRadioAccessTechnologyDict.allValues[0];
   }
-#else  // TARGET_OS_MACCATALYST
-#if defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 120000
+#else
   if (@available(iOS 12.0, *)) {
     NSDictionary<NSString *, NSString *> *networkCurrentRadioAccessTechnologyDict =
         networkInfo.serviceCurrentRadioAccessTechnology;
@@ -126,11 +103,9 @@ GDTCORNetworkMobileSubtype GDTCORNetworkMobileSubTypeMessage() {
       networkCurrentRadioAccessTechnology = networkCurrentRadioAccessTechnologyDict.allValues[0];
     }
   } else {
-#else   // defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 120000
-  networkCurrentRadioAccessTechnology = networkInfo.currentRadioAccessTechnology;
-#endif  // // defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 120000
+    networkCurrentRadioAccessTechnology = networkInfo.currentRadioAccessTechnology;
   }
-#endif  // TARGET_OS_MACCATALYST
+#endif
   if (networkCurrentRadioAccessTechnology) {
     NSNumber *networkMobileSubtype =
         CTRadioAccessTechnologyToNetworkSubTypeMessage[networkCurrentRadioAccessTechnology];
@@ -141,97 +116,6 @@ GDTCORNetworkMobileSubtype GDTCORNetworkMobileSubTypeMessage() {
 #else
   return GDTCORNetworkMobileSubtypeUNKNOWN;
 #endif
-}
-
-NSData *_Nullable GDTCOREncodeArchive(id<NSSecureCoding> obj,
-                                      NSString *archivePath,
-                                      NSError *_Nullable *error) {
-  NSData *resultData;
-#if (defined(__IPHONE_11_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000) || \
-    (defined(__MAC_10_13) && MAC_OS_X_VERSION_MAX_ALLOWED >= 101300) ||      \
-    (defined(__TVOS_11_0) && __TV_OS_VERSION_MAX_ALLOWED >= 110000) ||       \
-    (defined(__WATCHOS_4_0) && __WATCH_OS_VERSION_MAX_ALLOWED >= 040000) ||  \
-    (defined(TARGET_OS_MACCATALYST) && TARGET_OS_MACCATALYST)
-  if (@available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4, *)) {
-    resultData = [NSKeyedArchiver archivedDataWithRootObject:obj
-                                       requiringSecureCoding:YES
-                                                       error:error];
-    if (*error) {
-      GDTCORLogDebug(@"Encoding an object failed: %@", *error);
-      return nil;
-    }
-    if (archivePath) {
-      BOOL result = [resultData writeToFile:archivePath options:NSDataWritingAtomic error:error];
-      if (result == NO || *error) {
-        GDTCORLogDebug(@"Attempt to write archive failed: URL:%@ error:%@", archivePath, *error);
-      } else {
-        GDTCORLogDebug(@"Writing archive succeeded: %@", archivePath);
-      }
-    }
-  } else {
-#endif
-    BOOL result = NO;
-    @try {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-      resultData = [NSKeyedArchiver archivedDataWithRootObject:obj];
-#pragma clang diagnostic pop
-      if (archivePath) {
-        result = [resultData writeToFile:archivePath options:NSDataWritingAtomic error:error];
-        if (result == NO || *error) {
-          GDTCORLogDebug(@"Attempt to write archive failed: URL:%@ error:%@", archivePath, *error);
-        } else {
-          GDTCORLogDebug(@"Writing archive succeeded: %@", archivePath);
-        }
-      }
-    } @catch (NSException *exception) {
-      NSString *errorString =
-          [NSString stringWithFormat:@"An exception was thrown during encoding: %@", exception];
-      *error = [NSError errorWithDomain:NSCocoaErrorDomain
-                                   code:-1
-                               userInfo:@{NSLocalizedFailureReasonErrorKey : errorString}];
-    }
-    GDTCORLogDebug(@"Attempt to write archive. successful:%@ URL:%@ error:%@",
-                   result ? @"YES" : @"NO", archivePath, *error);
-  }
-  return resultData;
-}
-
-id<NSSecureCoding> _Nullable GDTCORDecodeArchive(Class archiveClass,
-                                                 NSString *_Nullable archivePath,
-                                                 NSData *_Nullable archiveData,
-                                                 NSError *_Nullable *error) {
-  id<NSSecureCoding> unarchivedObject = nil;
-#if (defined(__IPHONE_11_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000) || \
-    (defined(__MAC_10_13) && MAC_OS_X_VERSION_MAX_ALLOWED >= 101300) ||      \
-    (defined(__TVOS_11_0) && __TV_OS_VERSION_MAX_ALLOWED >= 110000) ||       \
-    (defined(__WATCHOS_4_0) && __WATCH_OS_VERSION_MAX_ALLOWED >= 040000) ||  \
-    (defined(TARGET_OS_MACCATALYST) && TARGET_OS_MACCATALYST)
-  if (@available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4, *)) {
-    NSData *data = archiveData ? archiveData : [NSData dataWithContentsOfFile:archivePath];
-    if (data) {
-      unarchivedObject = [NSKeyedUnarchiver unarchivedObjectOfClass:archiveClass
-                                                           fromData:data
-                                                              error:error];
-    }
-  } else {
-#endif
-    @try {
-      NSData *archivedData =
-          archiveData ? archiveData : [NSData dataWithContentsOfFile:archivePath];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-      unarchivedObject = [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
-#pragma clang diagnostic pop
-    } @catch (NSException *exception) {
-      NSString *errorString =
-          [NSString stringWithFormat:@"An exception was thrown during encoding: %@", exception];
-      *error = [NSError errorWithDomain:NSCocoaErrorDomain
-                                   code:-1
-                               userInfo:@{NSLocalizedFailureReasonErrorKey : errorString}];
-    }
-  }
-  return unarchivedObject;
 }
 
 @interface GDTCORApplication ()
@@ -247,9 +131,9 @@ id<NSSecureCoding> _Nullable GDTCORDecodeArchive(Class archiveClass,
 
 + (void)load {
   GDTCORLogDebug(
-      @"%@", @"GDT is initializing. Please note that if you quit the app via the "
-              "debugger and not through a lifecycle event, event data will remain on disk but "
-              "storage won't have a reference to them since the singleton wasn't saved to disk.");
+      "%@", @"GDT is initializing. Please note that if you quit the app via the "
+             "debugger and not through a lifecycle event, event data will remain on disk but "
+             "storage won't have a reference to them since the singleton wasn't saved to disk.");
 #if TARGET_OS_IOS || TARGET_OS_TV
   // If this asserts, please file a bug at https://github.com/firebase/firebase-ios-sdk/issues.
   GDTCORFatalAssert(
@@ -322,7 +206,7 @@ id<NSSecureCoding> _Nullable GDTCORDecodeArchive(Class archiveClass,
                                                            expirationHandler:handler];
 #if !NDEBUG
   if (bgID != GDTCORBackgroundIdentifierInvalid) {
-    GDTCORLogDebug(@"Creating background task with name:%@ bgID:%ld", name, (long)bgID);
+    GDTCORLogDebug("Creating background task with name:%@ bgID:%ld", name, (long)bgID);
   }
 #endif  // !NDEBUG
   return bgID;
@@ -330,7 +214,7 @@ id<NSSecureCoding> _Nullable GDTCORDecodeArchive(Class archiveClass,
 
 - (void)endBackgroundTask:(GDTCORBackgroundIdentifier)bgID {
   if (bgID != GDTCORBackgroundIdentifierInvalid) {
-    GDTCORLogDebug(@"Ending background task with ID:%ld was successful", (long)bgID);
+    GDTCORLogDebug("Ending background task with ID:%ld was successful", (long)bgID);
     [[self sharedApplicationForBackgroundTask] endBackgroundTask:bgID];
     return;
   }
@@ -375,7 +259,7 @@ id<NSSecureCoding> _Nullable GDTCORDecodeArchive(Class archiveClass,
   _isRunningInBackground = YES;
 
   NSNotificationCenter *notifCenter = [NSNotificationCenter defaultCenter];
-  GDTCORLogDebug(@"%@", @"GDTCORPlatform is sending a notif that the app is backgrounding.");
+  GDTCORLogDebug("%@", @"GDTCORPlatform is sending a notif that the app is backgrounding.");
   [notifCenter postNotificationName:kGDTCORApplicationDidEnterBackgroundNotification object:nil];
 }
 
@@ -383,13 +267,13 @@ id<NSSecureCoding> _Nullable GDTCORDecodeArchive(Class archiveClass,
   _isRunningInBackground = NO;
 
   NSNotificationCenter *notifCenter = [NSNotificationCenter defaultCenter];
-  GDTCORLogDebug(@"%@", @"GDTCORPlatform is sending a notif that the app is foregrounding.");
+  GDTCORLogDebug("%@", @"GDTCORPlatform is sending a notif that the app is foregrounding.");
   [notifCenter postNotificationName:kGDTCORApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)iOSApplicationWillTerminate:(NSNotification *)notif {
   NSNotificationCenter *notifCenter = [NSNotificationCenter defaultCenter];
-  GDTCORLogDebug(@"%@", @"GDTCORPlatform is sending a notif that the app is terminating.");
+  GDTCORLogDebug("%@", @"GDTCORPlatform is sending a notif that the app is terminating.");
   [notifCenter postNotificationName:kGDTCORApplicationWillTerminateNotification object:nil];
 }
 #endif  // TARGET_OS_IOS || TARGET_OS_TV
@@ -399,7 +283,7 @@ id<NSSecureCoding> _Nullable GDTCORDecodeArchive(Class archiveClass,
 #if TARGET_OS_OSX
 - (void)macOSApplicationWillTerminate:(NSNotification *)notif {
   NSNotificationCenter *notifCenter = [NSNotificationCenter defaultCenter];
-  GDTCORLogDebug(@"%@", @"GDTCORPlatform is sending a notif that the app is terminating.");
+  GDTCORLogDebug("%@", @"GDTCORPlatform is sending a notif that the app is terminating.");
   [notifCenter postNotificationName:kGDTCORApplicationWillTerminateNotification object:nil];
 }
 #endif  // TARGET_OS_OSX

@@ -22,9 +22,8 @@
 #import "FBLPromises.h"
 #endif
 
-#import <GoogleUtilities/GULKeychainUtils.h>
-
 #import "FIRInstallationsErrorUtil.h"
+#import "FIRInstallationsKeychainUtils.h"
 
 static NSString *const kFIRInstallationsIIDTokenKeychainId = @"com.google.iid-tokens";
 
@@ -119,7 +118,7 @@ static NSString *const kFIRInstallationsIIDTokenKeychainId = @"com.google.iid-to
 
   NSMutableDictionary *keychainQuery = [self IIDDefaultTokenDataKeychainQuery];
   NSError *error;
-  NSData *data = [GULKeychainUtils getItemWithQuery:keychainQuery error:&error];
+  NSData *data = [FIRInstallationsKeychainUtils getItemWithQuery:keychainQuery error:&error];
 
   if (data) {
     [resultPromise fulfill:data];
