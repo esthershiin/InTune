@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         // invoke auth modal
         let requestedScopes: SPTScope = [.appRemoteControl, .userTopRead, .playlistModifyPublic]
         self.sessionManager.initiateSession(with: requestedScopes, options: .default)
+        
         return true
     }
 
@@ -49,15 +50,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
       print("renewed", session)
     }
-    
-//    // instatiate SPTConfiguration
-//    let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
-//    let SpotifyRedirectURL = URL(string: "localhost:8888/callback")!
-//
-//    lazy var configuration = SPTConfiguration(
-//      clientID: SpotifyClientID,
-//      redirectURL: SpotifyRedirectURL
-//    )
+        
+    //    // instatiate SPTConfiguration
+    //    let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
+    //    let SpotifyRedirectURL = URL(string: "localhost:8888/callback")!
+    //
+    //    lazy var configuration = SPTConfiguration(
+    //      clientID: SpotifyClientID,
+    //      redirectURL: SpotifyRedirectURL
+    //    )
 
     // setup token swap
     lazy var sessionManager: SPTSessionManager = {
@@ -93,7 +94,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         }.resume()
         
     }
-    
-    
 
 }

@@ -14,9 +14,8 @@ import Firebase
 let db = Firestore.firestore()
 
 //authtoken and refresh token must be persistent
-var isLoggedIn: Bool = false
-var authToken: String = ""
-var refreshToken: String = ""
+var authToken: String?
+var refreshToken: String?
 
 class user {
     var name: String
@@ -129,9 +128,6 @@ class match {
         self.userA = userA
         self.userB = userB
         self.date = Date()
-        let evaluation = Tuner.generateScoresFor(userA, userB)
-        self.score = evaluation.score
-        self.topTracks = evaluation.tracks
-        self.topArtists = evaluation.artists
+        generateScoresFor(self, userA, userB)
     }
 }
