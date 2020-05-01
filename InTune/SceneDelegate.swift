@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if isLoggedIn {
-            let vc = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "TabVC") as! UITabBarController
             self.window = UIWindow(windowScene: windowScene)
             self.window?.rootViewController = vc
             self.window?.makeKeyAndVisible()
@@ -29,7 +29,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.rootViewController = vc
             self.window?.makeKeyAndVisible()
         }
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
