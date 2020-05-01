@@ -10,9 +10,10 @@
 import Foundation
 
 //authtoken and refresh token must be persistent
-var isLoggedIn: Bool
-var authToken: String
-var refreshToken: String
+//I initialized these values because it gave me an error. -es
+var isLoggedIn: Bool = false
+var authToken: String = ""
+var refreshToken: String = ""
 
 class user {
     var name: String
