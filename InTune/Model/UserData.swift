@@ -16,6 +16,7 @@ let db = Firestore.firestore()
 //authtoken and refresh token must be persistent
 var authToken: String?
 var refreshToken: String?
+var isLoggedIn: Bool = false
 
 class user {
     var name: String
@@ -34,6 +35,7 @@ class user {
         outgoings = [user]()
         incomings = [user]()
         startDate = Date()
+        addUserToFS()
     }
     
     //shallow test of equality
@@ -51,12 +53,18 @@ class user {
     func requestUser(otherUser: user) {
         outgoings.append(otherUser)
         otherUser.incomings.append(self)
+        
+        updateOutgoingsFS()
+        otherUser.updateIncomingsFS()
     }
     
     //remove a request (decline request?)
     func removeRequest(otherUser: user) {
         removeUser(arr: incomings, other: otherUser)
         removeUser(arr: otherUser.outgoings, other: self)
+        
+        updateIncomingsFS()
+        otherUser.updateOutgoingsFS()
     }
     
     //accept an incoming request and update the other user's status
@@ -64,6 +72,9 @@ class user {
         addMatch(other: otherUser)
         otherUser.addMatch(other: self)
         removeRequest(otherUser: otherUser)
+        
+        //fixme
+        updateIncomingsFS()
     }
     
     //add a match
@@ -72,6 +83,8 @@ class user {
         avgScore = (avgScore * numMatches + newMatch.score) / (numMatches + 1)
         numMatches += 1
         matches.append(newMatch)
+        
+        //fixme
     }
     
     //remove user from a given array (meant for incomings and outgoings)
@@ -84,32 +97,106 @@ class user {
         }
     }
     
-    //adding user data to Firestore
-    func addUser() {
-        
+    //Firestore
+    
+    //add inital user data to Firestore
+    func addUserToFS() {
         var outgoingUsernames = [String]()
         for outUser in outgoings {
             outgoingUsernames.append(outUser.name)
         }
-        
         var incomingUsernames = [String]()
         for inUser in incomings {
             incomingUsernames.append(inUser.name)
         }
-        
-        var ref: DocumentReference? = nil
-        ref = db.collection("users").addDocument(data: [
+        var matchContents = [Any]()
+        for match in matches {
+            let new = ["date": match.date, "score": match.score,
+                       "topTracks": match.topTracks, "topArtists": match.topArtists] as [String : Any]
+            matchContents.append([match.userB.name: new])
+        }
+        db.collection("users").document(name).setData([
             "name": name,
             "avgScore": avgScore,
             "numMatches": numMatches,
-            "matches": matches, //fixme
+            "matches": matchContents,
             "outgoings": outgoingUsernames,
             "incomings": incomingUsernames,
-        ]) {err in
+            "lastUpdated": FieldValue.serverTimestamp()
+        ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(ref!.documentID)")
+                print("Document successfully written")
+            }
+        }
+    }
+    
+    //update avgScore on Firestore
+    func updateAvgScoreFS() {
+        let userRef = db.collection("users").document(name)
+        userRef.updateData([
+            "avgScore": avgScore,
+            "lastUpdated": FieldValue.serverTimestamp()
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document sucessfully updated")
+            }
+        }
+    }
+    
+    
+    //update outgoings on Firestore
+    func updateOutgoingsFS() {
+        var outgoingUsernames = [String]()
+        for outUser in outgoings {
+            outgoingUsernames.append(outUser.name)
+        }
+        let userRef = db.collection("users").document(name)
+        userRef.updateData([
+            "outgoings": outgoingUsernames,
+            "lastUpdated": FieldValue.serverTimestamp()
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document sucessfully updated")
+            }
+        }
+    }
+    
+    //update incomings on Firestore
+    func updateIncomingsFS() {
+        var incomingUsernames = [String]()
+        for inUser in incomings {
+            incomingUsernames.append(inUser.name)
+        }
+        let userRef = db.collection("users").document(name)
+        userRef.updateData([
+            "incomings": incomingUsernames,
+            "lastUpdated": FieldValue.serverTimestamp()
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document sucessfully updated")
+            }
+        }
+    }
+    
+    //update matches on Firestore
+    func updateMatchesFS() {
+        let userRef = db.collection("users").document(name)
+        userRef.updateData([
+            "matches": [name: ], //fixme
+            "lastUpdated": FieldValue.serverTimestamp()
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document sucessfully updated")
             }
         }
     }
@@ -117,6 +204,7 @@ class user {
 }
 
 class match {
+    var id: String
     var userA: user
     var userB: user
     var date: Date
@@ -125,9 +213,17 @@ class match {
     var topArtists: [String]
     
     init(userA: user, userB: user) {
+        
+        
+        
+        self.id = userA.name + userB.name
         self.userA = userA
         self.userB = userB
         self.date = Date()
-        generateScoresFor(userA, userB)
+        var myTuner = Tuner(userA, userB)
+        self.score = myTuner.score
+        self.topTracks = myTuner.topTracks
+        self.topArtists = myTuner.topArtists
     }
+    
 }

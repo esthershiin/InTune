@@ -13,17 +13,7 @@
 import Foundation
 
 
-func generateScoresFor(_ userA: user, _ userB: user) -> (tracks: [String], artists: [String], score: Int) {
-    
-    
-    var tracksIntersection = [String]()
-    var artistsIntersection = [String]()
-    var genreIntersection = [String]()
-    
-    return ([""], [""], 3)
-}
-
-struct TuneData {
+class Tuner {
     
     var userA: user
     var userB: user
@@ -31,25 +21,38 @@ struct TuneData {
     var tracksB: [String]
     var artistsA: [String]
     var artistsB: [String]
+    var score: Int
+    var topTracks: [String]
+    var topArtists: [String]
     
-    init(userA: user, userB: user) {
+    init(_ userA: user, _ userB: user) {
         self.userA = userA
         self.userB = userB
         tracksA = [""]
         tracksB = [""]
         artistsA = [""]
         artistsB = [""]
-    }
-    
-    func setTracksA() {
-        
-    }
-    
-    func setTracksB() {
+        score = 0
+        topTracks = [""]
+        topArtists = [""]
         
     }
 
-
+    func generateScores() -> (tracks: [String], artists: [String], score: Int) {
+        
+        var tracksIntersection = [String]()
+        var artistsIntersection = [String]()
+        var genreIntersection = [String]()
+        
+        return ([""], [""], 3)
+    }
+        
+        
+        
+    func setTracks(to trackdata: [[String: Any]], for user: user) {
+        
+    }
+    
     func getTracks(_ user: user) {
         let urlStringTracks = "https://api.spotify.com/v1/me/top/tracks?limit=50"
         guard let urlTracks = URL(string: urlStringTracks) else {return}
@@ -63,7 +66,8 @@ struct TuneData {
                 guard let tracks = data else { return}
                 let json = try? JSONSerialization.jsonObject(with: tracks, options: [])
                 guard let dict = json as? [String: Any] else {return}
-                guard let mytracks = dict["items"] else {return}
+                guard let topTracks = dict["items"] else {return}
+                self.setTracks(to: topTracks as! [[String : Any]], for: user)
             }
         }.resume()
     }
@@ -86,8 +90,10 @@ struct TuneData {
                 let json = try? JSONSerialization.jsonObject(with: artists, options: [])
                 guard let dict = json as? [String: Any] else { return}
                 guard let topArtists = dict["items"] else { return}
+                self.setTracks(to: topArtists as! [[String : Any]], for: user)
             }
         }.resume()
     }
 
+    
 }
