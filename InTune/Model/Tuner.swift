@@ -14,5 +14,11 @@ import Foundation
 
 func generateScoresFor(_ userA: user, _ userB: user) -> (tracks: [String], artists: [String], score: Int) {
     //filler
+    
     return ([""], [""], 3)
+}
+
+func getJSON(_ user: user) {
+    var urlString = "https://api.spotify.com/v1/me"
+    
 }
