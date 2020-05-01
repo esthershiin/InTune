@@ -9,30 +9,49 @@
 
 import Foundation
 
-var isLoggedIn: Bool = true
+//authtoken and refresh token must be persistent
+var isLoggedIn: Bool
+var authToken: String
+var refreshToken: String
 
-let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
-
-//should the redirectURL be a custom url? should it be a universal link? could it be localhost? on the spotify developers page and in the plist i temporarily listed it as localhost:8888/callback 
-let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
-
-var configuration = SPTConfiguration(
-  clientID: SpotifyClientID,
-  redirectURL: SpotifyRedirectURL
-)
-
-func tokenSwap() {
-    let tokenSwapURLString = "https://spotify-token-swap.glitch.me/api/token"
-    guard let tokenSwapURL = URL(string: tokenSwapURLString) else {return}
+class user {
+    var name: String
+    var avgScore: Int
+    var numMatches: Int
+    var outgoings = [user]()
+    var incomings = [user]()
+    var matches = [match]()
+    var startDate: Date
     
-    let task = URLSession.shared.dataTask(with: tokenSwapURL) { (data, response, err) in
-        guard let tokenData = data else { return }
-        let jsonTokenData = try? JSONSerialization.jsonObject(with: tokenData, options: [])
-        guard let dictionary = jsonTokenData as? [String: Any] else { return }
-        guard let access_token = dictionary["access_token"] else { return }
-        guard let expires_in = dictionary["expires_in"] else { return }
-        guard let refresh_token = dictionary["refresh_token"] else { return }
-        guard let scope = dictionary["scope"] else { return }
-    }.resume()
-
+    init(name: String) {
+        self.name = name
+        avgScore = 0
+        numMatches = 0
+        matches = [match]()
+        outgoings = [user]()
+        incomings = [user]()
+        startDate = Date()
+    }
+    
 }
+
+class match {
+    var userA: user
+    var userB: user
+    var date: Date
+    var score: Int
+    var topTracks: [String]
+    var topArtists: [String]
+    
+    init(userA: user, userB: user) {
+        self.userA = userA
+        self.userB = userB
+        self.date = Date()
+        let evaluation = generateScoresFor(userA, userB)
+        self.score = evaluation.score
+        self.topTracks = evaluation.tracks
+        self.topArtists = evaluation.artists
+    }
+}
+
+

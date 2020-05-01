@@ -12,12 +12,11 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate {
 
 
-    /* EDIT MADE BY ALLYSON: Change initial view controller based off login data */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
         FirebaseApp.configure()
         // invoke auth modal
-        let requestedScopes: SPTScope = [.appRemoteControl]
+        let requestedScopes: SPTScope = [.appRemoteControl, .userTopRead, .playlistModifyPublic]
         self.sessionManager.initiateSession(with: requestedScopes, options: .default)
         return true
     }
@@ -40,16 +39,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
       print("success", session)
     }
+    
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
       print("fail", error)
     }
+    
     func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
       print("renewed", session)
     }
     
     // instatiate SPTConfiguration
     let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
-    let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
+    let SpotifyRedirectURL = URL(string: "localhost:8888/callback")!
 
     lazy var configuration = SPTConfiguration(
       clientID: SpotifyClientID,
@@ -63,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         self.configuration.tokenSwapURL = tokenSwapURL
         self.configuration.tokenRefreshURL = tokenRefreshURL
         self.configuration.playURI = ""
+        storeTokens()
       }
       let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
       return manager
@@ -73,5 +75,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
       self.sessionManager.application(app, open: url, options: options)
       return true
     }
+    
+    func storeTokens() {
+        let _ = URLSession.shared.dataTask(with: self.configuration.tokenSwapURL!) { (data, response, err) in
+            guard let tokenData = data else { return }
+            let jsonTokenData = try? JSONSerialization.jsonObject(with: tokenData, options: [])
+            guard let dictionary = jsonTokenData as? [String: Any] else { return }
+            guard let access_token = dictionary["access_token"] else { return }
+            guard let expires_in = dictionary["expires_in"] else { return }
+            guard let refresh_token = dictionary["refresh_token"] else { return }
+            guard let scope = dictionary["scope"] else { return }
+            
+            authToken = access_token as! String
+            refreshToken = refresh_token as! String
+        }.resume()
+        
+    }
+    
 
 }

@@ -24,7 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.rootViewController = vc
             self.window?.makeKeyAndVisible()
         } else {
-            
+            let vc = storyboard.instantiateViewController(identifier: "LoginVC") as! LoginViewController
+            self.window = UIWindow(windowScene: windowScene)
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
         }
         
     }

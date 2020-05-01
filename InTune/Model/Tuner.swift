@@ -11,3 +11,8 @@
 //  API to do so. 
 
 import Foundation
+
+func generateScoresFor(_ userA: user, _ userB: user) -> (tracks: [String], artists: [String], score: Int) {
+    //filler
+    return ([""], [""], 3)
+}
