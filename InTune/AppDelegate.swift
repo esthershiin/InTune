@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         FirebaseApp.configure()
         
         // invoke auth modal
-        let requestedScopes: SPTScope = [.appRemoteControl, .userTopRead, .playlistModifyPublic]
+        let requestedScopes: SPTScope = [.userTopRead, .playlistModifyPublic]
         self.sessionManager.initiateSession(with: requestedScopes, options: .default)
         setIsLoggedIn()
         return true
@@ -59,10 +59,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
       redirectURL: SpotifyRedirectURL
     )
     
+    func getCode(){
+        let requestedScopes: SPTScope = [.userTopRead, .playlistModifyPublic]
+        let urlstr = "https://accounts.spotify.com/authorize?client_id=\(SpotifyClientID)&response_type=code&redirect_uri=\(SpotifyRedirectURI)&scopes=user-top-read%20playlist-modify-public"
+        guard let myurl = URL(string: urlstr) else {return}
+        
+        URLSession.shared.dataTask(with: myurl) {(data, response, err) in
+            guard let content = data else {return}
+            let json = try? JSONSerialization.jsonObject(with: content, options: [])
+            guard let dict = json as? [String: Any] else {return}
+            authcode = dict["code"] as? String
+        }
+    }
+    
     // setup token swap
     lazy var sessionManager: SPTSessionManager = {
-      if let tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token"),
-         let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token") {
+        getCode()
+        
+        if let tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token?code=\(authcode)"),
+        let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token") {
         self.configuration.tokenSwapURL = tokenSwapURL
         self.configuration.tokenRefreshURL = tokenRefreshURL
         self.configuration.playURI = ""

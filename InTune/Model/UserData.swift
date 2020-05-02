@@ -17,6 +17,7 @@ let db = Firestore.firestore()
 var authToken: String?
 var refreshToken: String?
 var isLoggedIn: Bool = false
+var authcode: String?
 
 class user {
     var name: String
@@ -190,7 +191,7 @@ class user {
     func updateMatchesFS() {
         let userRef = db.collection("users").document(name)
         userRef.updateData([
-            "matches": [name: ], //fixme
+//            "matches": [name: ], //fixme
             "lastUpdated": FieldValue.serverTimestamp()
         ]) { err in
             if let err = err {

@@ -16,4 +16,12 @@ import Foundation
 //  redirectURL: SpotifyRedirectURL
 //)
 //
+
+
+let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
+
+let SpotifyRedirectURI = "intune-login://callback"
+
+let SpotifyRedirectURL = URL(string: "intune-login://callback")!
+
 let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token")

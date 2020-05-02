@@ -16,13 +16,35 @@ class LoginViewController: UIViewController, SPTSessionManagerDelegate {
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        // invoke auth modal
-        let requestedScopes: SPTScope = [.appRemoteControl, .userTopRead, .playlistModifyPublic]
+        
+//        let requestedScopes: SPTScope = [.appRemoteControl, .userTopRead, .playlistModifyPublic]
+        
+//        let urlstr = "https://accounts.spotify.com/authorize?client_id=\(SpotifyClientID)&return_type=code&redirect_uri=\(SpotifyRedirectURI)&scopes=\(requestedScopes)"
+//
+//        guard let myurl = URL(string: urlstr) else {return}
+//
+//        URLSession.shared.dataTask(with: myurl) {(data, response, err) in
+//            guard let content = data else {return}
+//            let json = try? JSONSerialization.jsonObject(with: content, options: [])
+//            guard let dict = json as? [String: Any] else {return}
+//            authcode = dict["code"] as? String
+//        }
+        
+//        guard let tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token?code=\(authcode)") else { return }
+//            URLSession.shared.dataTask(with: tokenSwapURL) {(data, response, err) in
+//            guard let tokens = data else {return}
+//            let json = try? JSONSerialization.jsonObject(with: tokens, options: [])
+//            guard let dict = json as? [String: Any] else {return}
+//            authToken = dict["access_token"] as? String
+//            refreshToken = dict["refresh_token"] as? String
+//        }
+
         if (isLoggedIn) {
             var vc = UITabBarController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }
+        
     }
 
     // implement session delegate
