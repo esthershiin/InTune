@@ -57,6 +57,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gns-b3-8NY"/>
+                                    <segue destination="Tbx-N6-K0c" kind="presentation" identifier="LoginToTab" modalPresentationStyle="fullScreen" id="2cY-RW-TUp"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOx-Bj-JSv">
@@ -1044,7 +1045,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group 6.png" translatesAutoresizingMaskIntoConstraints="NO" id="IBO-tN-Rb5">
-                                <rect key="frame" x="116" y="101" width="182" height="182"/>
+                                <rect key="frame" x="116" y="107" width="182" height="182"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="182" id="X7l-kM-qmL"/>
                                     <constraint firstAttribute="width" constant="182" id="rpz-eU-QHK"/>
@@ -1091,7 +1092,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </state>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEV-PL-JNb">
-                                <rect key="frame" x="41" y="473" width="90" height="90"/>
+                                <rect key="frame" x="41" y="479" width="90" height="90"/>
                                 <color key="backgroundColor" red="0.98086982970000003" green="0.87273269890000005" blue="0.87492746109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="7al-Me-Mtp"/>
@@ -1107,7 +1108,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQQ-kZ-7cb">
-                                <rect key="frame" x="167" y="473" width="90" height="90"/>
+                                <rect key="frame" x="167" y="479" width="90" height="90"/>
                                 <color key="backgroundColor" red="0.98086982970000003" green="0.87273269890000005" blue="0.87492746109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="KN3-Nw-ccO"/>
@@ -1123,7 +1124,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6x-s6-4he">
-                                <rect key="frame" x="298" y="473" width="90" height="90"/>
+                                <rect key="frame" x="298" y="479" width="90" height="90"/>
                                 <color key="backgroundColor" red="0.98086982970000003" green="0.87273269890000005" blue="0.87492746109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="Ioz-Xr-bqJ"/>
@@ -1190,7 +1191,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBd-f9-4gq">
-                                <rect key="frame" x="57" y="352" width="300" height="58"/>
+                                <rect key="frame" x="57" y="358" width="300" height="58"/>
                                 <color key="backgroundColor" red="0.61234950157914114" green="0.1794617825978671" blue="0.20110616850688198" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="0A0-pG-rKl"/>
@@ -1210,7 +1211,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match message goes here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ca-O2-HMe">
-                                <rect key="frame" x="73" y="288" width="268" height="59"/>
+                                <rect key="frame" x="73" y="294" width="268" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="Ebe-Vt-zCZ"/>
                                     <constraint firstAttribute="width" constant="268" id="qBX-eQ-VIY"/>
@@ -1230,7 +1231,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="82" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ool-yK-3PP">
-                                <rect key="frame" x="137" y="151" width="140" height="93"/>
+                                <rect key="frame" x="137" y="157" width="140" height="93"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="93" id="78B-aS-TCj"/>
                                     <constraint firstAttribute="width" constant="140" id="Ey8-GK-ZJy"/>

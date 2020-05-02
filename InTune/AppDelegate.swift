@@ -21,19 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
 
     // MARK: UISceneSession Lifecycle
 
+    // Called when a new scene session is being created.
+    // Use this method to select a configuration to create the new scene with.
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
+    // Called when the user discards a scene session.
+    // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
+    // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    // implement session delegate
+    // Implement session delegate. If the session is successfully initiated,
+    // save the relevant data. This includes the current user and tokens.
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
         isLoggedIn = true
         guard let userurl = URL(string: "https://api.spotify.com/v1/me") else {return}
@@ -50,18 +51,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         print("success", session)
     }
     
+    // Upon session failure, there is no need to take action.
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
         print("fail", error)
     }
     
+    // Upon session renewal, also renew our copy of the AuthToken.
     func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
         authToken = session.accessToken
         print("renewed", session)
     }
 
     let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
-    
-    var manager: SPTSessionManager!
 
     let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
 
@@ -70,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
       redirectURL: SpotifyRedirectURL
     )
     
-    // setup token swap
+    // Setup token swap using Glitch.
     lazy var sessionManager: SPTSessionManager = {
         
         if let tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token"),
@@ -83,36 +84,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
       return manager
     }()
     
-//    func getCode(){
-//        let urlstr = "https://accounts.spotify.com/authorize?client_id=\(SpotifyClientID)&response_type=code&redirect_uri=\(SpotifyRedirectURI)&scopes=user-top-read+playlist-modify-public"
-//        guard let myurl = URL(string: urlstr) else {return}
-//        URLSession.shared.dataTask(with: myurl) {(data, response, err) in
-//            guard let content = data else {return}
-//            let json = try? JSONSerialization.jsonObject(with: content, options: [])
-//            guard let dict = json as? [String: Any] else {return}
-//            authcode = dict["code"] as? String
-//        }.resume()
-//    }
-    
+    // Request to open a session with Spotify. This should only be called by
+    // the LoginViewController.
     func requestSpotify() {
         let requestedScopes: SPTScope = [.userTopRead, .playlistModifyPublic]
         sessionManager.initiateSession(with: requestedScopes, options: .default)
     }
     
-    // configure auth callback
+    // Configure auth callback.
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
       self.sessionManager.application(app, open: url, options: options)
       return true
-    }
-    
-    func storeTokens() {
-        authToken = manager.session?.accessToken
-        refreshToken = manager.session?.refreshToken
-    }
-
-    func setIsLoggedIn() {
-        let temp = manager.session?.isExpired ?? true
-        isLoggedIn = !temp
     }
 
 }

@@ -24,7 +24,6 @@
 		3F0364C22452603F00B5B217 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0364C12452603F00B5B217 /* UserData.swift */; };
 		3F391B35245B7F3900081A79 /* InTune-Bridging-Header.h in Resources */ = {isa = PBXBuildFile; fileRef = 3F391B33245B7EAD00081A79 /* InTune-Bridging-Header.h */; };
 		3F99957B245BF85E009DA3B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F99957A245BF85E009DA3B5 /* Constants.swift */; };
-		3F99957D245C9A33009DA3B5 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F99957C245C9A33009DA3B5 /* Networking.swift */; };
 		3F999585245D1E06009DA3B5 /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F999584245D1E06009DA3B5 /* MatchCollectionViewCell.swift */; };
 		3F999587245D3914009DA3B5 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F999586245D3914009DA3B5 /* AboutViewController.swift */; };
 		3FB0E67624578E13005E2A59 /* Amiko-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */; };
@@ -83,7 +82,6 @@
 		3F0364C12452603F00B5B217 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		3F391B33245B7EAD00081A79 /* InTune-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InTune-Bridging-Header.h"; sourceTree = "<group>"; };
 		3F99957A245BF85E009DA3B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		3F99957C245C9A33009DA3B5 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		3F999584245D1E06009DA3B5 /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F999586245D3914009DA3B5 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 				3F0364BF24525F4F00B5B217 /* Tuner.swift */,
 				3F0364C12452603F00B5B217 /* UserData.swift */,
 				3F99957A245BF85E009DA3B5 /* Constants.swift */,
-				3F99957C245C9A33009DA3B5 /* Networking.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -470,7 +467,6 @@
 				3F0364B524525D6100B5B217 /* IncomingRequestViewController.swift in Sources */,
 				3F0364AD24525CF700B5B217 /* LoginViewController.swift in Sources */,
 				3F0364C024525F4F00B5B217 /* Tuner.swift in Sources */,
-				3F99957D245C9A33009DA3B5 /* Networking.swift in Sources */,
 				3F0364B924525D7B00B5B217 /* MatchViewController.swift in Sources */,
 				FEF2F198244FE594000BC236 /* ViewController.swift in Sources */,
 				3F999587245D3914009DA3B5 /* AboutViewController.swift in Sources */,

@@ -4,6 +4,8 @@
 //
 //  Created by Allyson on 4/23/20.
 //
+/*  This is where a user can see the details of their match with another
+    user. Matches are uniquely identified by their date and the users involved. */
 
 import UIKit
 
@@ -92,24 +94,9 @@ class MatchViewController: UIViewController {
         topArtist1.text = topartistsNames[0]
         topArtist2.text = topartistsNames[1]
         topArtist3.text = topartistsNames[2]
-        
-        /* FIXME: To get the TopTracks images we'll need to fix
-         our implementation of the match class such that it
-         stores tracks by their UNIQUE ID. Right now
-        */
-        
     }
     
     @IBAction func goToPlaylist(_ sender: Any) {
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

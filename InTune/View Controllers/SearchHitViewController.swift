@@ -4,6 +4,9 @@
 //
 //  Created by Allyson on 4/23/20.
 //
+/*  The search hit is what comes up if a user successfully searches another
+    user by their name/ID. This is where a user may choose to interact with
+    the user their search hit landed on. THIS FILE IS INCOMPLETE. */
 
 import UIKit
 
@@ -11,8 +14,6 @@ class SearchHitViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -34,14 +35,5 @@ class SearchHitViewController: UIViewController {
             }
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

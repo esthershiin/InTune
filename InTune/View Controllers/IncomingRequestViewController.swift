@@ -4,6 +4,9 @@
 //
 //  Created by Allyson on 4/23/20.
 //
+/*  If a different user has requested to tune in with the current user, the
+    current user may view their request on the Incoming Request page. They
+    have the option to accept or decline. */
 
 import UIKit
 
@@ -34,7 +37,7 @@ class IncomingRequestViewController: UIViewController {
             guard let pfpUrl = pfpDict["url"] as? String else {return}
             guard let imageURL = URL(string: pfpUrl) else {return}
 
-                // just not to cause a deadlock in UI!
+            // just not to cause a deadlock in UI!
             DispatchQueue.global().async {
                 guard let imageData = try? Data(contentsOf: imageURL) else { return }
                 let image = UIImage(data: imageData)
@@ -43,7 +46,6 @@ class IncomingRequestViewController: UIViewController {
                 }
             }
         }
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func requestAccepted(_ sender: Any) {
@@ -64,14 +66,5 @@ class IncomingRequestViewController: UIViewController {
     
     @IBAction func requestRejected(_ sender: Any) {
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
