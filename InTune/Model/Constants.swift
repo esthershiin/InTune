@@ -30,11 +30,18 @@ func getMessage(score: Int) -> String {
     }
 }
 
-let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
+//let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
+//
+//let SpotifyRedirectURI = "spotify-ios-quick-start://spotify-login-callback"
+//
+//let SpotifyRedirectURL = URL(string: SpotifyRedirectURI)!
+//
+//let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token")
 
-let SpotifyRedirectURI = "spotify-ios-quick-start://spotify-login-callback"
+let formatter : DateFormatter = {
+    let df = DateFormatter()
+    df.dateStyle = .short
+    return df
+}()
 
-let SpotifyRedirectURL = URL(string: SpotifyRedirectURI)!
-
-let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token")
 
