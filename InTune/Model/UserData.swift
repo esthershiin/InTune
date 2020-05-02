@@ -74,8 +74,8 @@ class user {
         otherUser.addMatch(other: self)
         removeRequest(otherUser: otherUser)
         
-        
         updateIncomingsFS()
+        otherUser.updateOutgoingsFS()
     }
     
     //add a match
@@ -85,7 +85,12 @@ class user {
         numMatches += 1
         matches.append(newMatch)
         
-        //fixme
+        updateAvgScoreFS()
+        other.updateAvgScoreFS()
+        updateNumMatchesFS()
+        other.updateNumMatchesFS()
+        updateMatchesFS()
+        other.updateMatchesFS()
     }
     
     //remove user from a given array (meant for incomings and outgoings)
@@ -137,6 +142,20 @@ class user {
         }
     }
     
+    //update nuMatches on Firestore
+    func updateNumMatchesFS() {
+        let userRef = db.collection("users").document(name)
+        userRef.updateData([
+            "numMatches": numMatches,
+            "lastUpdated": FieldValue.serverTimestamp()
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document sucessfully updated")
+            }
+        }
+    }
     
     //update outgoings on Firestore
     func updateOutgoingsFS() {
