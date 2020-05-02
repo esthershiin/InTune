@@ -1393,7 +1393,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exd-gm-Msq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1750.7246376811595" y="-629.46428571428567"/>
+            <point key="canvasLocation" x="1751" y="-629"/>
         </scene>
         <!--Match View Controller-->
         <scene sceneID="wNl-eL-J1e">
