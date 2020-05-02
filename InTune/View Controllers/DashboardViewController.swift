@@ -25,11 +25,12 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         var userB = userA.incomings[indexPath.row]
         if (collectionView.tag == 1) {
             userB = userA.outgoings[indexPath.row]
-        } else {
-            if (userA.name == userA.matches[indexPath.row].userA.name) {
-                userB = userA.matches[indexPath.row].userB
+        } else if (collectionView.tag == 2) {
+            var thismatch = fetchMatch(id: userA.matches[indexPath.row])
+            if (userA.name == thismatch.userA.name) {
+                userB = thismatch.userB
             } else {
-                userB = userA.matches[indexPath.row].userA
+                userB = thismatch.userA
             }
         }
         let cell = MatchCollectionViewCell()

@@ -52,8 +52,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
             endingLineNumber = "59"
-            landmarkName = "configuration"
-            landmarkType = "24">
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
             <Locations>
                <Location
                   uuid = "D195C731-9BFA-4A57-BF4F-5B9A1976E4DC - a9a7016081e26a44"

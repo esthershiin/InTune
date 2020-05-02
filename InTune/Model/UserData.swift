@@ -110,8 +110,6 @@ class user {
         update(username: self.name, data: "avgScore", newData: otherAvgScore)
     }
     
-    //Firestore
-    
     //add new user data to Firestore
     func addNewUser() {
         db.collection("users").document(name).setData([
@@ -126,44 +124,6 @@ class user {
                 print("Error adding document: \(err)")
             } else {
                 print("Document successfully written")
-            }
-        }
-    }
-    
-    //fetch user data from firestore
-    func fetch(username: String, data: String) -> Any {
-        var docData: Any!
-        let docRef = db.collection("users").document(username)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                docData = document.data()?[data] as Any
-            } else {
-                print("Document does not exist")
-            }
-        }
-        return docData!
-    }
-    
-    //fetch current user
-    func fetchUser(username: String) {
-        let currUser = user(name: username)
-        currUser.avgScore = fetch(username: username, data: "avgScore") as! Int
-        currUser.numMatches = fetch(username: username, data: "numMatches") as! Int
-        currUser.outgoings = fetch(username: username, data: "outgoings") as! [String]
-        currUser.incomings = fetch(username: username, data: "incomings") as! [String]
-        currUser.matches = fetch(username: username, data: "matches") as! [String]
-        currUser.startDate = fetch(username: username, data: "startDate") as! Date
-        currentUser = currUser
-    }
-    
-    //update user data in firestore
-    func update(username: String, data: String, newData: Any) {
-        let userRef = db.collection("users").document(username)
-        userRef.updateData([data: newData]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
             }
         }
     }
@@ -222,32 +182,73 @@ class match {
             }
         }
     }
-    
-    //fetch match data from firestore
-    func fetch(matchID: String, data: String) -> Any {
-        var docData: Any!
-        let docRef = db.collection("matches").document(matchID)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                docData = document.data()?[data] as Any
-            } else {
-                print("Document does not exist")
-            }
-        }
-        return docData!
-    }
-    
-    //fetch match
-    func fetchMatch(id: String) -> match {
-        let targetUserA = fetch(matchID: id, data: "userA") as! String
-        let targetUserB = fetch(matchID: id, data: "userB") as! String
-        let targetMatch = match(userA: targetUserA, userB: targetUserB)
-        targetMatch.date = fetch(matchID: id, data: "date") as! Date
-        targetMatch.score = fetch(matchID: id, data: "score") as! Int
-        targetMatch.topTracks = fetch(matchID: id, data: "topTracks") as! [String]
-        targetMatch.topArtists = fetch(matchID: id, data: "topArtists") as! [String]
-        return targetMatch
-    }
+
     
 }
 
+
+//Firestore
+
+//fetch user data from firestore
+func fetch(username: String, data: String) -> Any {
+    var docData: Any!
+    let docRef = db.collection("users").document(username)
+    docRef.getDocument { (document, error) in
+        if let document = document, document.exists {
+            docData = document.data()?[data] as Any
+        } else {
+            print("Document does not exist")
+        }
+    }
+    return docData!
+}
+
+//fetch current user
+func fetchUser(username: String) {
+    let currUser = user(name: username)
+    currUser.avgScore = fetch(username: username, data: "avgScore") as! Int
+    currUser.numMatches = fetch(username: username, data: "numMatches") as! Int
+    currUser.outgoings = fetch(username: username, data: "outgoings") as! [String]
+    currUser.incomings = fetch(username: username, data: "incomings") as! [String]
+    currUser.matches = fetch(username: username, data: "matches") as! [String]
+    currUser.startDate = fetch(username: username, data: "startDate") as! Date
+    currentUser = currUser
+}
+
+//update user data in firestore
+func update(username: String, data: String, newData: Any) {
+    let userRef = db.collection("users").document(username)
+    userRef.updateData([data: newData]) { err in
+        if let err = err {
+            print("Error updating document: \(err)")
+        } else {
+            print("Document successfully updated")
+        }
+    }
+}
+
+//fetch match data from firestore
+func fetch(matchID: String, data: String) -> Any {
+    var docData: Any!
+    let docRef = db.collection("matches").document(matchID)
+    docRef.getDocument { (document, error) in
+        if let document = document, document.exists {
+            docData = document.data()?[data] as Any
+        } else {
+            print("Document does not exist")
+        }
+    }
+    return docData!
+}
+
+//fetch match
+func fetchMatch(id: String) -> match {
+    let targetUserA = fetch(matchID: id, data: "userA") as! String
+    let targetUserB = fetch(matchID: id, data: "userB") as! String
+    let targetMatch = match(userA: targetUserA, userB: targetUserB)
+    targetMatch.date = fetch(matchID: id, data: "date") as! Date
+    targetMatch.score = fetch(matchID: id, data: "score") as! Int
+    targetMatch.topTracks = fetch(matchID: id, data: "topTracks") as! [String]
+    targetMatch.topArtists = fetch(matchID: id, data: "topArtists") as! [String]
+    return targetMatch
+}
