@@ -68,12 +68,12 @@ class Tuner {
     func setTracks(to trackdata: [[String: Any]], for user: String) {
         if (userA == user) {
             for item in trackdata {
-                guard let trackTitle = item["name"] as? String else {return}
+                guard let trackTitle = item["id"] as? String else {return}
                 tracksA.append(trackTitle)
             }
         } else {
             for item in trackdata {
-                guard let trackTitle = item["name"] as? String else {return}
+                guard let trackTitle = item["id"] as? String else {return}
                 tracksB.append(trackTitle)
             }
         }
@@ -82,12 +82,12 @@ class Tuner {
     func setArtists(to artistdata: [[String: Any]], for user: String) {
         if (userA == user) {
             for item in artistdata {
-                guard let artist = item["name"] as? String , let genre = item["genres"] as? String else {return}
+                guard let artist = item["id"] as? String , let genre = item["genres"] as? String else {return}
                 artistsA[artist] = genre
             }
         } else {
             for item in artistdata {
-                guard let artist = item["name"] as? String , let genre = item["genres"] as? String else {return}
+                guard let artist = item["id"] as? String , let genre = item["genres"] as? String else {return}
                 artistsB[artist] = genre
             }
         }

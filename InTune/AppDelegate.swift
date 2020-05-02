@@ -16,9 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         //Use Firebase library to configure APIs
         FirebaseApp.configure()
         
-        // invoke auth modal
-    
-        if (refreshToken != nil) {
+        //THIS IS CURRENTLY BACKWARDS. HAVE IT WRONG FOR TESTING.
+        if (refreshToken == nil) {
             isLoggedIn = true
         }
         
@@ -102,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         authToken = manager.session?.accessToken
         refreshToken = manager.session?.refreshToken
     }
-    
+
     func setIsLoggedIn() {
         let temp = manager.session?.isExpired ?? true
         isLoggedIn = !temp
