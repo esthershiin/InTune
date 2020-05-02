@@ -9,7 +9,6 @@ target 'InTune' do
   
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
-  pod 'Firebase/Storage'
-  pod 'Firebase/Database'
+  pod 'FirebaseFirestoreSwift'
 
 end

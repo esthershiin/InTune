@@ -217,6 +217,24 @@ class user {
  
 }
 
+// FIXME !!!
+//logged in user's data in String format (?)
+var userData: String = ""
+
+//fetch data from firestore
+func fetch(username: String) {
+    let docRef = db.collection("users").document(username)
+    docRef.getDocument { (document, error) in
+        if let document = document, document.exists {
+            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+            userData = dataDescription
+            print("Document data: \(dataDescription)")
+        } else {
+            print("Document does not exist")
+        }
+    }
+}
+
 class match {
     var userA: user
     var userB: user
