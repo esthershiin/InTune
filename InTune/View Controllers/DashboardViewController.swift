@@ -55,7 +55,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
                     cell.MatchedUserImage.image = image
                 }
             }
-        }
+        }.resume()
         cell.MatchedUserName.text = userB.name
         return cell
     }
