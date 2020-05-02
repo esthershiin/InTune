@@ -201,10 +201,8 @@ class match {
             }
         }
     }
-
     
 }
-
 
 //Firestore
 

@@ -191,6 +191,7 @@
                                 </state>
                                 <connections>
                                     <action selector="logoutButtonPressed:" destination="h3R-3G-D2j" eventType="touchUpInside" id="lDF-sR-2hf"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="loggingOut" animates="NO" modalPresentationStyle="fullScreen" id="4ms-2e-BIN"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of friends you're In Tune with" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rg-lv-Vvm">
@@ -972,7 +973,6 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                         <outlet property="joinDateLabel" destination="zYw-3Z-uak" id="5Ys-Eh-tC4"/>
                         <outlet property="profileImageView" destination="DQ4-Bo-B1h" id="vQX-Ce-XMH"/>
                         <outlet property="usernameLabel" destination="eqZ-ff-Zrl" id="i0i-e5-IKr"/>
-                        <segue destination="L1y-n0-dhd" kind="presentation" identifier="searchHitToMatch" modalPresentationStyle="fullScreen" id="N2H-Eb-ROC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pdc-Dt-bbb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1081,7 +1081,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                     <constraint firstAttribute="height" constant="35" id="cZ6-Z0-BSb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Amiko-Regular" family="Amiko" pointSize="17"/>
-                                <state key="normal" title="Share">
+                                <state key="normal">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
@@ -1461,7 +1461,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                                     <constraint firstAttribute="height" constant="35" id="qpm-RK-iOK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Amiko-Regular" family="Amiko" pointSize="17"/>
-                                <state key="normal" title="Share">
+                                <state key="normal">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
@@ -1583,7 +1583,4 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
         <image name="music.note" catalog="system" width="48" height="64"/>
         <image name="person.crop.circle" catalog="system" width="64" height="60"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="N2H-Eb-ROC"/>
-    </inferredMetricsTieBreakers>
 </document>
