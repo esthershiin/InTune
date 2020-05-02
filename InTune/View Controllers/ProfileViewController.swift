@@ -22,10 +22,6 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func settingsButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "settings", sender: sender)
-    }
-    
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
     }

@@ -18,8 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         
         // invoke auth modal
         let requestedScopes: SPTScope = [.userTopRead, .playlistModifyPublic]
-        self.sessionManager.initiateSession(with: requestedScopes, options: .default)
-        setIsLoggedIn()
+        manager = sessionManager
+        manager.initiateSession(with: requestedScopes, options: .default)
+        if (refreshToken != nil) {
+            isLoggedIn = true
+        }
         return true
     }
 
@@ -51,42 +54,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     }
 
     let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
+    
+    var manager: SPTSessionManager!
 
-    let SpotifyRedirectURL = URL(string: "intune-login://callback")!
+    let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
 
     lazy var configuration = SPTConfiguration(
       clientID: SpotifyClientID,
       redirectURL: SpotifyRedirectURL
     )
     
-    func getCode(){
-        let requestedScopes: SPTScope = [.userTopRead, .playlistModifyPublic]
-        let urlstr = "https://accounts.spotify.com/authorize?client_id=\(SpotifyClientID)&response_type=code&redirect_uri=\(SpotifyRedirectURI)&scopes=user-top-read%20playlist-modify-public"
-        guard let myurl = URL(string: urlstr) else {return}
+    // setup token swap
+    lazy var sessionManager: SPTSessionManager = {
         
+        if let tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token"),
+        let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token") {
+        self.configuration.tokenSwapURL = tokenSwapURL
+        self.configuration.tokenRefreshURL = tokenRefreshURL
+        self.configuration.playURI = ""
+      }
+      let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
+      return manager
+    }()
+    
+    func getCode(){
+        let urlstr = "https://accounts.spotify.com/authorize?client_id=\(SpotifyClientID)&response_type=code&redirect_uri=\(SpotifyRedirectURI)&scopes=user-top-read+playlist-modify-public"
+        guard let myurl = URL(string: urlstr) else {return}
         URLSession.shared.dataTask(with: myurl) {(data, response, err) in
             guard let content = data else {return}
             let json = try? JSONSerialization.jsonObject(with: content, options: [])
             guard let dict = json as? [String: Any] else {return}
             authcode = dict["code"] as? String
-        }
+        }.resume()
     }
-    
-    // setup token swap
-    lazy var sessionManager: SPTSessionManager = {
-        getCode()
-        
-        if let tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token?code=\(authcode)"),
-        let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token") {
-        self.configuration.tokenSwapURL = tokenSwapURL
-        self.configuration.tokenRefreshURL = tokenRefreshURL
-        self.configuration.playURI = ""
-        storeTokens()
-        setIsLoggedIn()
-      }
-      let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
-      return manager
-    }()
     
     // configure auth callback
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -95,12 +95,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     }
     
     func storeTokens() {
-        authToken = sessionManager.session?.accessToken
-        refreshToken = sessionManager.session?.refreshToken
+        authToken = manager.session?.accessToken
+        refreshToken = manager.session?.refreshToken
     }
     
     func setIsLoggedIn() {
-        isLoggedIn = (!sessionManager.session!.isExpired)
+        var temp = manager.session?.isExpired ?? true
+        isLoggedIn = !temp
     }
 
 }

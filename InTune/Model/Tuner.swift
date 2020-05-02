@@ -42,9 +42,21 @@ class Tuner {
         
         var tracksIntersection = [String]()
         var artistsIntersection = [String]()
-        var genreIntersection = [String]()
-        
-        return ([""], [""], 3)
+        for track in tracksA {
+            if tracksB.contains(track) {
+                tracksIntersection.append(track)
+            }
+        }
+        for artist in artistsA {
+            if artistsB.contains(artist) {
+                artistsIntersection.append(artist)
+            }
+        }
+        self.topTracks = tracksIntersection
+        self.topArtists = artistsIntersection
+        let totalIntersection = tracksIntersection.count + artistsIntersection.count
+        self.score = (totalIntersection * 100) / (tracksA.count + artistsA.count)
+        return (self.topTracks, self.topArtists, self.score)
     }
         
         
