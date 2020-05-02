@@ -39,7 +39,7 @@
 		FEF2F1A0244FE595000BC236 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEF2F19E244FE595000BC236 /* LaunchScreen.storyboard */; };
 		FEF2F1AB244FE595000BC236 /* InTuneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF2F1AA244FE595000BC236 /* InTuneTests.swift */; };
 		FEF2F1B6244FE595000BC236 /* InTuneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF2F1B5244FE595000BC236 /* InTuneUITests.swift */; };
-		FEFF62D8245CF9DB008CE006 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF62D7245CF9DA008CE006 /* GoogleService-Info.plist */; };
+		FEFF62DA245CFC64008CE006 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF62D9245CFC64008CE006 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +100,7 @@
 		FEF2F1B1244FE595000BC236 /* InTuneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InTuneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEF2F1B5244FE595000BC236 /* InTuneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InTuneUITests.swift; sourceTree = "<group>"; };
 		FEF2F1B7244FE595000BC236 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FEFF62D7245CF9DA008CE006 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FEFF62D9245CFC64008CE006 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,7 +242,7 @@
 				FEF2F193244FE594000BC236 /* AppDelegate.swift */,
 				FEF2F19C244FE595000BC236 /* Assets.xcassets */,
 				FEF2F1A1244FE595000BC236 /* Info.plist */,
-				FEFF62D7245CF9DA008CE006 /* GoogleService-Info.plist */,
+				FEFF62D9245CFC64008CE006 /* GoogleService-Info.plist */,
 			);
 			path = InTune;
 			sourceTree = "<group>";
@@ -383,7 +383,7 @@
 				FEF2F19D244FE595000BC236 /* Assets.xcassets in Resources */,
 				FEF2F19B244FE594000BC236 /* Main.storyboard in Resources */,
 				3F0364A32452431800B5B217 /* blob2.png in Resources */,
-				FEFF62D8245CF9DB008CE006 /* GoogleService-Info.plist in Resources */,
+				FEFF62DA245CFC64008CE006 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

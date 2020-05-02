@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>157264404084-cqk5c7p0s491g9bvvk4tsqk86c329p61.apps.googleusercontent.com</string>
+	<string>900261139215-rl41cesuqnm1a3unst4v036uf9rmljml.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.157264404084-cqk5c7p0s491g9bvvk4tsqk86c329p61</string>
+	<string>com.googleusercontent.apps.900261139215-rl41cesuqnm1a3unst4v036uf9rmljml</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA3y5GlT2J2H8NhFONfjK-9Xl4dwfwXxJg</string>
+	<string>AIzaSyDKVv1e45sJKRjPlAXvcD2ME3R_FObfkOk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>157264404084</string>
+	<string>900261139215</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.APES.Snapagram</string>
+	<string>ally-esth-jun.InTune</string>
 	<key>PROJECT_ID</key>
-	<string>snapagram-949e4</string>
+	<string>intune-e7d33</string>
 	<key>STORAGE_BUCKET</key>
-	<string>snapagram-949e4.appspot.com</string>
+	<string>intune-e7d33.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:157264404084:ios:32069c4e237f4b960afb21</string>
+	<string>1:900261139215:ios:50b528443b4b31e656647a</string>
 	<key>DATABASE_URL</key>
-	<string>https://snapagram-949e4.firebaseio.com</string>
+	<string>https://intune-e7d33.firebaseio.com</string>
 </dict>
 </plist>
