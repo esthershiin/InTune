@@ -21,9 +21,10 @@ class ProfileViewController: UIViewController {
         guard let user = currentUser else {return}
         
         usernameLabel.text = user.name
-        var formatter = DateFormatter()
-        formatter.dateStyle = .short
-        joinedDateLabel.text = user.startDate.for
+        joinedDateLabel.text = formatter.string(from: user.startDate)
+        topMatchLabel.text = String(user.matches[0].score)
+        averageScoreLabel.text = String(user.avgScore)
+        numberOfMatchesLabel.text = String(user.matches.count)
         
         let imageurlstring = "https://api.spotify.com/v1/users/\(user.name)"
         guard let imageURL = URL(string: imageurlstring) else {return}

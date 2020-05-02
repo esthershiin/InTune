@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, SPTSessionManagerDelegate {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var logoImageView: UIImageView!
     
@@ -38,6 +38,9 @@ class LoginViewController: UIViewController, SPTSessionManagerDelegate {
 //            authToken = dict["access_token"] as? String
 //            refreshToken = dict["refresh_token"] as? String
 //        }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.requestSpotify()
 
         if (isLoggedIn) {
             var vc = UITabBarController()
@@ -45,19 +48,6 @@ class LoginViewController: UIViewController, SPTSessionManagerDelegate {
             present(vc, animated: true, completion: nil)
         }
         
-    }
-
-    // implement session delegate
-    func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
-      print("success", session)
-    }
-    
-    func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
-      print("fail", error)
-    }
-    
-    func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
-      print("renewed", session)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

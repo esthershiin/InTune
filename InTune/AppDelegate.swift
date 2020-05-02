@@ -17,12 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         FirebaseApp.configure()
         
         // invoke auth modal
-        let requestedScopes: SPTScope = [.userTopRead, .playlistModifyPublic]
-        manager = sessionManager
-        manager.initiateSession(with: requestedScopes, options: .default)
+    
         if (refreshToken != nil) {
             isLoggedIn = true
         }
+        
         return true
     }
 
@@ -77,15 +76,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
       return manager
     }()
     
-    func getCode(){
-        let urlstr = "https://accounts.spotify.com/authorize?client_id=\(SpotifyClientID)&response_type=code&redirect_uri=\(SpotifyRedirectURI)&scopes=user-top-read+playlist-modify-public"
-        guard let myurl = URL(string: urlstr) else {return}
-        URLSession.shared.dataTask(with: myurl) {(data, response, err) in
-            guard let content = data else {return}
-            let json = try? JSONSerialization.jsonObject(with: content, options: [])
-            guard let dict = json as? [String: Any] else {return}
-            authcode = dict["code"] as? String
-        }.resume()
+//    func getCode(){
+//        let urlstr = "https://accounts.spotify.com/authorize?client_id=\(SpotifyClientID)&response_type=code&redirect_uri=\(SpotifyRedirectURI)&scopes=user-top-read+playlist-modify-public"
+//        guard let myurl = URL(string: urlstr) else {return}
+//        URLSession.shared.dataTask(with: myurl) {(data, response, err) in
+//            guard let content = data else {return}
+//            let json = try? JSONSerialization.jsonObject(with: content, options: [])
+//            guard let dict = json as? [String: Any] else {return}
+//            authcode = dict["code"] as? String
+//        }.resume()
+//    }
+    
+    func requestSpotify() {
+        let requestedScopes: SPTScope = [.userTopRead, .playlistModifyPublic]
+        sessionManager.initiateSession(with: requestedScopes, options: .default)
     }
     
     // configure auth callback
@@ -100,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     }
     
     func setIsLoggedIn() {
-        var temp = manager.session?.isExpired ?? true
+        let temp = manager.session?.isExpired ?? true
         isLoggedIn = !temp
     }
 

@@ -38,3 +38,10 @@ let SpotifyRedirectURL = URL(string: SpotifyRedirectURI)!
 
 let tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token")
 
+let formatter : DateFormatter = {
+    let df = DateFormatter()
+    df.dateStyle = .short
+    return df
+}()
+
+
