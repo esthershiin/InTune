@@ -8,10 +8,12 @@
 import UIKit
 
 class MatchViewController: UIViewController {
+    
+    var thisMatch: match!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        usersLabel.text = "\(thisMatch.userA.name) + \(thisMatch.userB.name)"
         // Do any additional setup after loading the view.
     }
     @IBOutlet weak var usersLabel: UILabel!
