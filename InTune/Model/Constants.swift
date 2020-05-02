@@ -16,7 +16,19 @@ import Foundation
 //  redirectURL: SpotifyRedirectURL
 //)
 //
-
+func getMessage(score: Int) -> String {
+    if (score < 20) {
+        return "Hmmmm... try again!"
+    } else if (score < 40) {
+        return "Ok..."
+    } else if (score < 60) {
+        return "Getting there"
+    } else if (score < 80) {
+        return "Yay!"
+    } else {
+        return "What a great match! "
+    }
+}
 
 let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"
 

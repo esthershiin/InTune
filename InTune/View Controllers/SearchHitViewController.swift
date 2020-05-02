@@ -26,10 +26,11 @@ class SearchHitViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let thisuser = currentUser else { return }
         if let identifier = segue.identifier {
             if let dest = segue.destination as? MatchViewController, let username = usernameLabel.text {
                 //fix title and change other items
-                dest.usersLabel.text = "Match with " + username
+                dest.usersLabel.text = thisuser.name + " and " + username
             }
         }
     }

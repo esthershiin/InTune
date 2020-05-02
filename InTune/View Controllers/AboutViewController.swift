@@ -15,9 +15,6 @@ class AboutViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    @IBAction func inviteButtonWasPressed(_ sender: Any) {
-    }
     /*
     // MARK: - Navigation
 
