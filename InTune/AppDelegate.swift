@@ -16,11 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         //Use Firebase library to configure APIs
         FirebaseApp.configure()
         
-        //THIS IS CURRENTLY BACKWARDS. HAVE IT WRONG FOR TESTING.
-        if (refreshToken == nil) {
-            isLoggedIn = true
-        }
-        
         return true
     }
 
@@ -40,15 +35,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     
     // implement session delegate
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
-      print("success", session)
+        isLoggedIn = true
+        guard let userurl = URL(string: "https://api.spotify.com/v1/me") else {return}
+        let userreq = URLRequest(url: userurl)
+        URLSession.shared.dataTask(with: userreq) {(data, response, closure) in
+            guard let profile = data else {return}
+            let json = try? JSONSerialization.jsonObject(with: profile, options: [])
+            guard let dict = json as? [String: Any] else {return}
+            guard let username = dict["id"] as? String else {return}
+            currentUser = user(name: username)
+        }
+        authToken = session.accessToken
+        refreshToken = session.refreshToken
+        print("success", session)
     }
     
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
-      print("fail", error)
+        print("fail", error)
     }
     
     func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
-      print("renewed", session)
+        authToken = session.accessToken
+        print("renewed", session)
     }
 
     let SpotifyClientID = "b29fa2b4649e4bc697ecbf6721edaa39"

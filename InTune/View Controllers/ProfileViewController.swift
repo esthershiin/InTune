@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         guard let user = currentUser else {return}
         
         usernameLabel.text = user.name
