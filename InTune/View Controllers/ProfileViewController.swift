@@ -18,8 +18,36 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let user = currentUser else {return}
+        
+        usernameLabel.text = user.name
+        var formatter = DateFormatter()
+        formatter.dateStyle = .short
+        joinedDateLabel.text = user.startDate.for
+        
+        let imageurlstring = "https://api.spotify.com/v1/users/\(user.name)"
+        guard let imageURL = URL(string: imageurlstring) else {return}
+        var req = URLRequest(url: imageURL)
+        req.httpMethod = "GET"
+        req.addValue(authToken!, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: req) {(data, response, err) in
+            guard let profile = data else {return}
+            let profilejson = try? JSONSerialization.jsonObject(with: profile, options: [])
+            guard let profiledict = profilejson as? [String: Any] else { return}
+            guard let pfp = profiledict["images"] as? [String: Any] else { return}
+            guard let pfpurl = pfp["url"] as? String else {return}
+            guard let imageURL = URL(string: pfpurl) else {return}
 
-        // Do any additional setup after loading the view.
+                // just not to cause a deadlock in UI!
+            DispatchQueue.global().async {
+                guard let imageData = try? Data(contentsOf: imageURL) else { return }
+
+                let image = UIImage(data: imageData)
+                DispatchQueue.main.async {
+                    self.profileImageView.image = image
+                }
+            }
+        }.resume()
     }
     
     
