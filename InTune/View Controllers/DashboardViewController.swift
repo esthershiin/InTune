@@ -26,7 +26,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         if (collectionView.tag == 1) {
             userB = userA.outgoings[indexPath.row]
         } else if (collectionView.tag == 2) {
-            var thismatch = fetchMatch(id: userA.matches[indexPath.row])
+            let thismatch = fetchMatch(id: userA.matches[indexPath.row])
             if (userA.name == thismatch.userA) {
                 userB = thismatch.userB
             } else {

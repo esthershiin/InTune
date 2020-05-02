@@ -55,8 +55,12 @@ class ProfileViewController: UIViewController {
         }.resume()
     }
     
-    
     @IBAction func logoutButtonPressed(_ sender: Any) {
+        currentUser = nil
+        isLoggedIn = false
+        authToken = ""
+        refreshToken = ""
+        performSegue(withIdentifier: "loggingOut", sender: self)
     }
 
     /*
