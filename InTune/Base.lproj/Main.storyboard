@@ -27,7 +27,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OhB-9E-VwD">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="temp-logo-pink.png" translatesAutoresizingMaskIntoConstraints="NO" id="OhB-9E-VwD">
                                 <rect key="frame" x="143" y="164" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="7SP-Bd-9nl"/>
@@ -1582,5 +1582,6 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
         <image name="info.circle" catalog="system" width="64" height="60"/>
         <image name="music.note" catalog="system" width="48" height="64"/>
         <image name="person.crop.circle" catalog="system" width="64" height="60"/>
+        <image name="temp-logo-pink.png" width="116.63999938964844" height="123.83999633789062"/>
     </resources>
 </document>
