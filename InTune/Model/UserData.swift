@@ -74,7 +74,7 @@ class user {
         otherUser.addMatch(other: self)
         removeRequest(otherUser: otherUser)
         
-        //fixme
+        
         updateIncomingsFS()
     }
     
@@ -102,20 +102,9 @@ class user {
     
     //add inital user data to Firestore
     func addUserToFS() {
-        var outgoingUsernames = [String]()
-        for outUser in outgoings {
-            outgoingUsernames.append(outUser.name)
-        }
-        var incomingUsernames = [String]()
-        for inUser in incomings {
-            incomingUsernames.append(inUser.name)
-        }
-        var matchContents = [Any]()
-        for match in matches {
-            let new = ["date": match.date, "score": match.score,
-                       "topTracks": match.topTracks, "topArtists": match.topArtists] as [String : Any]
-            matchContents.append([match.userB.name: new])
-        }
+        let outgoingUsernames = [String]()
+        let incomingUsernames = [String]()
+        let matchContents = [Any]()
         db.collection("users").document(name).setData([
             "name": name,
             "avgScore": avgScore,
@@ -189,9 +178,14 @@ class user {
     
     //update matches on Firestore
     func updateMatchesFS() {
+        var matchContents = [Any]()
+        for match in matches {
+            let new = ["userA": match.userA, "usuerB": match.userB, "date": match.date, "score": match.score, "topTracks": match.topTracks, "topArtists": match.topArtists] as [String : Any]
+            matchContents.append([match.id: new])
+        }
         let userRef = db.collection("users").document(name)
         userRef.updateData([
-//            "matches": [name: ], //fixme
+            "matches": matchContents,
             "lastUpdated": FieldValue.serverTimestamp()
         ]) { err in
             if let err = err {
@@ -205,26 +199,29 @@ class user {
 }
 
 class match {
-    var id: String
     var userA: user
     var userB: user
     var date: Date
     var score: Int
     var topTracks: [String]
     var topArtists: [String]
+    var id: String
     
     init(userA: user, userB: user) {
-        
-        
-        
-        self.id = userA.name + userB.name
         self.userA = userA
         self.userB = userB
         self.date = Date()
-        var myTuner = Tuner(userA, userB)
+        
+        let myTuner = Tuner(userA, userB)
         self.score = myTuner.score
+        
         self.topTracks = myTuner.topTracks
         self.topArtists = myTuner.topArtists
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        self.id = "@" + userA.name + "@" + userB.name + formatter.string(from: date)
     }
     
 }
+
