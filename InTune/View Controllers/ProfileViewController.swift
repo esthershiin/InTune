@@ -22,7 +22,11 @@ class ProfileViewController: UIViewController {
         
         usernameLabel.text = user.name
         joinedDateLabel.text = formatter.string(from: user.startDate)
-        topMatchLabel.text = String(user.matches[0].score)
+        if (user.topMatch == "No matches found.") {
+            topMatchLabel.text = user.topMatch
+        } else {
+            topMatchLabel.text = "\(user.topScore) with @\(user.topMatch)"
+        }
         averageScoreLabel.text = String(user.avgScore)
         numberOfMatchesLabel.text = String(user.matches.count)
         
