@@ -19,6 +19,8 @@ var refreshToken: String?
 var isLoggedIn: Bool = false
 var authcode: String?
 
+var currentUser: user?
+
 class user {
     var name: String
     var avgScore: Int

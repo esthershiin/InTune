@@ -25,6 +25,8 @@
 		3F391B35245B7F3900081A79 /* InTune-Bridging-Header.h in Resources */ = {isa = PBXBuildFile; fileRef = 3F391B33245B7EAD00081A79 /* InTune-Bridging-Header.h */; };
 		3F99957B245BF85E009DA3B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F99957A245BF85E009DA3B5 /* Constants.swift */; };
 		3F99957D245C9A33009DA3B5 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F99957C245C9A33009DA3B5 /* Networking.swift */; };
+		3F999585245D1E06009DA3B5 /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F999584245D1E06009DA3B5 /* MatchCollectionViewCell.swift */; };
+		3F999587245D3914009DA3B5 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F999586245D3914009DA3B5 /* AboutViewController.swift */; };
 		3FB0E67624578E13005E2A59 /* Amiko-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */; };
 		3FB0E67724578E13005E2A59 /* Amiko-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67324578E13005E2A59 /* Amiko-Bold.ttf */; };
 		3FB0E67824578E13005E2A59 /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67424578E13005E2A59 /* SIL Open Font License.txt */; };
@@ -80,6 +82,8 @@
 		3F391B33245B7EAD00081A79 /* InTune-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InTune-Bridging-Header.h"; sourceTree = "<group>"; };
 		3F99957A245BF85E009DA3B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3F99957C245C9A33009DA3B5 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		3F999584245D1E06009DA3B5 /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
+		3F999586245D3914009DA3B5 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3FB0E67224578E13005E2A59 /* Amiko-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-SemiBold.ttf"; sourceTree = "<group>"; };
 		3FB0E67324578E13005E2A59 /* Amiko-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-Bold.ttf"; sourceTree = "<group>"; };
 		3FB0E67424578E13005E2A59 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
@@ -148,12 +152,14 @@
 				3F0364AC24525CF700B5B217 /* LoginViewController.swift */,
 				3F0364BA24525DA500B5B217 /* ProfileViewController.swift */,
 				3F0364AE24525D2C00B5B217 /* DashboardViewController.swift */,
+				3F999586245D3914009DA3B5 /* AboutViewController.swift */,
 				3F0364B024525D4000B5B217 /* SearchHitViewController.swift */,
 				3F0364B224525D4B00B5B217 /* SearchMissViewController.swift */,
 				3F0364B424525D6100B5B217 /* IncomingRequestViewController.swift */,
 				3F0364B624525D6F00B5B217 /* OutgoingRequestViewController.swift */,
 				3F0364B824525D7B00B5B217 /* MatchViewController.swift */,
 				FEF2F197244FE594000BC236 /* ViewController.swift */,
+				3F999584245D1E06009DA3B5 /* MatchCollectionViewCell.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -459,11 +465,13 @@
 				3F99957D245C9A33009DA3B5 /* Networking.swift in Sources */,
 				3F0364B924525D7B00B5B217 /* MatchViewController.swift in Sources */,
 				FEF2F198244FE594000BC236 /* ViewController.swift in Sources */,
+				3F999587245D3914009DA3B5 /* AboutViewController.swift in Sources */,
 				3F0364BB24525DA500B5B217 /* ProfileViewController.swift in Sources */,
 				3F0364AF24525D2C00B5B217 /* DashboardViewController.swift in Sources */,
 				3F0364B724525D6F00B5B217 /* OutgoingRequestViewController.swift in Sources */,
 				3F99957B245BF85E009DA3B5 /* Constants.swift in Sources */,
 				FEF2F194244FE594000BC236 /* AppDelegate.swift in Sources */,
+				3F999585245D1E06009DA3B5 /* MatchCollectionViewCell.swift in Sources */,
 				FEF2F196244FE594000BC236 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,24 +7,58 @@
 
 import UIKit
 
-class DashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
+class DashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        guard let thisuser = currentUser else { return 0 }
+        if (collectionView.tag == 0) {
+            return thisuser.incomings.count
+        } else if (collectionView.tag == 1) {
+            return thisuser.outgoings.count
+        } else if (collectionView.tag == 2) {
+            return thisuser.numMatches
+        } else {return 0}
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        guard let userA = currentUser else {return UICollectionViewCell()}
+        var userB = userA.incomings[indexPath.row]
+        if (collectionView.tag == 1) {
+            userB = userA.outgoings[indexPath.row]
+        } else {
+            if (userA.name == userA.matches[indexPath.row].userA.name) {
+                userB = userA.matches[indexPath.row].userB
+            } else {
+                userB = userA.matches[indexPath.row].userA
+            }
+        }
+        let cell = MatchCollectionViewCell()
+        let imageurlstring = "https://api.spotify.com/v1/users/\(userB.name)"
+        guard let imageURL = URL(string: imageurlstring) else {return UICollectionViewCell()}
+        var req = URLRequest(url: imageURL)
+        req.httpMethod = "GET"
+        req.addValue(authToken!, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: req) {(data, response, err) in
+            guard let profile = data else {return}
+            let profilejson = try? JSONSerialization.jsonObject(with: profile, options: [])
+            guard let profiledict = profilejson as? [String: Any] else { return}
+            guard let pfp = profiledict["images"] as? [String: Any] else { return}
+            guard let pfpurl = pfp["url"] as? String else {return}
+            guard let imageURL = URL(string: pfpurl) else {return}
+
+                // just not to cause a deadlock in UI!
+            DispatchQueue.global().async {
+                guard let imageData = try? Data(contentsOf: imageURL) else { return }
+
+                let image = UIImage(data: imageData)
+                DispatchQueue.main.async {
+                    cell.MatchedUserImage.image = image
+                }
+            }
+        }
+        cell.MatchedUserName.text = userB.name
+        return cell
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
-    }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,19 +66,18 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         incomingRequests.dataSource = self
         pendingRequests.delegate = self
         pendingRequests.dataSource = self
-        matches.delegate = self
-        matches.dataSource = self
+        Matches.delegate = self
+        Matches.dataSource = self
         // Do any additional setup after loading the view.
     }
+    
     @IBOutlet weak var searchBar: UISearchBar!
+    
     @IBOutlet weak var incomingRequests: UICollectionView!
     
     @IBOutlet weak var pendingRequests: UICollectionView!
     
-    @IBOutlet weak var matches: UITableView!
-    
-    @IBAction func inviteButtonPressed(_ sender: Any) {
-    }
+    @IBOutlet weak var Matches: UICollectionView!
     
     /*
     // MARK: - Navigation
@@ -55,5 +88,4 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         // Pass the selected object to the new view controller.
     }
     */
-
 }
