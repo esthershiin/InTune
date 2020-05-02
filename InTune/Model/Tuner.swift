@@ -15,8 +15,8 @@ import Foundation
 
 class Tuner {
     
-    var userA: user
-    var userB: user
+    var userA: String
+    var userB: String
     var tracksA: [String]
     var tracksB: [String]
     var artistsA: [String]
@@ -25,7 +25,7 @@ class Tuner {
     var topTracks: [String]
     var topArtists: [String]
     
-    init(_ userA: user, _ userB: user) {
+    init(_ userA: String, _ userB: String) {
         self.userA = userA
         self.userB = userB
         tracksA = [""]
@@ -49,11 +49,11 @@ class Tuner {
         
         
         
-    func setTracks(to trackdata: [[String: Any]], for user: user) {
+    func setTracks(to trackdata: [[String: Any]], for user: String) {
         
     }
     
-    func getTracks(_ user: user) {
+    func getTracks(_ user: String) {
         let urlStringTracks = "https://api.spotify.com/v1/me/top/tracks?limit=50"
         guard let urlTracks = URL(string: urlStringTracks) else {return}
         var requestTracks = URLRequest(url: urlTracks)
@@ -72,7 +72,7 @@ class Tuner {
         }.resume()
     }
 
-    func getArtists(_ user: user) {
+    func getArtists(_ user: String) {
         let urlStringArtists = "https://api.spotify.com/v1/me/top/artists?limit=50"
         guard let urlArtists = URL(string: urlStringArtists) else {return}
         var requestArtists = URLRequest(url: urlArtists)
