@@ -32,6 +32,8 @@
 		3FB0E67824578E13005E2A59 /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67424578E13005E2A59 /* SIL Open Font License.txt */; };
 		3FB0E67924578E13005E2A59 /* Amiko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB0E67524578E13005E2A59 /* Amiko-Regular.ttf */; };
 		F409F3A59F13F78497A4B8E9 /* Pods_InTune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37691AE6708D85021A2248E0 /* Pods_InTune.framework */; };
+		FED0508A245DA6BC0075463B /* temp-logo-pink.png in Resources */ = {isa = PBXBuildFile; fileRef = FED05089245DA6BC0075463B /* temp-logo-pink.png */; };
+		FED0508C245DA6E40075463B /* temp-logo-red.png in Resources */ = {isa = PBXBuildFile; fileRef = FED0508B245DA6E40075463B /* temp-logo-red.png */; };
 		FEECB37A245B9A9F00E9AB74 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEECB379245B9A9F00E9AB74 /* SpotifyiOS.framework */; };
 		FEF2F194244FE594000BC236 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF2F193244FE594000BC236 /* AppDelegate.swift */; };
 		FEF2F196244FE594000BC236 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF2F195244FE594000BC236 /* SceneDelegate.swift */; };
@@ -89,6 +91,8 @@
 		3FB0E67424578E13005E2A59 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
 		3FB0E67524578E13005E2A59 /* Amiko-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiko-Regular.ttf"; sourceTree = "<group>"; };
 		51B79A2E2474A8894EC13589 /* Pods-InTune.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InTune.debug.xcconfig"; path = "Target Support Files/Pods-InTune/Pods-InTune.debug.xcconfig"; sourceTree = "<group>"; };
+		FED05089245DA6BC0075463B /* temp-logo-pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "temp-logo-pink.png"; sourceTree = "<group>"; };
+		FED0508B245DA6E40075463B /* temp-logo-red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "temp-logo-red.png"; sourceTree = "<group>"; };
 		FEECB379245B9A9F00E9AB74 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		FEF2F190244FE594000BC236 /* InTune.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InTune.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEF2F193244FE594000BC236 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				3F0364A42452431F00B5B217 /* blob3.png */,
 				3F0364AA24525AF800B5B217 /* Group 7.png */,
 				3F0364A824525ACF00B5B217 /* Group 6.png */,
+				FED0508B245DA6E40075463B /* temp-logo-red.png */,
+				FED05089245DA6BC0075463B /* temp-logo-pink.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -376,6 +382,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FED0508C245DA6E40075463B /* temp-logo-red.png in Resources */,
 				3F391B35245B7F3900081A79 /* InTune-Bridging-Header.h in Resources */,
 				3FB0E67624578E13005E2A59 /* Amiko-SemiBold.ttf in Resources */,
 				3FB0E67724578E13005E2A59 /* Amiko-Bold.ttf in Resources */,
@@ -384,6 +391,7 @@
 				3F0364A12452414D00B5B217 /* blob1.png in Resources */,
 				3F0364AB24525AF800B5B217 /* Group 7.png in Resources */,
 				3FB0E67824578E13005E2A59 /* SIL Open Font License.txt in Resources */,
+				FED0508A245DA6BC0075463B /* temp-logo-pink.png in Resources */,
 				3FB0E67924578E13005E2A59 /* Amiko-Regular.ttf in Resources */,
 				FEF2F1A0244FE595000BC236 /* LaunchScreen.storyboard in Resources */,
 				FEF2F19D244FE595000BC236 /* Assets.xcassets in Resources */,
