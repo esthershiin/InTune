@@ -4,6 +4,8 @@
 //
 //  Created by Allyson on 4/23/20.
 //
+/*  The Profile is the users own information, which gives stats on the users
+    overall match data. This is also where users can log out if they wish to. */
 
 import UIKit
 
@@ -44,7 +46,7 @@ class ProfileViewController: UIViewController {
             guard let pfpurl = pfp["url"] as? String else {return}
             guard let imageURL = URL(string: pfpurl) else {return}
 
-                // just not to cause a deadlock in UI!
+            // just not to cause a deadlock in UI!
             DispatchQueue.global().async {
                 guard let imageData = try? Data(contentsOf: imageURL) else { return }
 
@@ -63,15 +65,5 @@ class ProfileViewController: UIViewController {
         refreshToken = ""
         performSegue(withIdentifier: "loggingOut", sender: self)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

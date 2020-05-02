@@ -4,6 +4,9 @@
 //
 //  Created by Allyson on 4/23/20.
 //
+/*  The search miss is where users end up if they attempt to search for
+    another user by name but there is no existing user in our database.
+    THIS FILE IS INCOMPLETE. */
 
 import UIKit
 
@@ -11,19 +14,6 @@ class SearchMissViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

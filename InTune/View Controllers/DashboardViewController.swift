@@ -4,6 +4,10 @@
 //
 //  Created by Allyson on 4/23/20.
 //
+/*  The Dashboard is the users center for all matches: prior, incoming, and
+    outgoing. The dashboard is where the user can see who has requested them,
+    check up on the people they've requested, browse old matches, and search
+    for new people to tune in with. */
 
 import UIKit
 

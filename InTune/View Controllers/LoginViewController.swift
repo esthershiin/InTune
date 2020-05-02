@@ -4,6 +4,8 @@
 //
 //  Created by Allyson on 4/23/20.
 //
+/*  The Login page is where users will start off if they've never logged in before,
+    or if their refresh token has expired and they must renew their session. */
 
 import UIKit
 
@@ -15,45 +17,23 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    /* Upon login button press, initiate a Spotify session using the
+     Auth code flow. Once the session has been initiated, segue to the
+    main portion of the app, which corresponds to the tab bar. */
     @IBAction func loginButtonPressed(_ sender: Any) {
+        let group = DispatchGroup()
+        group.enter()
         
-//        let requestedScopes: SPTScope = [.appRemoteControl, .userTopRead, .playlistModifyPublic]
-        
-//        let urlstr = "https://accounts.spotify.com/authorize?client_id=\(SpotifyClientID)&return_type=code&redirect_uri=\(SpotifyRedirectURI)&scopes=\(requestedScopes)"
-//
-//        guard let myurl = URL(string: urlstr) else {return}
-//
-//        URLSession.shared.dataTask(with: myurl) {(data, response, err) in
-//            guard let content = data else {return}
-//            let json = try? JSONSerialization.jsonObject(with: content, options: [])
-//            guard let dict = json as? [String: Any] else {return}
-//            authcode = dict["code"] as? String
-//        }
-        
-//        guard let tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token?code=\(authcode)") else { return }
-//            URLSession.shared.dataTask(with: tokenSwapURL) {(data, response, err) in
-//            guard let tokens = data else {return}
-//            let json = try? JSONSerialization.jsonObject(with: tokens, options: [])
-//            guard let dict = json as? [String: Any] else {return}
-//            authToken = dict["access_token"] as? String
-//            refreshToken = dict["refresh_token"] as? String
-//        }
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.requestSpotify()
-
-        if (isLoggedIn) {
-            var vc = UITabBarController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.requestSpotify()
+            group.leave()
         }
         
+        group.notify(queue: .main) {
+        if (true) {
+            self.performSegue(withIdentifier: "LoginToTab", sender: self)
+            }
+        }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    
-
 }

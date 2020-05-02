@@ -4,6 +4,9 @@
 //
 //  Created by Allyson on 4/23/20.
 //
+/*  If the current user has requested to match another user, but the other
+    user has not yet responded, the request will show up as a part of the
+    outgoing requests. */
 
 import UIKit
 
@@ -34,7 +37,7 @@ class OutgoingRequestViewController: UIViewController {
             guard let pfpUrl = pfpDict["url"] as? String else {return}
             guard let imageURL = URL(string: pfpUrl) else {return}
 
-                // just not to cause a deadlock in UI!
+            // just not to cause a deadlock in UI!
             DispatchQueue.global().async {
                 guard let imageData = try? Data(contentsOf: imageURL) else { return }
                 let image = UIImage(data: imageData)

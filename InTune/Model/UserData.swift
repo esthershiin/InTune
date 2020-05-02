@@ -4,8 +4,10 @@
 //
 //  Created by Allyson, Esther, Junna on 4/23/20.
 //
-
-/* Notes for development: Will probably need an abstraction for a user (class or struct?). The class will need a username, name, date joined, top match, average match score, and maybe a data structure that holds all the matches. */
+/*  UserData contains the definitions for the user class and the match class.
+    It also contains the relevant data for the current user, including their tokens
+    and whether or not they're logged in. UserData also interacts with Firebase,
+    where our user and match database is stored. */
 
 import Foundation
 import Firebase
