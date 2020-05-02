@@ -19,8 +19,8 @@ class Tuner {
     var userB: String
     var tracksA: [String]
     var tracksB: [String]
-    var artistsA: [String]
-    var artistsB: [String]
+    var artistsA: [String: String]
+    var artistsB: [String: String]
     var score: Int
     var topTracks: [String]
     var topArtists: [String]
@@ -30,16 +30,15 @@ class Tuner {
         self.userB = userB
         tracksA = [""]
         tracksB = [""]
-        artistsA = [""]
-        artistsB = [""]
+        artistsA = ["": ""]
+        artistsB = ["": ""]
         score = 0
         topTracks = [""]
         topArtists = [""]
-        
     }
 
     func generateScores() -> (tracks: [String], artists: [String], score: Int) {
-        
+        var genresIntersection = [String]()
         var tracksIntersection = [String]()
         var artistsIntersection = [String]()
         for track in tracksA {
@@ -47,22 +46,51 @@ class Tuner {
                 tracksIntersection.append(track)
             }
         }
-        for artist in artistsA {
-            if artistsB.contains(artist) {
+        for (artist, genre) in artistsA {
+            if (artistsB.keys.contains(artist)) {
                 artistsIntersection.append(artist)
+            }
+            if (artistsB.values.contains(genre)) {
+                genresIntersection.append(genre)
             }
         }
         self.topTracks = tracksIntersection
         self.topArtists = artistsIntersection
-        let totalIntersection = tracksIntersection.count + artistsIntersection.count
-        self.score = (totalIntersection * 100) / (tracksA.count + artistsA.count)
+        let totalIntersection = tracksIntersection.count + artistsIntersection.count + genresIntersection.count
+        let numArtist = max(artistsA.count, artistsB.count)
+        let numTracks = max(tracksA.count, tracksB.count)
+        self.score = (totalIntersection * 100) / (numTracks + (2 * numArtist))
         return (self.topTracks, self.topArtists, self.score)
     }
         
         
         
     func setTracks(to trackdata: [[String: Any]], for user: String) {
-        
+        if (userA == user) {
+            for item in trackdata {
+                guard let trackTitle = item["name"] as? String else {return}
+                tracksA.append(trackTitle)
+            }
+        } else {
+            for item in trackdata {
+                guard let trackTitle = item["name"] as? String else {return}
+                tracksB.append(trackTitle)
+            }
+        }
+    }
+    
+    func setArtists(to artistdata: [[String: Any]], for user: String) {
+        if (userA == user) {
+            for item in artistdata {
+                guard let artist = item["name"] as? String , let genre = item["genres"] as? String else {return}
+                artistsA[artist] = genre
+            }
+        } else {
+            for item in artistdata {
+                guard let artist = item["name"] as? String , let genre = item["genres"] as? String else {return}
+                artistsB[artist] = genre
+            }
+        }
     }
     
     func getTracks(_ user: String) {
@@ -102,7 +130,7 @@ class Tuner {
                 let json = try? JSONSerialization.jsonObject(with: artists, options: [])
                 guard let dict = json as? [String: Any] else { return}
                 guard let topArtists = dict["items"] else { return}
-                self.setTracks(to: topArtists as! [[String : Any]], for: user)
+                self.setArtists(to: topArtists as! [[String : Any]], for: user)
             }
         }.resume()
     }
