@@ -234,6 +234,20 @@ func fetchUser(username: String) {
     currentUser = currUser
 }
 
+//fetch current user
+func fetchOtherUser(username: String) -> user {
+    let currUser = user(name: username)
+    currUser.avgScore = fetch(username: username, data: "avgScore") as! Int
+    currUser.numMatches = fetch(username: username, data: "numMatches") as! Int
+    currUser.outgoings = fetch(username: username, data: "outgoings") as! [String]
+    currUser.incomings = fetch(username: username, data: "incomings") as! [String]
+    currUser.matches = fetch(username: username, data: "matches") as! [String]
+    currUser.startDate = fetch(username: username, data: "startDate") as! Date
+    currUser.topScore = fetch(username: username, data: "topScore") as! Int
+    currUser.topMatch = fetch(username: username, data: "topMatch") as! String
+    return currUser
+}
+
 //update user data in firestore
 func update(username: String, data: String, newData: Any) {
     let userRef = db.collection("users").document(username)
