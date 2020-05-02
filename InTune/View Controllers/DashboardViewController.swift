@@ -27,14 +27,14 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
             userB = userA.outgoings[indexPath.row]
         } else if (collectionView.tag == 2) {
             var thismatch = fetchMatch(id: userA.matches[indexPath.row])
-            if (userA.name == thismatch.userA.name) {
+            if (userA.name == thismatch.userA) {
                 userB = thismatch.userB
             } else {
                 userB = thismatch.userA
             }
         }
         let cell = MatchCollectionViewCell()
-        let imageurlstring = "https://api.spotify.com/v1/users/\(userB.name)"
+        let imageurlstring = "https://api.spotify.com/v1/users/\(userB)"
         guard let imageURL = URL(string: imageurlstring) else {return UICollectionViewCell()}
         var req = URLRequest(url: imageURL)
         req.httpMethod = "GET"
@@ -57,7 +57,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
                 }
             }
         }.resume()
-        cell.MatchedUserName.text = userB.name
+        cell.MatchedUserName.text = userB
         return cell
     }
 

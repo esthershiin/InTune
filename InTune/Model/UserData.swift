@@ -29,6 +29,8 @@ class user {
     var incomings = [String]()
     var matches = [String]()
     var startDate: Date
+    var topScore: Int
+    var topMatch: String
     
     init(name: String) {
         self.name = name
@@ -38,6 +40,8 @@ class user {
         incomings = [String]()
         matches = [String]()
         startDate = Date()
+        topScore = 0
+        topMatch = "No matches found."
         //if user is new create new collection in firestore
         let docRef = db.collection("users").document(name)
         docRef.getDocument { (document, error) in
@@ -108,17 +112,32 @@ class user {
         var otherAvgScore = fetch(username: other, data: "avgScore") as! Int
         otherAvgScore = (otherAvgScore * otherNumMatches + newMatch.score) / (otherNumMatches + 1)
         update(username: self.name, data: "avgScore", newData: otherAvgScore)
+        //update topScore and topMatch
+        if (self.topScore < newMatch.score) {
+            self.topScore = newMatch.score
+            self.topMatch = other
+            update(username: self.name, data: "topScore", newData: self.topScore)
+            update(username: self.name, data: "topMatch", newData: self.topMatch)
+        }
+        let otherTopScore = fetch(username: other, data: "topScore") as! Int
+        if (otherTopScore < newMatch.score) {
+            update(username: other, data: "topScore", newData: newMatch.score)
+            update(username: other, data: "topMatch", newData: self.name)
+        }
+        
     }
     
     //add new user data to Firestore
     func addNewUser() {
         db.collection("users").document(name).setData([
-            "name": name,
             "avgScore": avgScore,
             "numMatches": numMatches,
             "matches": matches,
             "outgoings": outgoings,
             "incomings": incomings,
+            "startDate": startDate,
+            "topScore": topScore,
+            "topMatch": topMatch
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -212,6 +231,8 @@ func fetchUser(username: String) {
     currUser.incomings = fetch(username: username, data: "incomings") as! [String]
     currUser.matches = fetch(username: username, data: "matches") as! [String]
     currUser.startDate = fetch(username: username, data: "startDate") as! Date
+    currUser.topScore = fetch(username: username, data: "topScore") as! Int
+    currUser.topMatch = fetch(username: username, data: "topMatch") as! String
     currentUser = currUser
 }
 
