@@ -9,8 +9,9 @@ import UIKit
 
 class MatchCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var MatchedUserImage: UIImageView!
+    var mymatch: match?
     
+    @IBOutlet weak var MatchedUserImage: UIImageView!
     
     @IBOutlet weak var MatchedUserName: UILabel!
 }

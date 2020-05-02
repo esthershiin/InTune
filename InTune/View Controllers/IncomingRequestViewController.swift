@@ -8,15 +8,17 @@
 import UIKit
 
 class IncomingRequestViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var joinDateLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    var requestingUserName: String?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+    }
     
     @IBAction func requestAccepted(_ sender: Any) {
         performSegue(withIdentifier: "requestToMatch", sender: usernameLabel.text)
@@ -27,7 +29,8 @@ class IncomingRequestViewController: UIViewController {
         if let identifier = segue.identifier {
             if let dest = segue.destination as? MatchViewController, let username = usernameLabel.text {
                 //get match score
-                dest.usersLabel.text = thisuser.name + " and " + username
+                var newMatch = match(userA: thisuser.name, userB: username)
+                dest.thisMatch = newMatch
             }
         }
     }

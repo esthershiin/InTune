@@ -23,7 +23,7 @@
 			<string>ally-esth-jun.InTune</string>
 			<key>URL Schemes</key>
 			<array>
-				<string>localhost</string>
+				<string>spotify-ios-quick-start</string>
 			</array>
 		</dict>
 	</array>
