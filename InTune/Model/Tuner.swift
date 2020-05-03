@@ -122,9 +122,9 @@ class Tuner {
             if let error = err {
                 print(error)
                 let code = error.localizedDescription
-                if (code == "") {
-                    useRefreshToken()
-                }
+//                if (code == "") {
+//                    useRefreshToken()
+//                }
             } else {
                 guard let artists = data else { return}
                 let json = try? JSONSerialization.jsonObject(with: artists, options: [])
