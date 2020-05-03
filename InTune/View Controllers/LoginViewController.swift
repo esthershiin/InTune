@@ -21,19 +21,28 @@ class LoginViewController: UIViewController {
      Auth code flow. Once the session has been initiated, segue to the
     main portion of the app, which corresponds to the tab bar. */
     @IBAction func loginButtonPressed(_ sender: Any) {
-        let group = DispatchGroup()
-        group.enter()
+//        let group = DispatchGroup()
+//        group.enter()
         
-        DispatchQueue.main.async {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.requestSpotify()
-            group.leave()
-        }
+
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            appDelegate.requestSpotify()
+//            group.leave()
+        guard let userurl = URL(string: "https://api.spotify.com/v1/me") else {return}
+        var userreq = URLRequest(url: userurl)
+        userreq.httpMethod = "GET"
+        userreq.addValue(authToken!, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: userreq) {(data, response, err) in
+            guard let profile = data else {return}
+            let json = try? JSONSerialization.jsonObject(with: profile, options: [])
+            guard let dict = json as? [String: Any] else {return}
+            guard let username = dict["id"] as? String else {return}
+            currentUser = user(name: username)
+        }.resume()
         
-        group.notify(queue: .main) {
-        if (true) {
+        if (currentUser != nil) {
             self.performSegue(withIdentifier: "LoginToTab", sender: self)
-            }
         }
+        
     }
 }
