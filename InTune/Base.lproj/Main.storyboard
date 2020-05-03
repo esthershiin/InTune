@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tbx-N6-K0c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tbx-N6-K0c">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,20 +28,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="temp-logo-pink.png" translatesAutoresizingMaskIntoConstraints="NO" id="OhB-9E-VwD">
-                                <rect key="frame" x="143" y="164" width="128" height="128"/>
+                                <rect key="frame" x="143" y="194" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="7SP-Bd-9nl"/>
                                     <constraint firstAttribute="width" constant="128" id="I2f-kQ-3aK"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to InTune" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-2L-pi7">
-                                <rect key="frame" x="47" y="327" width="320" height="44.666666666666686"/>
+                                <rect key="frame" x="47" y="357" width="320" height="44.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Amiko-Bold" family="Amiko" pointSize="33"/>
                                 <color key="textColor" red="0.39471387860000001" green="0.14917823669999999" blue="0.15293234589999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8k-9s-Wbj">
-                                <rect key="frame" x="89" y="406.66666666666669" width="237" height="49"/>
+                                <rect key="frame" x="89" y="436.66666666666669" width="237" height="49"/>
                                 <color key="backgroundColor" red="0.95174139738082886" green="0.79616183042526245" blue="0.79607534408569336" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="0KK-YC-kFP"/>
@@ -61,7 +61,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOx-Bj-JSv">
-                                <rect key="frame" x="60" y="490.66666666666674" width="294" height="150"/>
+                                <rect key="frame" x="60" y="520.66666666666663" width="294" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Mvl-Hb-rF7"/>
                                 </constraints>
@@ -81,7 +81,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HOx-Bj-JSv" secondAttribute="trailing" constant="60" id="HaF-fc-hRJ"/>
                             <constraint firstItem="p8k-9s-Wbj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="89" id="LcP-5j-h0D"/>
                             <constraint firstItem="HOx-Bj-JSv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="YGN-CS-26e"/>
-                            <constraint firstItem="OhB-9E-VwD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="120" id="dCw-qi-5iW"/>
+                            <constraint firstItem="OhB-9E-VwD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="dCw-qi-5iW"/>
                             <constraint firstItem="1u1-2L-pi7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="fm3-8C-Jj5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OhB-9E-VwD" secondAttribute="trailing" constant="143" id="l2m-wN-f2W"/>
                             <constraint firstItem="OhB-9E-VwD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="143" id="yjX-cR-XfH"/>
@@ -549,6 +549,11 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1399,7 +1404,7 @@ If that’s the case, remind them you’re waiting to get in tune!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exd-gm-Msq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1750.7246376811595" y="-629.46428571428567"/>
+            <point key="canvasLocation" x="1751" y="-629"/>
         </scene>
         <!--Match View Controller-->
         <scene sceneID="wNl-eL-J1e">

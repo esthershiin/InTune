@@ -112,6 +112,7 @@ class Tuner {
         }.resume()
     }
 
+    
     func getArtists(_ user: String) {
         let urlStringArtists = "https://api.spotify.com/v1/me/top/artists?limit=50"
         guard let urlArtists = URL(string: urlStringArtists) else {return}
@@ -122,9 +123,9 @@ class Tuner {
             if let error = err {
                 print(error)
                 let code = error.localizedDescription
-//                if (code == "") {
-//                    useRefreshToken()
-//                }
+                //if (code == "") {
+                //    useRefreshToken()
+                //}
             } else {
                 guard let artists = data else { return}
                 let json = try? JSONSerialization.jsonObject(with: artists, options: [])
