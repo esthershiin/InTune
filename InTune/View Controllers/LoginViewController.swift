@@ -28,10 +28,11 @@ class LoginViewController: UIViewController {
 //            let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //            appDelegate.requestSpotify()
 //            group.leave()
+        
         guard let userurl = URL(string: "https://api.spotify.com/v1/me") else {return}
         var userreq = URLRequest(url: userurl)
         userreq.httpMethod = "GET"
-        userreq.addValue(authToken!, forHTTPHeaderField: "Authorization")
+        userreq.addValue("Bearer: \(authToken!)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: userreq) {(data, response, err) in
             guard let profile = data else {return}
             let json = try? JSONSerialization.jsonObject(with: profile, options: [])

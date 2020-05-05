@@ -16,7 +16,7 @@ import Firebase
 let db = Firestore.firestore()
 
 //authtoken and refresh token must be persistent
-var authToken: String? = "BQACMdfFoH3GfFYs10LMODkwzKxYYa3vAkDlrDZRKdPMKuXlgrgxwzHkCSd8HT8TRNeOAzDAfZn20Agz-n8Zl6jvMVfdvgEtpX_QjkIL7uFlnOOCKoCMsV5rALEe_E10ESwBDB8X1OHT-KwZIewxEPqoYxL11FWPykYa7rfe6mN2zzSRFs9YpaGnRwK36WM23fnagjxVG7dnwJVOMVqdaYW8rN4mnlMmog"
+var authToken: String?
 var refreshToken: String?
 var isLoggedIn: Bool = false
 var authcode: String?
