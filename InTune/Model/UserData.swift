@@ -6,8 +6,27 @@
 //
 /*  UserData contains the definitions for the user class and the match class.
     It also contains the relevant data for the current user, including their tokens
-    and whether or not they're logged in. UserData also interacts with Firebase,
+    and whether or not they're logged in. UserData also interacts with Firestore,
     where our user and match database is stored. */
+
+// User Data Structure:
+// users -> username -> avgScore
+//                      numMatches
+//                      outgoings -> String array of usernames
+//                      incomings -> String array of usernames
+//                      matches -> String array of matchIDs
+//                      startDate
+//                      topScore
+//                      topMatch
+//
+// Match Data Structure:
+// matches -> matchID -> userA
+//                       userB
+//                       date
+//                       score
+//                       topTracks -> String array of track names
+//                       topArtists -> String array of top artists
+
 
 import Foundation
 import Firebase
@@ -59,11 +78,11 @@ class user {
     func requestUser(otherUser: String) {
         //update userA outgoings
         outgoings.append(otherUser)
-        update(username:self.name, data: "outgoings", newData: self.outgoings)
+        updateUserData(username:self.name, data: "outgoings", newData: self.outgoings)
         //update userB incomings
-        var otherIncomings = fetch(username: otherUser, data: "incomings") as! [String]
+        var otherIncomings = fetchUserData(username: otherUser, data: "incomings") as! [String]
         otherIncomings.append(self.name)
-        update(username: otherUser, data: "incomings", newData: otherIncomings)
+        updateUserData(username: otherUser, data: "incomings", newData: otherIncomings)
     }
     
     //remove a request (decline request)
@@ -75,16 +94,16 @@ class user {
                 break
             }
         }
-        update(username: self.name, data: "incomings", newData: self.incomings)
+        updateUserData(username: self.name, data: "incomings", newData: self.incomings)
         //update userB outgoings
-        var otherOutgoings = fetch(username: otherUser, data: "outgoings") as! [String]
+        var otherOutgoings = fetchUserData(username: otherUser, data: "outgoings") as! [String]
         for (i, user) in otherOutgoings.enumerated() {
             if (user == self.name) {
                 otherOutgoings.remove(at: i)
                 break
             }
         }
-        update(username: otherUser, data: "outgoings", newData: otherOutgoings)
+        updateUserData(username: otherUser, data: "outgoings", newData: otherOutgoings)
     }
     
     //accept an incoming request
@@ -101,30 +120,30 @@ class user {
         numMatches += 1
         matches.append(newMatch.id)
         //update matches
-        update(username: self.name, data: "matches", newData: other)
-        var otherMatches = fetch(username: other, data: "matches") as! [String]
+        updateUserData(username: self.name, data: "matches", newData: other)
+        var otherMatches = fetchUserData(username: other, data: "matches") as! [String]
         otherMatches.append(self.name)
-        update(username: other, data: "matches", newData: otherMatches)
+        updateUserData(username: other, data: "matches", newData: otherMatches)
         //update numMatches
-        update(username: self.name, data: "numMatches", newData: self.numMatches)
-        let otherNumMatches = (fetch(username: other, data: "numMatches") as! Int) + 1
-        update(username: other, data: "numMatches", newData: otherNumMatches)
+        updateUserData(username: self.name, data: "numMatches", newData: self.numMatches)
+        let otherNumMatches = (fetchUserData(username: other, data: "numMatches") as! Int) + 1
+        updateUserData(username: other, data: "numMatches", newData: otherNumMatches)
         //update avgScores
-        update(username: self.name, data: "avgScore", newData: numMatches)
-        var otherAvgScore = fetch(username: other, data: "avgScore") as! Int
+        updateUserData(username: self.name, data: "avgScore", newData: numMatches)
+        var otherAvgScore = fetchUserData(username: other, data: "avgScore") as! Int
         otherAvgScore = (otherAvgScore * otherNumMatches + newMatch.score) / (otherNumMatches + 1)
-        update(username: self.name, data: "avgScore", newData: otherAvgScore)
+        updateUserData(username: self.name, data: "avgScore", newData: otherAvgScore)
         //update topScore and topMatch
         if (self.topScore < newMatch.score) {
             self.topScore = newMatch.score
             self.topMatch = other
-            update(username: self.name, data: "topScore", newData: self.topScore)
-            update(username: self.name, data: "topMatch", newData: self.topMatch)
+            updateUserData(username: self.name, data: "topScore", newData: self.topScore)
+            updateUserData(username: self.name, data: "topMatch", newData: self.topMatch)
         }
-        let otherTopScore = fetch(username: other, data: "topScore") as! Int
+        let otherTopScore = fetchUserData(username: other, data: "topScore") as! Int
         if (otherTopScore < newMatch.score) {
-            update(username: other, data: "topScore", newData: newMatch.score)
-            update(username: other, data: "topMatch", newData: self.name)
+            updateUserData(username: other, data: "topScore", newData: newMatch.score)
+            updateUserData(username: other, data: "topMatch", newData: self.name)
         }
         
     }
@@ -150,7 +169,6 @@ class user {
     }
     
 }
-
 
 class match {
     var userA: String
@@ -209,7 +227,7 @@ class match {
 //Firestore
 
 //fetch user data from firestore
-func fetch(username: String, data: String) -> Any {
+func fetchUserData(username: String, data: String) -> Any {
     var docData: Any!
     let docRef = db.collection("users").document(username)
     docRef.getDocument { (document, error) in
@@ -222,36 +240,22 @@ func fetch(username: String, data: String) -> Any {
     return docData!
 }
 
-//fetch current user
+//set current user
 func fetchUser(username: String) {
     let currUser = user(name: username)
-    currUser.avgScore = fetch(username: username, data: "avgScore") as! Int
-    currUser.numMatches = fetch(username: username, data: "numMatches") as! Int
-    currUser.outgoings = fetch(username: username, data: "outgoings") as! [String]
-    currUser.incomings = fetch(username: username, data: "incomings") as! [String]
-    currUser.matches = fetch(username: username, data: "matches") as! [String]
-    currUser.startDate = fetch(username: username, data: "startDate") as! Date
-    currUser.topScore = fetch(username: username, data: "topScore") as! Int
-    currUser.topMatch = fetch(username: username, data: "topMatch") as! String
+    currUser.avgScore = fetchUserData(username: username, data: "avgScore") as! Int
+    currUser.numMatches = fetchUserData(username: username, data: "numMatches") as! Int
+    currUser.outgoings = fetchUserData(username: username, data: "outgoings") as! [String]
+    currUser.incomings = fetchUserData(username: username, data: "incomings") as! [String]
+    currUser.matches = fetchUserData(username: username, data: "matches") as! [String]
+    currUser.startDate = fetchUserData(username: username, data: "startDate") as! Date
+    currUser.topScore = fetchUserData(username: username, data: "topScore") as! Int
+    currUser.topMatch = fetchUserData(username: username, data: "topMatch") as! String
     currentUser = currUser
 }
 
-//fetch current user
-func fetchOtherUser(username: String) -> user {
-    let currUser = user(name: username)
-    currUser.avgScore = fetch(username: username, data: "avgScore") as! Int
-    currUser.numMatches = fetch(username: username, data: "numMatches") as! Int
-    currUser.outgoings = fetch(username: username, data: "outgoings") as! [String]
-    currUser.incomings = fetch(username: username, data: "incomings") as! [String]
-    currUser.matches = fetch(username: username, data: "matches") as! [String]
-    currUser.startDate = fetch(username: username, data: "startDate") as! Date
-    currUser.topScore = fetch(username: username, data: "topScore") as! Int
-    currUser.topMatch = fetch(username: username, data: "topMatch") as! String
-    return currUser
-}
-
 //update user data in firestore
-func update(username: String, data: String, newData: Any) {
+func updateUserData(username: String, data: String, newData: Any) {
     let userRef = db.collection("users").document(username)
     userRef.updateData([data: newData]) { err in
         if let err = err {
@@ -263,7 +267,7 @@ func update(username: String, data: String, newData: Any) {
 }
 
 //fetch match data from firestore
-func fetch(matchID: String, data: String) -> Any {
+func fetchMatchData(matchID: String, data: String) -> Any {
     var docData: Any!
     let docRef = db.collection("matches").document(matchID)
     docRef.getDocument { (document, error) in
@@ -278,12 +282,12 @@ func fetch(matchID: String, data: String) -> Any {
 
 //fetch match
 func fetchMatch(id: String) -> match {
-    let targetUserA = fetch(matchID: id, data: "userA") as! String
-    let targetUserB = fetch(matchID: id, data: "userB") as! String
+    let targetUserA = fetchMatchData(matchID: id, data: "userA") as! String
+    let targetUserB = fetchMatchData(matchID: id, data: "userB") as! String
     let targetMatch = match(userA: targetUserA, userB: targetUserB)
-    targetMatch.date = fetch(matchID: id, data: "date") as! Date
-    targetMatch.score = fetch(matchID: id, data: "score") as! Int
-    targetMatch.topTracks = fetch(matchID: id, data: "topTracks") as! [String]
-    targetMatch.topArtists = fetch(matchID: id, data: "topArtists") as! [String]
+    targetMatch.date = fetchMatchData(matchID: id, data: "date") as! Date
+    targetMatch.score = fetchMatchData(matchID: id, data: "score") as! Int
+    targetMatch.topTracks = fetchMatchData(matchID: id, data: "topTracks") as! [String]
+    targetMatch.topArtists = fetchMatchData(matchID: id, data: "topArtists") as! [String]
     return targetMatch
 }
